@@ -81,4 +81,41 @@ class Account extends BaseAccount implements IdentityInterface
     {
         return $this->getAuthKey() === $authKey;
     }
+
+    public function getCash()
+    {
+        $wallet = $this->getWallet();
+        if ($wallet == null) {
+            return 0;
+        }
+        return $wallet->cash;
+    }
+
+    public function getCoin()
+    {
+        $wallet = $this->getWallet();
+        if ($wallet == null) {
+            return 0;
+        }
+        return $wallet->coin;
+    }
+
+    public function getCredit()
+    {
+        $wallet = $this->getWallet();
+        if ($wallet == null) {
+            return 0;
+        }
+        return $wallet->credit;
+    }
+
+    protected function getWallet()
+    {
+        return Wallet::find()
+            ->where([
+                'is_deleted' => false,
+                'account' => $this->c_id
+            ])
+            ->one();
+    }
 }

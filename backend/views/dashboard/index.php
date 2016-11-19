@@ -19,7 +19,7 @@ $this->title = 'Admin Dashboard';
             <tbody>
             <tr>
                 <th>Wallet Cash</th>
-                <td>0</td>
+                <td><?= $dataModel->walletCash; ?></td>
             </tr>
             </tbody>
         </table>

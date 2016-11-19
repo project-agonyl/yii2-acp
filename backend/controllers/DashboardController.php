@@ -18,7 +18,7 @@ class DashboardController extends Controller
 
     public function actionIndex()
     {
-        $dataModel = new Dashboard();
+        $dataModel = new Dashboard(['aid' => Yii::$app->user->id]);
         return $this->render('index', ['dataModel' => $dataModel]);
     }
 }

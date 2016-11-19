@@ -15,6 +15,8 @@ use yii\base\Model;
 
 class Dashboard extends Model
 {
+    public $aid;
+
     public function getAccountCount()
     {
         return Account::find()
@@ -31,5 +33,13 @@ class Dashboard extends Model
         return Charac0::find()
             ->where(['c_status' => $status])
             ->count();
+    }
+
+    public function getWalletCash()
+    {
+        $account = Account::find()
+            ->where(['c_id' => $this->aid])
+            ->one();
+        return $account->cash;
     }
 }
