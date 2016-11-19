@@ -11,8 +11,9 @@ use yii\helpers\ArrayHelper;
  */
 class Charac0 extends BaseCharac0
 {
+    const STATUS_ACTIVE = 'A';
 
-public function behaviors()
+    public function behaviors()
     {
         return ArrayHelper::merge(
             parent::behaviors(),

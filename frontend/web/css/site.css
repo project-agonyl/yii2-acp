@@ -1,6 +1,9 @@
 html,
 body {
     height: 100%;
+    background-color: #141414;
+    font-family: Tahoma;
+    color: #FFFFFF;
 }
 
 .wrap {
@@ -117,4 +120,19 @@ a.desc:after {
 
 .nav > li > form > button.logout:focus {
     outline: none;
+}
+
+.centered {
+    text-align: center;
+}
+
+#errordiv {
+    padding: 8px 35px 3px 14px;
+    height: 20px;
+    width: 457px;
+}
+
+#main-content {
+    height: 500px;
+    width: 800px;
 }
