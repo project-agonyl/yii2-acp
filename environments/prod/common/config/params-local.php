@@ -1,8 +1,8 @@
 <?php
 return [
     'admins' => [
-        'karthikp',
-        'merlano'
+        'gm1',
+        'gm2'
     ],
-    'server-name' => 'A3Flamez'
+    'server-name' => 'A3'
 ];
