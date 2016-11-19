@@ -20,6 +20,7 @@ return [
         'user' => [
             'identityClass' => 'common\models\Account',
             'identityCookie' => ['name' => '_a3-admin', 'httpOnly' => true],
+            'loginUrl' => ['account/login'],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend

@@ -4,10 +4,7 @@ return [
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
-        ],
-        'user' => [
-            'loginUrl' => ['account/login']
-        ],
+        ]
     ],
     'defaultRoute' => 'account'
 ];

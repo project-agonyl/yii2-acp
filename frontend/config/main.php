@@ -18,8 +18,8 @@ return [
         ],
         'user' => [
             'identityClass' => 'common\models\Account',
-            'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_a3-acp', 'httpOnly' => true],
+            'loginUrl' => ['account/login'],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
