@@ -137,9 +137,7 @@ class AccountSearch extends Account
                 ]
             ],
             'defaultOrder' => [
-                'd_udate' => SORT_DESC,
-                'd_cdate' => SORT_DESC,
-                'c_id' => SORT_ASC
+                'd_udate' => SORT_DESC
             ]
         ];
     }

@@ -157,8 +157,7 @@ class CharacterSearch extends Charac0
                 ]
             ],
             'defaultOrder' => [
-                'd_udate' => SORT_DESC,
-                'c_id' => SORT_ASC
+                'd_udate' => SORT_DESC
             ]
         ];
     }
