@@ -8,7 +8,7 @@
 use kartik\grid\GridView;
 use kartik\icons\Icon;
 
-$this->title = 'Characters';
+$this->title = 'Accounts';
 ?>
 <?= GridView::widget([
     'id' => 'account-grid',
