@@ -96,7 +96,7 @@ class CharacterSearch extends Charac0
             ],
             'actions' => [
                 'header' => 'Actions',
-                'class' => '\yii\grid\ActionColumn',
+                'class' => '\kartik\grid\ActionColumn',
                 'template' => '{view} {add-credits}',
                 'buttons' => [
                     'add-credits' => function ($url, $model) {
