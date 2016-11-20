@@ -17,6 +17,10 @@ use yii\helpers\Json;
 class ActivityLog extends BaseActivityLog
 {
     const EVENT_TRANSFER_CASH = 1;
+    const EVENT_ACP_LOGIN = 2;
+    const EVENT_ACP_LOGOUT = 3;
+    const EVENT_ADMIN_PANEL_LOGIN = 4;
+    const EVENT_ADMIN_PANEL_LOGOUT = 5;
     const EVENT_UNKNOWN = 999;
 
     public function behaviors()
@@ -48,6 +52,10 @@ class ActivityLog extends BaseActivityLog
     {
         return [
             self::EVENT_TRANSFER_CASH => 'Wallet cash transfer',
+            self::EVENT_ACP_LOGIN => 'ACP login',
+            self::EVENT_ACP_LOGOUT => 'ACP logout',
+            self::EVENT_ADMIN_PANEL_LOGIN => 'Admin panel login',
+            self::EVENT_ADMIN_PANEL_LOGOUT => 'Admin panel logout',
             self::EVENT_UNKNOWN => 'Unknown event'
         ];
     }

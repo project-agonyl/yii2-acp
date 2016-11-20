@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\models\ActivityLog;
 use Yii;
 use yii\web\Controller;
 use backend\models\LoginForm;
@@ -64,6 +65,10 @@ class AccountController extends Controller
      */
     public function actionLogout()
     {
+        ActivityLog::addEntry(
+            ActivityLog::EVENT_ADMIN_PANEL_LOGOUT,
+            Yii::$app->user->id
+        );
         Yii::$app->user->logout();
         return $this->redirect(['index']);
     }

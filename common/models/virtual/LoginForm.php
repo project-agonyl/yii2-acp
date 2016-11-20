@@ -2,6 +2,7 @@
 namespace common\models\virtual;
 
 use common\models\Account;
+use common\models\ActivityLog;
 use Yii;
 use yii\base\Model;
 
@@ -41,7 +42,19 @@ class LoginForm extends Model
                 $this->addError('username', 'Invalid username or password');
                 return false;
             }
-            return Yii::$app->user->login($this->getAccount(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+            switch (Yii::$app->id) {
+                case 'a3-admin':
+                    $event = ActivityLog::EVENT_ADMIN_PANEL_LOGIN;
+                    break;
+                default:
+                    $event = ActivityLog::EVENT_ACP_LOGIN;
+                    break;
+            }
+            ActivityLog::addEntry(
+                $event,
+                $account->c_id
+            );
+            return Yii::$app->user->login($account, $this->rememberMe ? 3600 * 24 * 30 : 0);
         } else {
             return false;
         }

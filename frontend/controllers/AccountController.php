@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\ActivityLog;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -74,6 +75,10 @@ class AccountController extends Controller
      */
     public function actionLogout()
     {
+        ActivityLog::addEntry(
+            ActivityLog::EVENT_ACP_LOGOUT,
+            Yii::$app->user->id
+        );
         Yii::$app->user->logout();
         return $this->redirect(['index']);
     }
