@@ -14,6 +14,9 @@ return [
     'modules' => [
         'database' => [
             'class' => 'backend\modules\database\Module',
+        ],
+        'log' => [
+            'class' => 'backend\modules\log\Module',
         ]
     ],
     'components' => [

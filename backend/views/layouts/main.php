@@ -48,6 +48,13 @@ AppAsset::register($this);
                 ['label' => Icon::show('user').'Character', 'url' => ['/database/character']]
             ]
         ],
+        [
+            'label' => Icon::show('list').'Logs',
+            'items' => [
+                ['label' => Icon::show('list-alt').'Admin Accounts', 'url' => ['/log/activity?admin=1']],
+                ['label' => Icon::show('list-ul').'Normal Accounts', 'url' => ['/log/activity']]
+            ]
+        ],
         ['label' => Icon::show('sign-out').'Logout (' . trim(Yii::$app->user->id) . ')', 'url' => ['/account/logout']]
     ];
     echo Nav::widget([
