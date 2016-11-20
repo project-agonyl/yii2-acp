@@ -5,12 +5,14 @@ use backend\modules\database\models\CharacterSearch;
 use common\models\Charac0;
 use Yii;
 use common\components\Controller;
+use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
 class CharacterController extends Controller
 {
     public function actionIndex()
     {
+        Url::remember();
         $searchModel = new CharacterSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', ['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);

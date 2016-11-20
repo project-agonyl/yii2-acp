@@ -4,6 +4,8 @@ namespace common\models;
 
 use Yii;
 use \common\models\base\Charac0 as BaseCharac0;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -18,7 +20,12 @@ class Charac0 extends BaseCharac0
         return ArrayHelper::merge(
             parent::behaviors(),
             [
-                # custom behaviors
+                [
+                    'class' => TimestampBehavior::className(),
+                    'createdAtAttribute' => 'd_cdate',
+                    'updatedAtAttribute' => 'd_udate',
+                    'value' => new Expression('CURRENT_TIMESTAMP'),
+                ]
             ]
         );
     }

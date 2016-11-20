@@ -102,10 +102,10 @@ class CharacterSearch extends Charac0
                     'add-credits' => function ($url, $model) {
                         return Html::a(
                             Icon::show('plus'),
-                            Url::to(['add-cash', 'id' => trim($model->id)]),
+                            Url::to(['account/transfer-cash', 'id' => trim($model->c_sheadera)]),
                             [
                                 'data-toggle' => "tooltip",
-                                'title' => 'Add wallet cash',
+                                'title' => 'Transfer wallet cash',
                                 'data-pjax' => 0
                             ]
                         );

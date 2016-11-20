@@ -9,9 +9,12 @@
 namespace backend\modules\database\models;
 
 use common\models\Account;
+use kartik\icons\Icon;
 use Yii;
+use yii\bootstrap\Html;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
+use yii\helpers\Url;
 
 class AccountSearch extends Account
 {
@@ -86,7 +89,20 @@ class AccountSearch extends Account
             'actions' => [
                 'header' => 'Actions',
                 'class' => '\yii\grid\ActionColumn',
-                'template' => '{view}'
+                'template' => '{view} {add-credits}',
+                'buttons' => [
+                    'add-credits' => function ($url, $model) {
+                        return Html::a(
+                            Icon::show('plus'),
+                            Url::to(['account/transfer-cash', 'id' => trim($model->c_id)]),
+                            [
+                                'data-toggle' => "tooltip",
+                                'title' => 'Transfer wallet cash',
+                                'data-pjax' => 0
+                            ]
+                        );
+                    }
+                ]
             ]
         ];
     }
