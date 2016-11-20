@@ -46,9 +46,9 @@ abstract class Banlist extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_id' => Yii::t('models', 'C ID'),
-            'account' => Yii::t('models', 'Account'),
-            'tim' => Yii::t('models', 'Tim'),
+            'c_id' => 'C ID',
+            'account' => 'Account',
+            'tim' => 'Tim',
         ];
     }
 

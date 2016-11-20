@@ -49,12 +49,12 @@ abstract class Charloginlog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_id' => Yii::t('models', 'C ID'),
-            'rb' => Yii::t('models', 'Rb'),
-            'lvl' => Yii::t('models', 'Lvl'),
-            'datetime' => Yii::t('models', 'Datetime'),
-            'class' => Yii::t('models', 'Class'),
-            'Nation' => Yii::t('models', 'Nation'),
+            'c_id' => 'C ID',
+            'rb' => 'Rb',
+            'lvl' => 'Lvl',
+            'datetime' => 'Datetime',
+            'class' => 'Class',
+            'Nation' => 'Nation',
         ];
     }
 

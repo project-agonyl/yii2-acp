@@ -6,5 +6,10 @@ return [
             'class' => 'yii\caching\FileCache',
         ]
     ],
-    'defaultRoute' => 'account'
+    'defaultRoute' => 'account',
+    'modules' => [
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+        ]
+    ]
 ];

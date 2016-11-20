@@ -47,10 +47,10 @@ abstract class AccountExt extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'Job' => Yii::t('models', 'Job'),
-            'RecomID' => Yii::t('models', 'Recom ID'),
-            'EmailStatus' => Yii::t('models', 'Email Status'),
+            'AccountID' => 'Account ID',
+            'Job' => 'Job',
+            'RecomID' => 'Recom ID',
+            'EmailStatus' => 'Email Status',
         ];
     }
 

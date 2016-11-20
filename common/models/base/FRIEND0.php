@@ -45,9 +45,9 @@ abstract class FRIEND0 extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'CharName' => Yii::t('models', 'Char Name'),
-            'GroupInfo' => Yii::t('models', 'Group Info'),
-            'FriendInfo' => Yii::t('models', 'Friend Info'),
+            'CharName' => 'Char Name',
+            'GroupInfo' => 'Group Info',
+            'FriendInfo' => 'Friend Info',
         ];
     }
 

@@ -48,12 +48,12 @@ abstract class Onlinerecords extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'charname' => Yii::t('models', 'Charname'),
-            'charid' => Yii::t('models', 'Charid'),
-            'login_time' => Yii::t('models', 'Login Time'),
-            'logout_time' => Yii::t('models', 'Logout Time'),
-            'online_time' => Yii::t('models', 'Online Time'),
-            'used' => Yii::t('models', 'Used'),
+            'charname' => 'Charname',
+            'charid' => 'Charid',
+            'login_time' => 'Login Time',
+            'logout_time' => 'Logout Time',
+            'online_time' => 'Online Time',
+            'used' => 'Used',
         ];
     }
 

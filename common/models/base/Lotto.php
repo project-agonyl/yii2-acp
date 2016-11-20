@@ -50,13 +50,13 @@ abstract class Lotto extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'LottoEventID' => Yii::t('models', 'Lotto Event ID'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'SelectNum1' => Yii::t('models', 'Select Num1'),
-            'SelectNum2' => Yii::t('models', 'Select Num2'),
-            'SelectNum3' => Yii::t('models', 'Select Num3'),
-            'SelectNum4' => Yii::t('models', 'Select Num4'),
-            'SelectNum5' => Yii::t('models', 'Select Num5'),
+            'LottoEventID' => 'Lotto Event ID',
+            'AccountID' => 'Account ID',
+            'SelectNum1' => 'Select Num1',
+            'SelectNum2' => 'Select Num2',
+            'SelectNum3' => 'Select Num3',
+            'SelectNum4' => 'Select Num4',
+            'SelectNum5' => 'Select Num5',
         ];
     }
 

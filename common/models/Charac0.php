@@ -32,4 +32,28 @@ class Charac0 extends BaseCharac0
              ]
         );
     }
+
+    public function getId()
+    {
+        return $this->c_id;
+    }
+
+    public function getTypeString()
+    {
+        switch ((int)$this->c_sheaderb) {
+            case 1:
+                $type = 'Mage';
+                break;
+            case 2:
+                $type = 'Holy Knight';
+                break;
+            case 3:
+                $type = 'Archer';
+                break;
+            default:
+                $type = 'Warrior';
+                break;
+        }
+        return $type;
+    }
 }

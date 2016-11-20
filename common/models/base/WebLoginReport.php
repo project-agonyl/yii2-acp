@@ -49,13 +49,13 @@ abstract class WebLoginReport extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'LoginYear' => Yii::t('models', 'Login Year'),
-            'LoginMonth' => Yii::t('models', 'Login Month'),
-            'LoginDay' => Yii::t('models', 'Login Day'),
-            'LoginHour' => Yii::t('models', 'Login Hour'),
-            'CntSuccess' => Yii::t('models', 'Cnt Success'),
-            'CntFailure' => Yii::t('models', 'Cnt Failure'),
-            'CntAccessDeny' => Yii::t('models', 'Cnt Access Deny'),
+            'LoginYear' => 'Login Year',
+            'LoginMonth' => 'Login Month',
+            'LoginDay' => 'Login Day',
+            'LoginHour' => 'Login Hour',
+            'CntSuccess' => 'Cnt Success',
+            'CntFailure' => 'Cnt Failure',
+            'CntAccessDeny' => 'Cnt Access Deny',
         ];
     }
 

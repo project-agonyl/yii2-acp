@@ -50,13 +50,13 @@ abstract class ShoppingCart extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'char_name' => Yii::t('models', 'Char Name'),
-            'item_ids' => Yii::t('models', 'Item Ids'),
-            'credits_required' => Yii::t('models', 'Credits Required'),
-            'coupon_code' => Yii::t('models', 'Coupon Code'),
-            'discount' => Yii::t('models', 'Discount'),
-            'discount_allowed' => Yii::t('models', 'Discount Allowed'),
-            'special_count' => Yii::t('models', 'Special Count'),
+            'char_name' => 'Char Name',
+            'item_ids' => 'Item Ids',
+            'credits_required' => 'Credits Required',
+            'coupon_code' => 'Coupon Code',
+            'discount' => 'Discount',
+            'discount_allowed' => 'Discount Allowed',
+            'special_count' => 'Special Count',
         ];
     }
 

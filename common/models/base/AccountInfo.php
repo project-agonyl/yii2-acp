@@ -56,18 +56,18 @@ abstract class AccountInfo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'account' => Yii::t('models', 'Account'),
-            'contact' => Yii::t('models', 'Contact'),
-            'name' => Yii::t('models', 'Name'),
-            'email' => Yii::t('models', 'Email'),
-            'ip' => Yii::t('models', 'Ip'),
-            'login_ip' => Yii::t('models', 'Login Ip'),
-            'event_points' => Yii::t('models', 'Event Points'),
-            'cevent_points' => Yii::t('models', 'Cevent Points'),
-            'refresh_count' => Yii::t('models', 'Refresh Count'),
-            'ref_add_allow' => Yii::t('models', 'Ref Add Allow'),
-            'referer' => Yii::t('models', 'Referer'),
-            'flamez_coins' => Yii::t('models', 'Flamez Coins'),
+            'account' => 'Account',
+            'contact' => 'Contact',
+            'name' => 'Name',
+            'email' => 'Email',
+            'ip' => 'Ip',
+            'login_ip' => 'Login Ip',
+            'event_points' => 'Event Points',
+            'cevent_points' => 'Cevent Points',
+            'refresh_count' => 'Refresh Count',
+            'ref_add_allow' => 'Ref Add Allow',
+            'referer' => 'Referer',
+            'flamez_coins' => 'Flamez Coins',
         ];
     }
 

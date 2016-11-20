@@ -49,12 +49,12 @@ abstract class ClanMember extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ClanID' => Yii::t('models', 'Clan ID'),
-            'ServerID' => Yii::t('models', 'Server ID'),
-            'CharName' => Yii::t('models', 'Char Name'),
-            'Level' => Yii::t('models', 'Level'),
-            'Class' => Yii::t('models', 'Class'),
-            'Rank' => Yii::t('models', 'Rank'),
+            'ClanID' => 'Clan ID',
+            'ServerID' => 'Server ID',
+            'CharName' => 'Char Name',
+            'Level' => 'Level',
+            'Class' => 'Class',
+            'Rank' => 'Rank',
         ];
     }
 

@@ -49,12 +49,12 @@ abstract class ChristmasGiftInfo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'gift_code' => Yii::t('models', 'Gift Code'),
-            'gift_name' => Yii::t('models', 'Gift Name'),
-            'gift_item_code' => Yii::t('models', 'Gift Item Code'),
-            'gift_points' => Yii::t('models', 'Gift Points'),
-            'gift_took' => Yii::t('models', 'Gift Took'),
-            'gift_taken' => Yii::t('models', 'Gift Taken'),
+            'gift_code' => 'Gift Code',
+            'gift_name' => 'Gift Name',
+            'gift_item_code' => 'Gift Item Code',
+            'gift_points' => 'Gift Points',
+            'gift_took' => 'Gift Took',
+            'gift_taken' => 'Gift Taken',
         ];
     }
 

@@ -53,15 +53,15 @@ abstract class Membership extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_id' => Yii::t('models', 'C ID'),
-            'account' => Yii::t('models', 'Account'),
-            'memtype' => Yii::t('models', 'Memtype'),
-            'salary' => Yii::t('models', 'Salary'),
-            'datetook' => Yii::t('models', 'Datetook'),
-            'saldata' => Yii::t('models', 'Saldata'),
-            'ip' => Yii::t('models', 'Ip'),
-            'd_udate' => Yii::t('models', 'D Udate'),
-            'curmonth' => Yii::t('models', 'Curmonth'),
+            'c_id' => 'C ID',
+            'account' => 'Account',
+            'memtype' => 'Memtype',
+            'salary' => 'Salary',
+            'datetook' => 'Datetook',
+            'saldata' => 'Saldata',
+            'ip' => 'Ip',
+            'd_udate' => 'D Udate',
+            'curmonth' => 'Curmonth',
         ];
     }
 

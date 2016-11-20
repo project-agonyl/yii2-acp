@@ -49,12 +49,12 @@ abstract class VStatPcbang1 extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Sido' => Yii::t('models', 'Sido'),
-            'Gugun' => Yii::t('models', 'Gugun'),
-            'TypeA' => Yii::t('models', 'Type A'),
-            'TypeO' => Yii::t('models', 'Type O'),
-            'Total' => Yii::t('models', 'Total'),
-            'Ratio' => Yii::t('models', 'Ratio'),
+            'Sido' => 'Sido',
+            'Gugun' => 'Gugun',
+            'TypeA' => 'Type A',
+            'TypeO' => 'Type O',
+            'Total' => 'Total',
+            'Ratio' => 'Ratio',
         ];
     }
 

@@ -46,9 +46,9 @@ abstract class QuestList extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'QuestNo' => Yii::t('models', 'Quest No'),
-            'Content' => Yii::t('models', 'Content'),
-            'QuestFlag' => Yii::t('models', 'Quest Flag'),
+            'QuestNo' => 'Quest No',
+            'Content' => 'Content',
+            'QuestFlag' => 'Quest Flag',
         ];
     }
 

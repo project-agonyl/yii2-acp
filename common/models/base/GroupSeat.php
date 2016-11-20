@@ -51,14 +51,14 @@ abstract class GroupSeat extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'GroupSeatID' => Yii::t('models', 'Group Seat ID'),
-            'Master' => Yii::t('models', 'Master'),
-            'SeatName' => Yii::t('models', 'Seat Name'),
-            'SeatType' => Yii::t('models', 'Seat Type'),
-            'SeatPassword' => Yii::t('models', 'Seat Password'),
-            'ServerIdx' => Yii::t('models', 'Server Idx'),
-            'CntRegist' => Yii::t('models', 'Cnt Regist'),
-            'Name' => Yii::t('models', 'Name'),
+            'GroupSeatID' => 'Group Seat ID',
+            'Master' => 'Master',
+            'SeatName' => 'Seat Name',
+            'SeatType' => 'Seat Type',
+            'SeatPassword' => 'Seat Password',
+            'ServerIdx' => 'Server Idx',
+            'CntRegist' => 'Cnt Regist',
+            'Name' => 'Name',
         ];
     }
 

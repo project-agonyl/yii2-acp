@@ -50,12 +50,12 @@ abstract class BetaWebLoginLog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'BetaWebLoginLogID' => Yii::t('models', 'Beta Web Login Log ID'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'IpAddr' => Yii::t('models', 'Ip Addr'),
-            'LoginDate' => Yii::t('models', 'Login Date'),
-            'LoginCheck' => Yii::t('models', 'Login Check'),
-            'AccessDeny' => Yii::t('models', 'Access Deny'),
+            'BetaWebLoginLogID' => 'Beta Web Login Log ID',
+            'AccountID' => 'Account ID',
+            'IpAddr' => 'Ip Addr',
+            'LoginDate' => 'Login Date',
+            'LoginCheck' => 'Login Check',
+            'AccessDeny' => 'Access Deny',
         ];
     }
 

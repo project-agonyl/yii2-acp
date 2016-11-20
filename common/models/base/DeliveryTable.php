@@ -51,14 +51,14 @@ abstract class DeliveryTable extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'transaction_id' => Yii::t('models', 'Transaction ID'),
-            'account_name' => Yii::t('models', 'Account Name'),
-            'char_name' => Yii::t('models', 'Char Name'),
-            'item_ids' => Yii::t('models', 'Item Ids'),
-            'delivery_time' => Yii::t('models', 'Delivery Time'),
-            'credits_used' => Yii::t('models', 'Credits Used'),
-            'ip_address' => Yii::t('models', 'Ip Address'),
-            'coupon_code' => Yii::t('models', 'Coupon Code'),
+            'transaction_id' => 'Transaction ID',
+            'account_name' => 'Account Name',
+            'char_name' => 'Char Name',
+            'item_ids' => 'Item Ids',
+            'delivery_time' => 'Delivery Time',
+            'credits_used' => 'Credits Used',
+            'ip_address' => 'Ip Address',
+            'coupon_code' => 'Coupon Code',
         ];
     }
 

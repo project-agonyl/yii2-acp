@@ -46,10 +46,10 @@ abstract class ReservedPresent extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'SeatName' => Yii::t('models', 'Seat Name'),
-            'PresentType' => Yii::t('models', 'Present Type'),
-            'Present' => Yii::t('models', 'Present'),
+            'AccountID' => 'Account ID',
+            'SeatName' => 'Seat Name',
+            'PresentType' => 'Present Type',
+            'Present' => 'Present',
         ];
     }
 

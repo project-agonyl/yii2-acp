@@ -49,11 +49,11 @@ abstract class GameLoginLog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'LoginIdx' => Yii::t('models', 'Login Idx'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'LoginIP' => Yii::t('models', 'Login Ip'),
-            'LoginDate' => Yii::t('models', 'Login Date'),
-            'PayMode' => Yii::t('models', 'Pay Mode'),
+            'LoginIdx' => 'Login Idx',
+            'AccountID' => 'Account ID',
+            'LoginIP' => 'Login Ip',
+            'LoginDate' => 'Login Date',
+            'PayMode' => 'Pay Mode',
         ];
     }
 

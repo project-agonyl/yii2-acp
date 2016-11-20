@@ -46,9 +46,9 @@ abstract class CreditsTable extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'account_name' => Yii::t('models', 'Account Name'),
-            'char_name' => Yii::t('models', 'Char Name'),
-            'credits' => Yii::t('models', 'Credits'),
+            'account_name' => 'Account Name',
+            'char_name' => 'Char Name',
+            'credits' => 'Credits',
         ];
     }
 

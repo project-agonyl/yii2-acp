@@ -56,20 +56,20 @@ abstract class Clan extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ClanID' => Yii::t('models', 'Clan ID'),
-            'ServerID' => Yii::t('models', 'Server ID'),
-            'ClanName' => Yii::t('models', 'Clan Name'),
-            'Nation' => Yii::t('models', 'Nation'),
-            'MarkID' => Yii::t('models', 'Mark ID'),
-            'CDate' => Yii::t('models', 'Cdate'),
-            'DDate' => Yii::t('models', 'Ddate'),
-            'ClanPasswd' => Yii::t('models', 'Clan Passwd'),
-            'ClanRank' => Yii::t('models', 'Clan Rank'),
-            'ClanStatus' => Yii::t('models', 'Clan Status'),
-            'StorageID' => Yii::t('models', 'Storage ID'),
-            'AgitID' => Yii::t('models', 'Agit ID'),
-            'WinCount' => Yii::t('models', 'Win Count'),
-            'LoseCount' => Yii::t('models', 'Lose Count'),
+            'ClanID' => 'Clan ID',
+            'ServerID' => 'Server ID',
+            'ClanName' => 'Clan Name',
+            'Nation' => 'Nation',
+            'MarkID' => 'Mark ID',
+            'CDate' => 'Cdate',
+            'DDate' => 'Ddate',
+            'ClanPasswd' => 'Clan Passwd',
+            'ClanRank' => 'Clan Rank',
+            'ClanStatus' => 'Clan Status',
+            'StorageID' => 'Storage ID',
+            'AgitID' => 'Agit ID',
+            'WinCount' => 'Win Count',
+            'LoseCount' => 'Lose Count',
         ];
     }
 

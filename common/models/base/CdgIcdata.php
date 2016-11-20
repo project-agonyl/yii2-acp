@@ -57,22 +57,22 @@ abstract class CdgIcdata extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'item1' => Yii::t('models', 'Item1'),
-            'item2' => Yii::t('models', 'Item2'),
-            'item3' => Yii::t('models', 'Item3'),
-            'item4' => Yii::t('models', 'Item4'),
-            'item5' => Yii::t('models', 'Item5'),
-            'item6' => Yii::t('models', 'Item6'),
-            'item7' => Yii::t('models', 'Item7'),
-            'item8' => Yii::t('models', 'Item8'),
-            'item9' => Yii::t('models', 'Item9'),
-            'item10' => Yii::t('models', 'Item10'),
-            'item11' => Yii::t('models', 'Item11'),
-            'item12' => Yii::t('models', 'Item12'),
-            'item13' => Yii::t('models', 'Item13'),
-            'item14' => Yii::t('models', 'Item14'),
-            'item15' => Yii::t('models', 'Item15'),
-            'item16' => Yii::t('models', 'Item16'),
+            'item1' => 'Item1',
+            'item2' => 'Item2',
+            'item3' => 'Item3',
+            'item4' => 'Item4',
+            'item5' => 'Item5',
+            'item6' => 'Item6',
+            'item7' => 'Item7',
+            'item8' => 'Item8',
+            'item9' => 'Item9',
+            'item10' => 'Item10',
+            'item11' => 'Item11',
+            'item12' => 'Item12',
+            'item13' => 'Item13',
+            'item14' => 'Item14',
+            'item15' => 'Item15',
+            'item16' => 'Item16',
         ];
     }
 

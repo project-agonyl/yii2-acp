@@ -57,20 +57,20 @@ abstract class Charac0ex extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_id' => Yii::t('models', 'C ID'),
-            'str' => Yii::t('models', 'Str'),
-            'inte' => Yii::t('models', 'Inte'),
-            'dex' => Yii::t('models', 'Dex'),
-            'hp' => Yii::t('models', 'Hp'),
-            'mp' => Yii::t('models', 'Mp'),
-            'points' => Yii::t('models', 'Points'),
-            'rstr' => Yii::t('models', 'Rstr'),
-            'rinte' => Yii::t('models', 'Rinte'),
-            'rdex' => Yii::t('models', 'Rdex'),
-            'rhp' => Yii::t('models', 'Rhp'),
-            'rmp' => Yii::t('models', 'Rmp'),
-            'rpoints' => Yii::t('models', 'Rpoints'),
-            'level' => Yii::t('models', 'Level'),
+            'c_id' => 'C ID',
+            'str' => 'Str',
+            'inte' => 'Inte',
+            'dex' => 'Dex',
+            'hp' => 'Hp',
+            'mp' => 'Mp',
+            'points' => 'Points',
+            'rstr' => 'Rstr',
+            'rinte' => 'Rinte',
+            'rdex' => 'Rdex',
+            'rhp' => 'Rhp',
+            'rmp' => 'Rmp',
+            'rpoints' => 'Rpoints',
+            'level' => 'Level',
         ];
     }
 

@@ -45,8 +45,8 @@ abstract class Beta4 extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'CntLogin' => Yii::t('models', 'Cnt Login'),
+            'AccountID' => 'Account ID',
+            'CntLogin' => 'Cnt Login',
         ];
     }
 

@@ -55,17 +55,17 @@ abstract class RentalIndex extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_id' => Yii::t('models', 'C ID'),
-            'account' => Yii::t('models', 'Account'),
-            'itemcode' => Yii::t('models', 'Itemcode'),
-            'attribute' => Yii::t('models', 'Attribute'),
-            'uniqcode' => Yii::t('models', 'Uniqcode'),
-            'datestart' => Yii::t('models', 'Datestart'),
-            'dateend' => Yii::t('models', 'Dateend'),
-            'totaldays' => Yii::t('models', 'Totaldays'),
-            'status' => Yii::t('models', 'Status'),
-            'points' => Yii::t('models', 'Points'),
-            'datetime' => Yii::t('models', 'Datetime'),
+            'c_id' => 'C ID',
+            'account' => 'Account',
+            'itemcode' => 'Itemcode',
+            'attribute' => 'Attribute',
+            'uniqcode' => 'Uniqcode',
+            'datestart' => 'Datestart',
+            'dateend' => 'Dateend',
+            'totaldays' => 'Totaldays',
+            'status' => 'Status',
+            'points' => 'Points',
+            'datetime' => 'Datetime',
         ];
     }
 

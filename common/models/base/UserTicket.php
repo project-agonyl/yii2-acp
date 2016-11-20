@@ -44,8 +44,8 @@ abstract class UserTicket extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'TicketNo' => Yii::t('models', 'Ticket No'),
+            'AccountID' => 'Account ID',
+            'TicketNo' => 'Ticket No',
         ];
     }
 

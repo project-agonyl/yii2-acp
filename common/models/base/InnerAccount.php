@@ -47,10 +47,10 @@ abstract class InnerAccount extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'Desc' => Yii::t('models', 'Desc'),
-            'CreateDate' => Yii::t('models', 'Create Date'),
-            'Creater' => Yii::t('models', 'Creater'),
+            'AccountID' => 'Account ID',
+            'Desc' => 'Desc',
+            'CreateDate' => 'Create Date',
+            'Creater' => 'Creater',
         ];
     }
 

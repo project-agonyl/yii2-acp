@@ -54,17 +54,17 @@ abstract class Itemlog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'charname' => Yii::t('models', 'Charname'),
-            'tocharname' => Yii::t('models', 'Tocharname'),
-            'ip' => Yii::t('models', 'Ip'),
-            'toip' => Yii::t('models', 'Toip'),
-            'itemname' => Yii::t('models', 'Itemname'),
-            'itemcode' => Yii::t('models', 'Itemcode'),
-            'uniqcode' => Yii::t('models', 'Uniqcode'),
-            'loc' => Yii::t('models', 'Loc'),
-            'date' => Yii::t('models', 'Date'),
-            'shopname' => Yii::t('models', 'Shopname'),
-            'event' => Yii::t('models', 'Event'),
+            'charname' => 'Charname',
+            'tocharname' => 'Tocharname',
+            'ip' => 'Ip',
+            'toip' => 'Toip',
+            'itemname' => 'Itemname',
+            'itemcode' => 'Itemcode',
+            'uniqcode' => 'Uniqcode',
+            'loc' => 'Loc',
+            'date' => 'Date',
+            'shopname' => 'Shopname',
+            'event' => 'Event',
         ];
     }
 

@@ -50,12 +50,12 @@ abstract class WebLoginLog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'WebLoginLogID' => Yii::t('models', 'Web Login Log ID'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'LoginIP' => Yii::t('models', 'Login Ip'),
-            'LoginDate' => Yii::t('models', 'Login Date'),
-            'LoginSuccess' => Yii::t('models', 'Login Success'),
-            'AccessDeny' => Yii::t('models', 'Access Deny'),
+            'WebLoginLogID' => 'Web Login Log ID',
+            'AccountID' => 'Account ID',
+            'LoginIP' => 'Login Ip',
+            'LoginDate' => 'Login Date',
+            'LoginSuccess' => 'Login Success',
+            'AccessDeny' => 'Access Deny',
         ];
     }
 

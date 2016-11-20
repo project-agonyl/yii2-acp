@@ -54,17 +54,17 @@ abstract class Bak extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_id' => Yii::t('models', 'C ID'),
-            'c_sheadera' => Yii::t('models', 'C Sheadera'),
-            'c_sheaderb' => Yii::t('models', 'C Sheaderb'),
-            'c_sheaderc' => Yii::t('models', 'C Sheaderc'),
-            'c_headera' => Yii::t('models', 'C Headera'),
-            'c_headerb' => Yii::t('models', 'C Headerb'),
-            'c_headerc' => Yii::t('models', 'C Headerc'),
-            'd_cdate' => Yii::t('models', 'D Cdate'),
-            'd_udate' => Yii::t('models', 'D Udate'),
-            'c_status' => Yii::t('models', 'C Status'),
-            'm_body' => Yii::t('models', 'M Body'),
+            'c_id' => 'C ID',
+            'c_sheadera' => 'C Sheadera',
+            'c_sheaderb' => 'C Sheaderb',
+            'c_sheaderc' => 'C Sheaderc',
+            'c_headera' => 'C Headera',
+            'c_headerb' => 'C Headerb',
+            'c_headerc' => 'C Headerc',
+            'd_cdate' => 'D Cdate',
+            'd_udate' => 'D Udate',
+            'c_status' => 'C Status',
+            'm_body' => 'M Body',
         ];
     }
 

@@ -50,13 +50,13 @@ abstract class Dtproperties extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('models', 'ID'),
-            'objectid' => Yii::t('models', 'Objectid'),
-            'property' => Yii::t('models', 'Property'),
-            'value' => Yii::t('models', 'Value'),
-            'uvalue' => Yii::t('models', 'Uvalue'),
-            'lvalue' => Yii::t('models', 'Lvalue'),
-            'version' => Yii::t('models', 'Version'),
+            'id' => 'ID',
+            'objectid' => 'Objectid',
+            'property' => 'Property',
+            'value' => 'Value',
+            'uvalue' => 'Uvalue',
+            'lvalue' => 'Lvalue',
+            'version' => 'Version',
         ];
     }
 

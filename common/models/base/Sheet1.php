@@ -42,7 +42,7 @@ abstract class Sheet1 extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'F1' => Yii::t('models', 'F1'),
+            'F1' => 'F1',
         ];
     }
 

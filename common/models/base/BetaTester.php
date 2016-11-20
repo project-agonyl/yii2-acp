@@ -55,17 +55,17 @@ abstract class BetaTester extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'Motive' => Yii::t('models', 'Motive'),
-            'Result' => Yii::t('models', 'Result'),
-            'UserName' => Yii::t('models', 'User Name'),
-            'SCN' => Yii::t('models', 'Scn'),
-            'ResultDate' => Yii::t('models', 'Result Date'),
-            'ResultUser' => Yii::t('models', 'Result User'),
-            'ResultNo' => Yii::t('models', 'Result No'),
-            'ResultDesc' => Yii::t('models', 'Result Desc'),
-            'AuthType' => Yii::t('models', 'Auth Type'),
-            'RegistDate' => Yii::t('models', 'Regist Date'),
+            'AccountID' => 'Account ID',
+            'Motive' => 'Motive',
+            'Result' => 'Result',
+            'UserName' => 'User Name',
+            'SCN' => 'Scn',
+            'ResultDate' => 'Result Date',
+            'ResultUser' => 'Result User',
+            'ResultNo' => 'Result No',
+            'ResultDesc' => 'Result Desc',
+            'AuthType' => 'Auth Type',
+            'RegistDate' => 'Regist Date',
         ];
     }
 

@@ -51,14 +51,14 @@ abstract class Rebirth extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_id' => Yii::t('models', 'C ID'),
-            'rebirth' => Yii::t('models', 'Rebirth'),
-            'update' => Yii::t('models', 'Update'),
-            'account' => Yii::t('models', 'Account'),
-            'gift1' => Yii::t('models', 'Gift1'),
-            'gift2' => Yii::t('models', 'Gift2'),
-            'gift3' => Yii::t('models', 'Gift3'),
-            'gift4' => Yii::t('models', 'Gift4'),
+            'c_id' => 'C ID',
+            'rebirth' => 'Rebirth',
+            'update' => 'Update',
+            'account' => 'Account',
+            'gift1' => 'Gift1',
+            'gift2' => 'Gift2',
+            'gift3' => 'Gift3',
+            'gift4' => 'Gift4',
         ];
     }
 

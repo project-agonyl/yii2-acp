@@ -46,9 +46,9 @@ abstract class GameServer extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ServerIdx' => Yii::t('models', 'Server Idx'),
-            'ServerName' => Yii::t('models', 'Server Name'),
-            'CntRegist' => Yii::t('models', 'Cnt Regist'),
+            'ServerIdx' => 'Server Idx',
+            'ServerName' => 'Server Name',
+            'CntRegist' => 'Cnt Regist',
         ];
     }
 

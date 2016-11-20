@@ -47,12 +47,12 @@ abstract class CharInfo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'ServerIdx' => Yii::t('models', 'Server Idx'),
-            'CharName' => Yii::t('models', 'Char Name'),
-            'Class' => Yii::t('models', 'Class'),
-            'Nation' => Yii::t('models', 'Nation'),
-            'default' => Yii::t('models', 'Default'),
+            'AccountID' => 'Account ID',
+            'ServerIdx' => 'Server Idx',
+            'CharName' => 'Char Name',
+            'Class' => 'Class',
+            'Nation' => 'Nation',
+            'default' => 'Default',
         ];
     }
 

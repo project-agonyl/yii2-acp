@@ -44,8 +44,8 @@ abstract class Job extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'JobID' => Yii::t('models', 'Job ID'),
-            'JobName' => Yii::t('models', 'Job Name'),
+            'JobID' => 'Job ID',
+            'JobName' => 'Job Name',
         ];
     }
 

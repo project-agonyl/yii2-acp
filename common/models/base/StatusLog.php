@@ -52,14 +52,14 @@ abstract class StatusLog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'StatusLogID' => Yii::t('models', 'Status Log ID'),
-            'ManageID' => Yii::t('models', 'Manage ID'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'Status' => Yii::t('models', 'Status'),
-            'StartDate' => Yii::t('models', 'Start Date'),
-            'EndDate' => Yii::t('models', 'End Date'),
-            'Content' => Yii::t('models', 'Content'),
-            'LogDate' => Yii::t('models', 'Log Date'),
+            'StatusLogID' => 'Status Log ID',
+            'ManageID' => 'Manage ID',
+            'AccountID' => 'Account ID',
+            'Status' => 'Status',
+            'StartDate' => 'Start Date',
+            'EndDate' => 'End Date',
+            'Content' => 'Content',
+            'LogDate' => 'Log Date',
         ];
     }
 

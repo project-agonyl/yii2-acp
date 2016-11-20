@@ -55,17 +55,17 @@ abstract class Deals extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'deal_id' => Yii::t('models', 'Deal ID'),
-            'character' => Yii::t('models', 'Character'),
-            'item_name' => Yii::t('models', 'Item Name'),
-            'item_code' => Yii::t('models', 'Item Code'),
-            'flamez_coins' => Yii::t('models', 'Flamez Coins'),
-            'deal_status' => Yii::t('models', 'Deal Status'),
-            'bcharacter' => Yii::t('models', 'Bcharacter'),
-            'deal_time' => Yii::t('models', 'Deal Time'),
-            'seller_ip' => Yii::t('models', 'Seller Ip'),
-            'hidden' => Yii::t('models', 'Hidden'),
-            'credits' => Yii::t('models', 'Credits'),
+            'deal_id' => 'Deal ID',
+            'character' => 'Character',
+            'item_name' => 'Item Name',
+            'item_code' => 'Item Code',
+            'flamez_coins' => 'Flamez Coins',
+            'deal_status' => 'Deal Status',
+            'bcharacter' => 'Bcharacter',
+            'deal_time' => 'Deal Time',
+            'seller_ip' => 'Seller Ip',
+            'hidden' => 'Hidden',
+            'credits' => 'Credits',
         ];
     }
 

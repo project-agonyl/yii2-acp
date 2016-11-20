@@ -44,8 +44,8 @@ abstract class Charrecord extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_id' => Yii::t('models', 'C ID'),
-            'info' => Yii::t('models', 'Info'),
+            'c_id' => 'C ID',
+            'info' => 'Info',
         ];
     }
 

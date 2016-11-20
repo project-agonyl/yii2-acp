@@ -47,10 +47,10 @@ abstract class AccountAuth extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'AuthType' => Yii::t('models', 'Auth Type'),
-            'AuthDate' => Yii::t('models', 'Auth Date'),
-            'Result' => Yii::t('models', 'Result'),
+            'AccountID' => 'Account ID',
+            'AuthType' => 'Auth Type',
+            'AuthDate' => 'Auth Date',
+            'Result' => 'Result',
         ];
     }
 

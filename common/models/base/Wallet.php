@@ -65,14 +65,14 @@ abstract class Wallet extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('models', 'ID'),
-            'is_deleted' => Yii::t('models', 'Is Deleted'),
-            'account' => Yii::t('models', 'Account'),
-            'cash' => Yii::t('models', 'Cash'),
-            'coin' => Yii::t('models', 'Coin'),
-            'credit' => Yii::t('models', 'Credit'),
-            'created_at' => Yii::t('models', 'Created At'),
-            'updated_at' => Yii::t('models', 'Updated At'),
+            'id' => 'ID',
+            'is_deleted' => 'Is Deleted',
+            'account' => 'Account',
+            'cash' => 'Cash',
+            'coin' => 'Coin',
+            'credit' => 'Credit',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 

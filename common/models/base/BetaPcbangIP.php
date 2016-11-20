@@ -45,9 +45,9 @@ abstract class BetaPcbangIP extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'IP' => Yii::t('models', 'Ip'),
-            'Result' => Yii::t('models', 'Result'),
+            'AccountID' => 'Account ID',
+            'IP' => 'Ip',
+            'Result' => 'Result',
         ];
     }
 

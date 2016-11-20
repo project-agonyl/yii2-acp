@@ -47,11 +47,11 @@ abstract class RegisteredItem extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'c_id' => Yii::t('models', 'C ID'),
-            'itemcode' => Yii::t('models', 'Itemcode'),
-            'uniqcode' => Yii::t('models', 'Uniqcode'),
-            'status' => Yii::t('models', 'Status'),
-            'charname' => Yii::t('models', 'Charname'),
+            'c_id' => 'C ID',
+            'itemcode' => 'Itemcode',
+            'uniqcode' => 'Uniqcode',
+            'status' => 'Status',
+            'charname' => 'Charname',
         ];
     }
 

@@ -67,17 +67,17 @@ abstract class ActivityLog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('models', 'ID'),
-            'is_visible' => Yii::t('models', 'Is Visible'),
-            'account' => Yii::t('models', 'Account'),
-            'character' => Yii::t('models', 'Character'),
-            'event' => Yii::t('models', 'Event'),
-            'description' => Yii::t('models', 'Description'),
-            'browser' => Yii::t('models', 'Browser'),
-            'operating_system' => Yii::t('models', 'Operating System'),
-            'ip_address' => Yii::t('models', 'Ip Address'),
-            'created_at' => Yii::t('models', 'Created At'),
-            'updated_at' => Yii::t('models', 'Updated At'),
+            'id' => 'ID',
+            'is_visible' => 'Is Visible',
+            'account' => 'Account',
+            'character' => 'Character',
+            'event' => 'Event',
+            'description' => 'Description',
+            'browser' => 'Browser',
+            'operating_system' => 'Operating System',
+            'ip_address' => 'Ip Address',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 

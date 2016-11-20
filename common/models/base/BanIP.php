@@ -42,7 +42,7 @@ abstract class BanIP extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'List_IP' => Yii::t('models', 'List  Ip'),
+            'List_IP' => 'List  Ip',
         ];
     }
 

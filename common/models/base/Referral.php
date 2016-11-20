@@ -46,9 +46,9 @@ abstract class Referral extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'character_name' => Yii::t('models', 'Character Name'),
-            'account_referred' => Yii::t('models', 'Account Referred'),
-            'gift_taken' => Yii::t('models', 'Gift Taken'),
+            'character_name' => 'Character Name',
+            'account_referred' => 'Account Referred',
+            'gift_taken' => 'Gift Taken',
         ];
     }
 

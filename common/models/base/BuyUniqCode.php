@@ -45,9 +45,9 @@ abstract class BuyUniqCode extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'transaction_id' => Yii::t('models', 'Transaction ID'),
-            'item_code' => Yii::t('models', 'Item Code'),
-            'unique_code' => Yii::t('models', 'Unique Code'),
+            'transaction_id' => 'Transaction ID',
+            'item_code' => 'Item Code',
+            'unique_code' => 'Unique Code',
         ];
     }
 

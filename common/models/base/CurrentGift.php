@@ -45,8 +45,8 @@ abstract class CurrentGift extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'account' => Yii::t('models', 'Account'),
-            'current_gift' => Yii::t('models', 'Current Gift'),
+            'account' => 'Account',
+            'current_gift' => 'Current Gift',
         ];
     }
 

@@ -50,13 +50,13 @@ abstract class ZipCode extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'zipidx' => Yii::t('models', 'Zipidx'),
-            'zipcode' => Yii::t('models', 'Zipcode'),
-            'sido' => Yii::t('models', 'Sido'),
-            'gugun' => Yii::t('models', 'Gugun'),
-            'dong' => Yii::t('models', 'Dong'),
-            'note1' => Yii::t('models', 'Note1'),
-            'note2' => Yii::t('models', 'Note2'),
+            'zipidx' => 'Zipidx',
+            'zipcode' => 'Zipcode',
+            'sido' => 'Sido',
+            'gugun' => 'Gugun',
+            'dong' => 'Dong',
+            'note1' => 'Note1',
+            'note2' => 'Note2',
         ];
     }
 

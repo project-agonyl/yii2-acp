@@ -46,10 +46,10 @@ abstract class CdgMondrops extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'monsterid' => Yii::t('models', 'Monsterid'),
-            'itemcode' => Yii::t('models', 'Itemcode'),
-            'dropcount' => Yii::t('models', 'Dropcount'),
-            'monstername' => Yii::t('models', 'Monstername'),
+            'monsterid' => 'Monsterid',
+            'itemcode' => 'Itemcode',
+            'dropcount' => 'Dropcount',
+            'monstername' => 'Monstername',
         ];
     }
 

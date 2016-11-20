@@ -42,7 +42,7 @@ abstract class VAdultAge extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'age' => Yii::t('models', 'Age'),
+            'age' => 'Age',
         ];
     }
 

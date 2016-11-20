@@ -49,11 +49,11 @@ abstract class AccountFailAuth extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'FailAuthID' => Yii::t('models', 'Fail Auth ID'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'SCN1' => Yii::t('models', 'Scn1'),
-            'SCN2' => Yii::t('models', 'Scn2'),
-            'AuthDate' => Yii::t('models', 'Auth Date'),
+            'FailAuthID' => 'Fail Auth ID',
+            'AccountID' => 'Account ID',
+            'SCN1' => 'Scn1',
+            'SCN2' => 'Scn2',
+            'AuthDate' => 'Auth Date',
         ];
     }
 

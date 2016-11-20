@@ -49,11 +49,11 @@ abstract class UpdateLog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'UpdateLogID' => Yii::t('models', 'Update Log ID'),
-            'ManageID' => Yii::t('models', 'Manage ID'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'UpdateContent' => Yii::t('models', 'Update Content'),
-            'LogDate' => Yii::t('models', 'Log Date'),
+            'UpdateLogID' => 'Update Log ID',
+            'ManageID' => 'Manage ID',
+            'AccountID' => 'Account ID',
+            'UpdateContent' => 'Update Content',
+            'LogDate' => 'Log Date',
         ];
     }
 

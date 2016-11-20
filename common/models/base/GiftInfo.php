@@ -45,9 +45,9 @@ abstract class GiftInfo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'account' => Yii::t('models', 'Account'),
-            'gift' => Yii::t('models', 'Gift'),
-            'time' => Yii::t('models', 'Time'),
+            'account' => 'Account',
+            'gift' => 'Gift',
+            'time' => 'Time',
         ];
     }
 

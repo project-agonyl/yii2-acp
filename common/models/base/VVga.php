@@ -46,9 +46,9 @@ abstract class VVga extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'QuestNo' => Yii::t('models', 'Quest No'),
-            'AnswerNo' => Yii::t('models', 'Answer No'),
-            'AccountID' => Yii::t('models', 'Account ID'),
+            'QuestNo' => 'Quest No',
+            'AnswerNo' => 'Answer No',
+            'AccountID' => 'Account ID',
         ];
     }
 

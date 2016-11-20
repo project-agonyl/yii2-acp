@@ -46,9 +46,9 @@ abstract class LotteryTicket extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'LotteryTicketID' => Yii::t('models', 'Lottery Ticket ID'),
-            'IsUsed' => Yii::t('models', 'Is Used'),
-            'TicketNo' => Yii::t('models', 'Ticket No'),
+            'LotteryTicketID' => 'Lottery Ticket ID',
+            'IsUsed' => 'Is Used',
+            'TicketNo' => 'Ticket No',
         ];
     }
 

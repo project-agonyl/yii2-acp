@@ -51,13 +51,13 @@ abstract class BlackList extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'BlackListID' => Yii::t('models', 'Black List ID'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'BlockStartDate' => Yii::t('models', 'Block Start Date'),
-            'BlockEndDate' => Yii::t('models', 'Block End Date'),
-            'AccountStatus' => Yii::t('models', 'Account Status'),
-            'Status' => Yii::t('models', 'Status'),
-            'Content' => Yii::t('models', 'Content'),
+            'BlackListID' => 'Black List ID',
+            'AccountID' => 'Account ID',
+            'BlockStartDate' => 'Block Start Date',
+            'BlockEndDate' => 'Block End Date',
+            'AccountStatus' => 'Account Status',
+            'Status' => 'Status',
+            'Content' => 'Content',
         ];
     }
 

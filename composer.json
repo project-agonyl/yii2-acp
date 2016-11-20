@@ -16,7 +16,10 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "schmunk42/yii2-giiant": "@stable",
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.2",
+        "kartik-v/yii2-grid": "@dev",
+        "kartik-v/yii2-icons": "@dev",
+        "bower-asset/components-font-awesome": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

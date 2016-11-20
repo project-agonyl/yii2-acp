@@ -46,9 +46,9 @@ abstract class Answer extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'QuestNo' => Yii::t('models', 'Quest No'),
-            'AnswerNo' => Yii::t('models', 'Answer No'),
-            'Content' => Yii::t('models', 'Content'),
+            'QuestNo' => 'Quest No',
+            'AnswerNo' => 'Answer No',
+            'Content' => 'Content',
         ];
     }
 

@@ -50,13 +50,13 @@ abstract class CouponTable extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('models', 'ID'),
-            'coupon_code' => Yii::t('models', 'Coupon Code'),
-            'discount' => Yii::t('models', 'Discount'),
-            'character' => Yii::t('models', 'Character'),
-            'min_amt' => Yii::t('models', 'Min Amt'),
-            'gift_time' => Yii::t('models', 'Gift Time'),
-            'flag' => Yii::t('models', 'Flag'),
+            'id' => 'ID',
+            'coupon_code' => 'Coupon Code',
+            'discount' => 'Discount',
+            'character' => 'Character',
+            'min_amt' => 'Min Amt',
+            'gift_time' => 'Gift Time',
+            'flag' => 'Flag',
         ];
     }
 

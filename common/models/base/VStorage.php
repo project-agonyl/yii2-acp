@@ -52,14 +52,14 @@ abstract class VStorage extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'HistoryDate' => Yii::t('models', 'History Date'),
-            'ServerID' => Yii::t('models', 'Server ID'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'Money' => Yii::t('models', 'Money'),
-            'CreateDate' => Yii::t('models', 'Create Date'),
-            'LastDate' => Yii::t('models', 'Last Date'),
-            'Status' => Yii::t('models', 'Status'),
-            'BodyInfo' => Yii::t('models', 'Body Info'),
+            'HistoryDate' => 'History Date',
+            'ServerID' => 'Server ID',
+            'AccountID' => 'Account ID',
+            'Money' => 'Money',
+            'CreateDate' => 'Create Date',
+            'LastDate' => 'Last Date',
+            'Status' => 'Status',
+            'BodyInfo' => 'Body Info',
         ];
     }
 

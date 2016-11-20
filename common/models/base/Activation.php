@@ -44,8 +44,8 @@ abstract class Activation extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'act_id' => Yii::t('models', 'Act ID'),
-            'account' => Yii::t('models', 'Account'),
+            'act_id' => 'Act ID',
+            'account' => 'Account',
         ];
     }
 

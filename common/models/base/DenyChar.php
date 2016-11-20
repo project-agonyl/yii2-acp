@@ -43,7 +43,7 @@ abstract class DenyChar extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'DenyCharID' => Yii::t('models', 'Deny Char ID'),
+            'DenyCharID' => 'Deny Char ID',
         ];
     }
 

@@ -15,6 +15,7 @@ class m161119_193427_activity_log extends Migration
             'character'                         => $this->char(20),
             'event'                             => $this->integer()->notNull(),
             'description'                       => $this->text(),
+            'data'                              => $this->text(),
             'browser'                           => $this->text(),
             'operating_system'                  => $this->text(),
             'ip_address'                        => $this->text(),

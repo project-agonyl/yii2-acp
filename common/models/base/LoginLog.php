@@ -45,8 +45,8 @@ abstract class LoginLog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'SCN' => Yii::t('models', 'Scn'),
-            'LoginDate' => Yii::t('models', 'Login Date'),
+            'SCN' => 'Scn',
+            'LoginDate' => 'Login Date',
         ];
     }
 

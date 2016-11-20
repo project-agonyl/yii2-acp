@@ -45,8 +45,8 @@ abstract class A3items extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'item_id' => Yii::t('models', 'Item ID'),
-            'item_name' => Yii::t('models', 'Item Name'),
+            'item_id' => 'Item ID',
+            'item_name' => 'Item Name',
         ];
     }
 

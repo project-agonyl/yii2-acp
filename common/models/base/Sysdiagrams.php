@@ -49,11 +49,11 @@ abstract class Sysdiagrams extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('models', 'Name'),
-            'principal_id' => Yii::t('models', 'Principal ID'),
-            'diagram_id' => Yii::t('models', 'Diagram ID'),
-            'version' => Yii::t('models', 'Version'),
-            'definition' => Yii::t('models', 'Definition'),
+            'name' => 'Name',
+            'principal_id' => 'Principal ID',
+            'diagram_id' => 'Diagram ID',
+            'version' => 'Version',
+            'definition' => 'Definition',
         ];
     }
 

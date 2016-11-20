@@ -49,11 +49,11 @@ abstract class WebLoginRecentLog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'LoginIP' => Yii::t('models', 'Login Ip'),
-            'CntLoginFailure' => Yii::t('models', 'Cnt Login Failure'),
-            'CheckDate' => Yii::t('models', 'Check Date'),
-            'AccessDenyDate' => Yii::t('models', 'Access Deny Date'),
+            'AccountID' => 'Account ID',
+            'LoginIP' => 'Login Ip',
+            'CntLoginFailure' => 'Cnt Login Failure',
+            'CheckDate' => 'Check Date',
+            'AccessDenyDate' => 'Access Deny Date',
         ];
     }
 

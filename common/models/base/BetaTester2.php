@@ -53,16 +53,16 @@ abstract class BetaTester2 extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'BetaID' => Yii::t('models', 'Beta ID'),
-            'BetaRandNum' => Yii::t('models', 'Beta Rand Num'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'Scn' => Yii::t('models', 'Scn'),
-            'ZipCode' => Yii::t('models', 'Zip Code'),
-            'Region' => Yii::t('models', 'Region'),
-            'Age' => Yii::t('models', 'Age'),
-            'Sex' => Yii::t('models', 'Sex'),
-            'Result' => Yii::t('models', 'Result'),
-            'BetaNum' => Yii::t('models', 'Beta Num'),
+            'BetaID' => 'Beta ID',
+            'BetaRandNum' => 'Beta Rand Num',
+            'AccountID' => 'Account ID',
+            'Scn' => 'Scn',
+            'ZipCode' => 'Zip Code',
+            'Region' => 'Region',
+            'Age' => 'Age',
+            'Sex' => 'Sex',
+            'Result' => 'Result',
+            'BetaNum' => 'Beta Num',
         ];
     }
 

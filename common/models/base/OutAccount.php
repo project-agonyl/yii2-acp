@@ -55,17 +55,17 @@ abstract class OutAccount extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'OutAccountID' => Yii::t('models', 'Out Account ID'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'OutDate' => Yii::t('models', 'Out Date'),
-            'Result' => Yii::t('models', 'Result'),
-            'ResultUser' => Yii::t('models', 'Result User'),
-            'ResultDesc' => Yii::t('models', 'Result Desc'),
-            'Reason' => Yii::t('models', 'Reason'),
-            'RestoreDate' => Yii::t('models', 'Restore Date'),
-            'SCN' => Yii::t('models', 'Scn'),
-            'PrevStatus' => Yii::t('models', 'Prev Status'),
-            'ResultDate' => Yii::t('models', 'Result Date'),
+            'OutAccountID' => 'Out Account ID',
+            'AccountID' => 'Account ID',
+            'OutDate' => 'Out Date',
+            'Result' => 'Result',
+            'ResultUser' => 'Result User',
+            'ResultDesc' => 'Result Desc',
+            'Reason' => 'Reason',
+            'RestoreDate' => 'Restore Date',
+            'SCN' => 'Scn',
+            'PrevStatus' => 'Prev Status',
+            'ResultDate' => 'Result Date',
         ];
     }
 

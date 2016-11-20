@@ -52,17 +52,17 @@ abstract class Playerpkinfo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('models', 'ID'),
-            'pker' => Yii::t('models', 'Pker'),
-            'pker_rb' => Yii::t('models', 'Pker Rb'),
-            'pker_lvl' => Yii::t('models', 'Pker Lvl'),
-            'pked' => Yii::t('models', 'Pked'),
-            'pked_rb' => Yii::t('models', 'Pked Rb'),
-            'pked_lvl' => Yii::t('models', 'Pked Lvl'),
-            'loc' => Yii::t('models', 'Loc'),
-            'time' => Yii::t('models', 'Time'),
-            'pker_nation' => Yii::t('models', 'Pker Nation'),
-            'pked_nation' => Yii::t('models', 'Pked Nation'),
+            'id' => 'ID',
+            'pker' => 'Pker',
+            'pker_rb' => 'Pker Rb',
+            'pker_lvl' => 'Pker Lvl',
+            'pked' => 'Pked',
+            'pked_rb' => 'Pked Rb',
+            'pked_lvl' => 'Pked Lvl',
+            'loc' => 'Loc',
+            'time' => 'Time',
+            'pker_nation' => 'Pker Nation',
+            'pked_nation' => 'Pked Nation',
         ];
     }
 

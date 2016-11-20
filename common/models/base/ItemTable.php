@@ -51,14 +51,14 @@ abstract class ItemTable extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'item_id' => Yii::t('models', 'Item ID'),
-            'item_name' => Yii::t('models', 'Item Name'),
-            'item_category' => Yii::t('models', 'Item Category'),
-            'item_code' => Yii::t('models', 'Item Code'),
-            'items_count' => Yii::t('models', 'Items Count'),
-            'item_pic' => Yii::t('models', 'Item Pic'),
-            'buy_credits' => Yii::t('models', 'Buy Credits'),
-            'rent_credits' => Yii::t('models', 'Rent Credits'),
+            'item_id' => 'Item ID',
+            'item_name' => 'Item Name',
+            'item_category' => 'Item Category',
+            'item_code' => 'Item Code',
+            'items_count' => 'Items Count',
+            'item_pic' => 'Item Pic',
+            'buy_credits' => 'Buy Credits',
+            'rent_credits' => 'Rent Credits',
         ];
     }
 

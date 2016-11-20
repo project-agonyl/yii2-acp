@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
+use kartik\icons\Icon;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -39,19 +40,19 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/']],
+        ['label' => Icon::show('home').'Home', 'url' => ['/']],
         [
-            'label' => 'Character',
+            'label' => Icon::show('database').'Database',
             'items' => [
-                ['label' => 'Character Details', 'url' => ['/character/details']],
-                ['label' => 'Add Credits', 'url' => ['/character/add-credits']],
-                ['label' => 'Add Items', 'url' => ['/character/add-items']]
+                ['label' => Icon::show('users').'Account', 'url' => ['/database/account']],
+                ['label' => Icon::show('user').'Character', 'url' => ['/database/character']]
             ]
         ],
-        ['label' => 'Logout (' . trim(Yii::$app->user->id) . ')', 'url' => ['/account/logout']]
+        ['label' => Icon::show('sign-out').'Logout (' . trim(Yii::$app->user->id) . ')', 'url' => ['/account/logout']]
     ];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
+        'encodeLabels' => false,
         'items' => $menuItems,
     ]);
     NavBar::end();

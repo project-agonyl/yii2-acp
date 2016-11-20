@@ -42,7 +42,7 @@ abstract class Count extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'count' => Yii::t('models', 'Count'),
+            'count' => 'Count',
         ];
     }
 

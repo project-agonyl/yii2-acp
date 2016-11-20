@@ -46,9 +46,9 @@ abstract class RandChar extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'RandNo' => Yii::t('models', 'Rand No'),
-            'Rand' => Yii::t('models', 'Rand'),
-            'AccountID' => Yii::t('models', 'Account ID'),
+            'RandNo' => 'Rand No',
+            'Rand' => 'Rand',
+            'AccountID' => 'Account ID',
         ];
     }
 

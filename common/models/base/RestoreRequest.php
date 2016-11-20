@@ -50,12 +50,12 @@ abstract class RestoreRequest extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'RestoreRequestID' => Yii::t('models', 'Restore Request ID'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'SCN' => Yii::t('models', 'Scn'),
-            'Result' => Yii::t('models', 'Result'),
-            'RequestDate' => Yii::t('models', 'Request Date'),
-            'ResultDate' => Yii::t('models', 'Result Date'),
+            'RestoreRequestID' => 'Restore Request ID',
+            'AccountID' => 'Account ID',
+            'SCN' => 'Scn',
+            'Result' => 'Result',
+            'RequestDate' => 'Request Date',
+            'ResultDate' => 'Result Date',
         ];
     }
 

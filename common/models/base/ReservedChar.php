@@ -53,15 +53,15 @@ abstract class ReservedChar extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'CharName' => Yii::t('models', 'Char Name'),
-            'ServerIdx' => Yii::t('models', 'Server Idx'),
-            'CharClass' => Yii::t('models', 'Char Class'),
-            'Nation' => Yii::t('models', 'Nation'),
-            'GroupSeatID' => Yii::t('models', 'Group Seat ID'),
-            'RegistDate' => Yii::t('models', 'Regist Date'),
-            'Sex' => Yii::t('models', 'Sex'),
-            'Name' => Yii::t('models', 'Name'),
+            'AccountID' => 'Account ID',
+            'CharName' => 'Char Name',
+            'ServerIdx' => 'Server Idx',
+            'CharClass' => 'Char Class',
+            'Nation' => 'Nation',
+            'GroupSeatID' => 'Group Seat ID',
+            'RegistDate' => 'Regist Date',
+            'Sex' => 'Sex',
+            'Name' => 'Name',
         ];
     }
 

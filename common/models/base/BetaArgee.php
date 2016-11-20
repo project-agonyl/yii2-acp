@@ -45,8 +45,8 @@ abstract class BetaArgee extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'AgreeStatus' => Yii::t('models', 'Agree Status'),
+            'AccountID' => 'Account ID',
+            'AgreeStatus' => 'Agree Status',
         ];
     }
 

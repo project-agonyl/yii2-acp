@@ -45,9 +45,9 @@ abstract class BetaPresent extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'Present' => Yii::t('models', 'Present'),
-            'PresentType' => Yii::t('models', 'Present Type'),
+            'AccountID' => 'Account ID',
+            'Present' => 'Present',
+            'PresentType' => 'Present Type',
         ];
     }
 

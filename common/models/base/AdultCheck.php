@@ -46,9 +46,9 @@ abstract class AdultCheck extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Name' => Yii::t('models', 'Name'),
-            'SCN' => Yii::t('models', 'Scn'),
-            'RegDate' => Yii::t('models', 'Reg Date'),
+            'Name' => 'Name',
+            'SCN' => 'Scn',
+            'RegDate' => 'Reg Date',
         ];
     }
 

@@ -51,13 +51,13 @@ abstract class GameBroadcast extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'GameBroadcastID' => Yii::t('models', 'Game Broadcast ID'),
-            'AccountID' => Yii::t('models', 'Account ID'),
-            'RequestDate' => Yii::t('models', 'Request Date'),
-            'Job' => Yii::t('models', 'Job'),
-            'Motive' => Yii::t('models', 'Motive'),
-            'Intro' => Yii::t('models', 'Intro'),
-            'FilePath' => Yii::t('models', 'File Path'),
+            'GameBroadcastID' => 'Game Broadcast ID',
+            'AccountID' => 'Account ID',
+            'RequestDate' => 'Request Date',
+            'Job' => 'Job',
+            'Motive' => 'Motive',
+            'Intro' => 'Intro',
+            'FilePath' => 'File Path',
         ];
     }
 

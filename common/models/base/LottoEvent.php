@@ -45,8 +45,8 @@ abstract class LottoEvent extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'LottoEventID' => Yii::t('models', 'Lotto Event ID'),
-            'EventName' => Yii::t('models', 'Event Name'),
+            'LottoEventID' => 'Lotto Event ID',
+            'EventName' => 'Event Name',
         ];
     }
 

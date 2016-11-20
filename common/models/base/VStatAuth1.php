@@ -51,13 +51,13 @@ abstract class VStatAuth1 extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'AuthType' => Yii::t('models', 'Auth Type'),
-            'ResultO' => Yii::t('models', 'Result O'),
-            'ResultA' => Yii::t('models', 'Result A'),
-            'Total' => Yii::t('models', 'Total'),
-            'AuthTypeName' => Yii::t('models', 'Auth Type Name'),
-            'ResultOP' => Yii::t('models', 'Result Op'),
-            'ResultAP' => Yii::t('models', 'Result Ap'),
+            'AuthType' => 'Auth Type',
+            'ResultO' => 'Result O',
+            'ResultA' => 'Result A',
+            'Total' => 'Total',
+            'AuthTypeName' => 'Auth Type Name',
+            'ResultOP' => 'Result Op',
+            'ResultAP' => 'Result Ap',
         ];
     }
 
