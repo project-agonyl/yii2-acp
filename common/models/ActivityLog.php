@@ -21,6 +21,7 @@ class ActivityLog extends BaseActivityLog
     const EVENT_ACP_LOGOUT = 3;
     const EVENT_ADMIN_PANEL_LOGIN = 4;
     const EVENT_ADMIN_PANEL_LOGOUT = 5;
+    const EVENT_ACP_SIGNUP = 6;
     const EVENT_UNKNOWN = 999;
 
     public function behaviors()
@@ -56,11 +57,12 @@ class ActivityLog extends BaseActivityLog
             self::EVENT_ACP_LOGOUT => 'ACP logout',
             self::EVENT_ADMIN_PANEL_LOGIN => 'Admin panel login',
             self::EVENT_ADMIN_PANEL_LOGOUT => 'Admin panel logout',
+            self::EVENT_ACP_SIGNUP => 'ACP Sign Up',
             self::EVENT_UNKNOWN => 'Unknown event'
         ];
     }
 
-    public static function addEntry($event, $account, $data = [], $description = '')
+    public static function addEntry($event, $account, $data = '', $description = '')
     {
         $browser = new Browser();
         $os = new Os();
@@ -71,7 +73,7 @@ class ActivityLog extends BaseActivityLog
             'description' => $description,
             'ip_address' => Yii::$app->request->userIP,
             'browser' => $browser->getName().' '.$browser->getVersion(),
-            'operating_system' => $os->getName()
+            'operating_system' => $os->getName().' '.$os->getVersion()
         ]);
         return $event->save();
     }

@@ -11,15 +11,9 @@ use yii\helpers\ArrayHelper;
  */
 class AccountInfo extends BaseAccountInfo
 {
-
-public function behaviors()
+    public function behaviors()
     {
-        return ArrayHelper::merge(
-            parent::behaviors(),
-            [
-                # custom behaviors
-            ]
-        );
+        return [];
     }
 
     public function rules()

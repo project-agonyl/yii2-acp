@@ -124,14 +124,10 @@ class AccountController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-                }
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Thank you for signing up. Please check your email and activate your account.');
+            return $this->redirect(['login']);
         }
-
         return $this->render('signup', [
             'model' => $model,
         ]);

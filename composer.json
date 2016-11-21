@@ -20,7 +20,8 @@
         "kartik-v/yii2-grid": "@dev",
         "kartik-v/yii2-icons": "@dev",
         "bower-asset/components-font-awesome": "*",
-        "sinergi/browser-detector": "^6.1"
+        "sinergi/browser-detector": "^6.1",
+        "ramsey/uuid": "^3.5"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

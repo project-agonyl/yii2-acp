@@ -16,6 +16,7 @@ use yii\web\IdentityInterface;
 class Account extends BaseAccount implements IdentityInterface
 {
     const STATUS_ACTIVE = 'A';
+    const STATUS_NEW = 'F';
 
     public function behaviors()
     {

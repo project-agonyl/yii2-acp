@@ -6,30 +6,47 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
 
-$this->title = 'Signup';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'ACP Login';
 ?>
-<div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to signup:</p>
-
+<?php $form = ActiveForm::begin([
+    'id' => 'signup-form',
+    'options' => [ 'class' => 'form-signin', 'style' => 'max-width: 600px']
+]); ?>
+    <h2 class="form-signin-heading">ACP Sign Up</h2>
     <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'email') ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+        <div class="col-sm-6">
+            <?= $form->field($model, 'c_id')->textInput(['autofocus' => true]) ?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model, 'c_headerb')->textInput() ?>
         </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-sm-6">
+            <?= $form->field($model, 'c_headera')->passwordInput() ?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model, 'repeatPassword')->passwordInput() ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <?= $form->field($model, 'name')->textInput() ?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model, 'phone')->textInput() ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <?= Html::submitButton('Sign Up', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-danger" href="<?= Url::to(['login']); ?>">Cancel</a>
+        </div>
+    </div>
+<?php ActiveForm::end(); ?>

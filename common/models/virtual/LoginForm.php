@@ -42,6 +42,10 @@ class LoginForm extends Model
                 $this->addError('username', 'Invalid username or password');
                 return false;
             }
+            if ($account->c_status == Account::STATUS_NEW) {
+                $this->addError('username', 'Please activate your account');
+                return false;
+            }
             switch (Yii::$app->id) {
                 case 'a3-admin':
                     $event = ActivityLog::EVENT_ADMIN_PANEL_LOGIN;
