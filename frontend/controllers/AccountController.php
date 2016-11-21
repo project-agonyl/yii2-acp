@@ -1,6 +1,8 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Account;
+use common\models\Activation;
 use common\models\ActivityLog;
 use Yii;
 use yii\base\InvalidParamException;
@@ -84,26 +86,38 @@ class AccountController extends Controller
     }
 
     /**
-     * Displays contact page.
+     * Activates account
      *
      * @return mixed
      */
-    public function actionContact()
+    public function actionActivate($id)
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending email.');
-            }
-
-            return $this->refresh();
+        $model = Activation::find()
+            ->where([
+                'act_id' => $id
+            ])
+            ->one();
+        if ($model == null) {
+            Yii::$app->session->setFlash('danger', 'Invalid activation link. Please use correct URL and try again.');
         } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
+            $account = Account::find()
+                ->where([
+                    'c_id' => $model->account,
+                    'c_status' => Account::STATUS_NEW
+                ])
+                ->one();
+            if ($account == null) {
+                Yii::$app->session->setFlash('danger', 'Account has already been activated.');
+            } else {
+                $account->c_status = Account::STATUS_ACTIVE;
+                if ($account->save()) {
+                    Yii::$app->session->setFlash('success', 'Account has been activated. See you in game!');
+                } else {
+                    Yii::$app->session->setFlash('danger', 'There was some error activating you account. Please try again later.');
+                }
+            }
         }
+        return $this->redirect(['login']);
     }
 
     /**
