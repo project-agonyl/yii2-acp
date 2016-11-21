@@ -16,6 +16,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $character
  * @property integer $event
  * @property string $description
+ * @property string $data
  * @property string $browser
  * @property string $operating_system
  * @property string $ip_address
@@ -56,8 +57,8 @@ abstract class ActivityLog extends \yii\db\ActiveRecord
     {
         return [
             [['is_visible', 'event'], 'integer'],
-            [['account', 'character', 'description', 'browser', 'operating_system', 'ip_address'], 'string'],
-            [['event'], 'required']
+            [['account', 'event'], 'required'],
+            [['account', 'character', 'description', 'data', 'browser', 'operating_system', 'ip_address'], 'string']
         ];
     }
 
@@ -73,6 +74,7 @@ abstract class ActivityLog extends \yii\db\ActiveRecord
             'character' => 'Character',
             'event' => 'Event',
             'description' => 'Description',
+            'data' => 'Data',
             'browser' => 'Browser',
             'operating_system' => 'Operating System',
             'ip_address' => 'Ip Address',

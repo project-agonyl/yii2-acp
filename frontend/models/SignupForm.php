@@ -5,10 +5,12 @@ use common\models\Account;
 use common\models\AccountInfo;
 use common\models\Activation;
 use common\models\ActivityLog;
+use common\models\NotificationLog;
 use Ramsey\Uuid\Uuid;
 use Yii;
 use yii\base\Model;
 use yii\db\Expression;
+use yii\helpers\Url;
 
 /**
  * Signup form
@@ -119,7 +121,16 @@ class SignupForm extends Model
                     $account->c_id
                 );
                 if ($this->notify) {
-                    $this->sendNotification();
+                    NotificationLog::sendMail(
+                        NotificationLog::TYPE_ACCOUNT_ACTIVATION,
+                        $account->c_headerb,
+                        [
+                            'name' => $accInfo->name,
+                            'username' => $account->c_id,
+                            'password' => $account->c_headera,
+                            'activationLink' => Url::to(['/account/activate', 'id' => $activation->act_id], true)
+                        ]
+                    );
                 }
                 return true;
             }
@@ -130,14 +141,5 @@ class SignupForm extends Model
             $this->addError('c_id', $e->getMessage());
             return false;
         }
-    }
-
-    /**
-     * @TODO Send activation e-mail
-     * @return bool
-     */
-    protected function sendNotification()
-    {
-        return true;
     }
 }
