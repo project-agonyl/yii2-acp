@@ -77,7 +77,9 @@ class ActivityLogSearch extends ActivityLog
                 }
             ],
             'description',
-            'data',
+            'browser',
+            'operating_system',
+            'ip_address',
             'created' => [
                 'attribute' => 'created_at',
                 'label' => 'Event Time',
