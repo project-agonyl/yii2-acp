@@ -111,6 +111,10 @@ class AccountController extends Controller
             } else {
                 $account->c_status = Account::STATUS_ACTIVE;
                 if ($account->save()) {
+                    ActivityLog::addEntry(
+                        ActivityLog::EVENT_ACCOUNT_ACTIVATED,
+                        $account->c_id
+                    );
                     Yii::$app->session->setFlash('success', 'Account has been activated. See you in game!');
                 } else {
                     Yii::$app->session->setFlash('danger', 'There was some error activating you account. Please try again later.');
