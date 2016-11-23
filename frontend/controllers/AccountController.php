@@ -12,7 +12,6 @@ use common\models\virtual\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use frontend\models\ContactForm;
 
 /**
  * Account controller
@@ -156,19 +155,17 @@ class AccountController extends Controller
      *
      * @return mixed
      */
-    public function actionRequestPasswordReset()
+    public function actionForgotPassword()
     {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
+            if ($model->save()) {
                 Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-
-                return $this->goHome();
+                return $this->redirect(['login']);
             } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
+                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for username provided. Please contact GM!');
             }
         }
-
         return $this->render('requestPasswordResetToken', [
             'model' => $model,
         ]);
@@ -188,13 +185,10 @@ class AccountController extends Controller
         } catch (InvalidParamException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
-
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
             Yii::$app->session->setFlash('success', 'New password was saved.');
-
-            return $this->goHome();
+            return $this->redirect(['login']);
         }
-
         return $this->render('resetPassword', [
             'model' => $model,
         ]);

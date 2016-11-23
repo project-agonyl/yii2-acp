@@ -6,26 +6,25 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
 
 $this->title = 'Request password reset';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-request-password-reset">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out your email. A link to reset password will be sent there.</p>
-
+<?php $form = ActiveForm::begin([
+    'id' => 'forgot-form',
+    'options' => [ 'class' => 'form-signin']
+]); ?>
+    <h4>A link will be sent to you registered email address to reset password</h4>
+    <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
     <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form']); ?>
-
-                <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?><br>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-warning" href="<?= Url::to(['login']); ?>">Cancel</a>
         </div>
     </div>
-</div>
+<?php ActiveForm::end(); ?>

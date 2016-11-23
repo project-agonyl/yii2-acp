@@ -1,9 +1,12 @@
 <?php
 namespace frontend\models;
 
+use common\models\Account;
+use common\models\AccountInfo;
+use common\models\ActivityLog;
 use yii\base\Model;
 use yii\base\InvalidParamException;
-use common\models\User;
+use Yii;
 
 /**
  * Password reset form
@@ -11,11 +14,16 @@ use common\models\User;
 class ResetPasswordForm extends Model
 {
     public $password;
+    public $repeatPassword;
 
     /**
-     * @var \common\models\User
+     * @var \common\models\Account
      */
-    private $_user;
+    private $_account;
+    /**
+     * @var \common\models\AccountInfo
+     */
+    private $_accInfo;
 
 
     /**
@@ -30,10 +38,15 @@ class ResetPasswordForm extends Model
         if (empty($token) || !is_string($token)) {
             throw new InvalidParamException('Password reset token cannot be blank.');
         }
-        $this->_user = User::findByPasswordResetToken($token);
-        if (!$this->_user) {
+        $this->_accInfo = AccountInfo::find()
+            ->where(['forgot_pass_key' => $token])
+            ->one();
+        if (!$this->_accInfo) {
             throw new InvalidParamException('Wrong password reset token.');
         }
+        $this->_account = Account::find()
+            ->where(['c_id' => $this->_accInfo->account])
+            ->one();
         parent::__construct($config);
     }
 
@@ -43,8 +56,9 @@ class ResetPasswordForm extends Model
     public function rules()
     {
         return [
-            ['password', 'required'],
-            ['password', 'string', 'min' => 6],
+            [['password', 'repeatPassword'], 'required'],
+            ['password', 'string', 'min' => 4],
+            ['repeatPassword', 'compare', 'compareAttribute' => 'password', 'message' => 'Passwords do not match']
         ];
     }
 
@@ -55,10 +69,30 @@ class ResetPasswordForm extends Model
      */
     public function resetPassword()
     {
-        $user = $this->_user;
-        $user->setPassword($this->password);
-        $user->removePasswordResetToken();
-
-        return $user->save(false);
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            $this->_account->c_headera = $this->password;
+            if (!$this->_account->save()) {
+                $transaction->rollBack();
+                $this->addErrors($this->_account->errors);
+                return false;
+            }
+            $this->_accInfo->forgot_pass_key = null;
+            if (!$this->_accInfo->save()) {
+                $transaction->rollBack();
+                $this->addErrors($this->_accInfo->errors);
+                return false;
+            }
+            $transaction->commit();
+            ActivityLog::addEntry(
+                ActivityLog::EVENT_PASSWORD_UPDATED,
+                $this->_account->c_id
+            );
+            return true;
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            $this->addError('password', $e->getMessage());
+            return false;
+        }
     }
 }

@@ -48,7 +48,7 @@ class SignupForm extends Model
         return [
             [['c_id', 'c_headerb', 'c_headera', 'name', 'phone', 'repeatPassword'], 'safe'],
             ['c_id', 'trim'],
-            ['c_id', 'match', 'pattern'=> '/^[A-Za-z0-9]+$/u', 'message'=> 'Username cannot contain special characters.'],
+            ['c_id', 'match', 'pattern' => '/^[A-Za-z0-9]+$/u', 'message'=> 'Username cannot contain special characters.'],
             ['c_id', 'required'],
             ['c_id', 'unique', 'targetClass' => '\common\models\Account', 'message' => 'This username has already been taken.'],
             ['c_id', 'string', 'min' => 6, 'max' => 12],

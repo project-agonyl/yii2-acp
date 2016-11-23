@@ -22,6 +22,7 @@ use Yii;
  * @property string $referer
  * @property double $flamez_coins
  * @property string $forgot_pass_key
+ * @property integer $id
  * @property string $aliasModel
  */
 abstract class AccountInfo extends \yii\db\ActiveRecord
@@ -70,6 +71,7 @@ abstract class AccountInfo extends \yii\db\ActiveRecord
             'referer' => 'Referer',
             'flamez_coins' => 'Flamez Coins',
             'forgot_pass_key' => 'Forgot Pass Key',
+            'id' => 'ID',
         ];
     }
 

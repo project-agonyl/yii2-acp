@@ -11,15 +11,9 @@ use yii\helpers\ArrayHelper;
  */
 class Charloginlog extends BaseCharloginlog
 {
-
-public function behaviors()
+    public function behaviors()
     {
-        return ArrayHelper::merge(
-            parent::behaviors(),
-            [
-                # custom behaviors
-            ]
-        );
+        return [];
     }
 
     public function rules()
@@ -30,5 +24,12 @@ public function behaviors()
                   # custom validation rules
              ]
         );
+    }
+
+    public static function onlinePlayerCount()
+    {
+        return self::find()
+            ->where('c_id IS NOT NULL')
+            ->count();
     }
 }

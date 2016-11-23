@@ -1,16 +1,23 @@
 <?php
 namespace frontend\models;
 
+use common\models\Account;
+use common\models\AccountInfo;
+use common\models\ActivityLog;
+use common\models\NotificationLog;
+use Ramsey\Uuid\Uuid;
 use Yii;
 use yii\base\Model;
 use common\models\User;
+use yii\db\Query;
+use yii\helpers\Url;
 
 /**
  * Password reset request form
  */
 class PasswordResetRequestForm extends Model
 {
-    public $email;
+    public $username;
 
 
     /**
@@ -19,14 +26,11 @@ class PasswordResetRequestForm extends Model
     public function rules()
     {
         return [
-            ['email', 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'exist',
-                'targetClass' => '\common\models\User',
-                'filter' => ['status' => User::STATUS_ACTIVE],
-                'message' => 'There is no user with such email.'
-            ],
+            ['username', 'safe'],
+            ['username', 'trim'],
+            ['username', 'required'],
+            ['username', 'string', 'min' => 6, 'max' => 12],
+            ['username', 'match', 'pattern' => '/^[A-Za-z0-9]+$/u', 'message'=> 'Username cannot contain special characters.']
         ];
     }
 
@@ -35,34 +39,42 @@ class PasswordResetRequestForm extends Model
      *
      * @return bool whether the email was send
      */
-    public function sendEmail()
+    public function save()
     {
-        /* @var $user User */
-        $user = User::findOne([
-            'status' => User::STATUS_ACTIVE,
-            'email' => $this->email,
-        ]);
-
-        if (!$user) {
-            return false;
-        }
-        
-        if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
-            $user->generatePasswordResetToken();
-            if (!$user->save()) {
-                return false;
+        $account = Account::find()
+            ->where([
+                'c_id' => $this->username,
+                'c_status' => Account::STATUS_ACTIVE
+            ])
+            ->one();
+        if ($account != null) {
+            $accInfo = AccountInfo::find()
+                ->where(['account' => $account->c_id])
+                ->one();
+            if ($accInfo == null) {
+                $accInfo = new AccountInfo([
+                    'account' => $account->c_id
+                ]);
+                $accInfo->email = $account->c_headerb;
+                $accInfo->ip = Yii::$app->request->userIP;
+                $accInfo->event_points = 0;
+                $accInfo->cevent_points = 0;
+                $accInfo->refresh_count = 0;
+                $accInfo->ref_add_allow = 1;
+            }
+            $uuid = Uuid::uuid4();
+            $accInfo->forgot_pass_key = $uuid->toString();
+            if ($accInfo->save()) {
+                NotificationLog::sendMail(
+                    NotificationLog::TYPE_FORGOT_PASSWORD,
+                    $account->c_headerb,
+                    [
+                        'username' => $account->c_id,
+                        'resetPasswordLink' => Url::to(['/account/reset-password', 'token' => $accInfo->forgot_pass_key], true)
+                    ]
+                );
             }
         }
-
-        return Yii::$app
-            ->mailer
-            ->compose(
-                ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
-                ['user' => $user]
-            )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-            ->setTo($this->email)
-            ->setSubject('Password reset for ' . Yii::$app->name)
-            ->send();
+        return true;
     }
 }

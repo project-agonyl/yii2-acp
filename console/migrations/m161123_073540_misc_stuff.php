@@ -7,6 +7,7 @@ class m161123_073540_misc_stuff extends Migration
     public function safeUp()
     {
         $this->addColumn('AccountInfo', 'forgot_pass_key', $this->text());
+        $this->addColumn('AccountInfo', 'id', $this->primaryKey());
         $this->createTable('item',[
             'id'                                => $this->primaryKey(),
             'second_column_id'                  => $this->integer()->defaultValue(35)->notNull(),
