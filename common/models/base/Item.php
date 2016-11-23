@@ -16,6 +16,8 @@ use yii\behaviors\TimestampBehavior;
  * @property string $name
  * @property integer $type
  * @property string $meta
+ * @property integer $woonz
+ * @property integer $item_id
  * @property string $created_at
  * @property string $updated_at
  *
@@ -54,9 +56,10 @@ abstract class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['second_column_id', 'is_available_eshop', 'type'], 'integer'],
-            [['name'], 'required'],
-            [['name', 'meta'], 'string']
+            [['second_column_id', 'is_available_eshop', 'type', 'woonz', 'item_id'], 'integer'],
+            [['name', 'item_id'], 'required'],
+            [['name', 'meta'], 'string'],
+            [['item_id'], 'unique']
         ];
     }
 
@@ -74,6 +77,8 @@ abstract class Item extends \yii\db\ActiveRecord
             'meta' => 'Meta',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'woonz' => 'Woonz',
+            'item_id' => 'Item ID',
         ];
     }
 

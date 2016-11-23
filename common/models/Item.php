@@ -4,6 +4,8 @@ namespace common\models;
 
 use Yii;
 use \common\models\base\Item as BaseItem;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -11,13 +13,15 @@ use yii\helpers\ArrayHelper;
  */
 class Item extends BaseItem
 {
-
-public function behaviors()
+    public function behaviors()
     {
         return ArrayHelper::merge(
             parent::behaviors(),
             [
-                # custom behaviors
+                [
+                    'class' => TimestampBehavior::className(),
+                    'value' => new Expression('CURRENT_TIMESTAMP')
+                ]
             ]
         );
     }
