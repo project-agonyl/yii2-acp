@@ -34,13 +34,13 @@ class m161123_073540_misc_stuff extends Migration
             'created_at'                        => $this->dateTime() . " DEFAULT CURRENT_TIMESTAMP",
             'updated_at'                        => $this->dateTime() . " DEFAULT CURRENT_TIMESTAMP"
         ]);
-        $this->addForeignKey('fk_item_level_item', 'item_level', 'item_id', 'item', 'id');
+        $this->addForeignKey('fk_item_level_item', 'item_info', 'item_id', 'item', 'id');
     }
 
     public function safeDown()
     {
-        $this->dropForeignKey('fk_item_level_item', 'item_level');
-        $this->dropTable('item_level');
+        $this->dropForeignKey('fk_item_level_item', 'item_info');
+        $this->dropTable('item_info');
         $this->dropTable('item');
         $this->dropColumn('AccountInfo', 'forgot_pass_key');
     }

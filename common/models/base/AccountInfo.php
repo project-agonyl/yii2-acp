@@ -21,6 +21,7 @@ use Yii;
  * @property integer $ref_add_allow
  * @property string $referer
  * @property double $flamez_coins
+ * @property string $forgot_pass_key
  * @property string $aliasModel
  */
 abstract class AccountInfo extends \yii\db\ActiveRecord
@@ -43,7 +44,7 @@ abstract class AccountInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['account', 'contact', 'name', 'email', 'ip', 'login_ip', 'referer'], 'string'],
+            [['account', 'contact', 'name', 'email', 'ip', 'login_ip', 'referer', 'forgot_pass_key'], 'string'],
             [['event_points', 'cevent_points', 'refresh_count', 'ref_add_allow'], 'integer'],
             [['cevent_points', 'refresh_count', 'ref_add_allow'], 'required'],
             [['flamez_coins'], 'number']
@@ -68,6 +69,7 @@ abstract class AccountInfo extends \yii\db\ActiveRecord
             'ref_add_allow' => 'Ref Add Allow',
             'referer' => 'Referer',
             'flamez_coins' => 'Flamez Coins',
+            'forgot_pass_key' => 'Forgot Pass Key',
         ];
     }
 
