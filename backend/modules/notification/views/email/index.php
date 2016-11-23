@@ -8,10 +8,10 @@
 use kartik\grid\GridView;
 use kartik\icons\Icon;
 
-$this->title = 'Accounts';
+$this->title = 'E-mails';
 ?>
 <?= GridView::widget([
-    'id' => 'account-grid',
+    'id' => 'email-grid',
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
     'columns' => $searchModel->columnMap,
@@ -25,7 +25,7 @@ $this->title = 'Accounts';
     'export' => false,
     'panel'=>[
         'type' => GridView::TYPE_PRIMARY,
-        'heading' => Icon::show('users').'Active Accounts',
+        'heading' => Icon::show('envelope').'E-mails',
     ],
     'persistResize' => false,
 ]); ?>

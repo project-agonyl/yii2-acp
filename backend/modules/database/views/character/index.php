@@ -21,11 +21,6 @@ $this->title = 'Characters';
     'bordered' => true,
     'responsive' => true,
     'pjax' => true,
-    'pjaxSettings' => [
-        'options' => [
-            'enablePushState' => false
-        ]
-    ],
     'toolbar' => false,
     'export' => false,
     'panel'=>[

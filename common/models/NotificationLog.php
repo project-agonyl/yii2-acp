@@ -72,6 +72,7 @@ class NotificationLog extends BaseNotificationLog
             $subject = $view->renderPhpFile($subjectTemplate, $params);
             $body = $view->renderPhpFile($bodyTemplate, $params);
             $log = new NotificationLog();
+            $log->status = self::STATUS_SENT;
             $log->from_address = $fromAddress;
             $log->to_address = $toAddress;
             $log->subject = $subject;

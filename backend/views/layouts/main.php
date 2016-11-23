@@ -55,6 +55,12 @@ AppAsset::register($this);
                 ['label' => Icon::show('list-ul').'Normal Accounts', 'url' => ['/log/activity']]
             ]
         ],
+        [
+            'label' => Icon::show('commenting').'Notifications',
+            'items' => [
+                ['label' => Icon::show('envelope').'E-mail', 'url' => ['/notification/email']]
+            ]
+        ],
         ['label' => Icon::show('sign-out').'Logout (' . trim(Yii::$app->user->id) . ')', 'url' => ['/account/logout']]
     ];
     echo Nav::widget([

@@ -17,6 +17,9 @@ return [
         ],
         'log' => [
             'class' => 'backend\modules\log\Module',
+        ],
+        'notification' => [
+            'class' => 'backend\modules\notification\Module',
         ]
     ],
     'components' => [

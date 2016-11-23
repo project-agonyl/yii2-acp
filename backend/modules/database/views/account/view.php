@@ -41,4 +41,4 @@ $this->title = $model->c_id.' Details';
         ],
     ],
 ]); ?>
-<?= Html::a('Back', Url::to(['/database/account'], ['class' => 'btn btn-info']));?>
+<?= Html::a('Back', Url::previous(), ['class' => 'btn btn-info']);?>
