@@ -2,10 +2,14 @@
 
 namespace common\models;
 
+use SendGrid\Content;
+use SendGrid\Email;
+use SendGrid\Mail;
 use Yii;
 use \common\models\base\NotificationLog as BaseNotificationLog;
 use yii\base\View;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "notification_log".
@@ -63,7 +67,20 @@ class NotificationLog extends BaseNotificationLog
             $log->subject = $subject;
             $log->body = $body;
             $log->type = $type;
-            return $log->save();
+            if (!$log->save()) {
+                Yii::error(Json::encode($log->errors));
+                return false;
+            }
+            $from = new Email(null, $fromAddress);
+            $to = new Email(null, $toAddress);
+            $content = new Content("text/html", $body);
+            $mail = new Mail($from, $subject, $to, $content);
+            $sg = new \SendGrid(ArrayHelper::getValue(Yii::$app->params, 'sendgrid.apikey', ''));
+            $response = $sg->client->mail()->send()->post($mail);
+            Yii::info('Notification '.$log->id.' response status code is '.$response->statusCode());
+            Yii::info('Notification '.$log->id.' response headers are '.$response->headers());
+            Yii::info('Notification '.$log->id.' response body is '.$response->body());
+            return true;
         } catch (\Exception $e) {
             Yii::error($e->getMessage());
             return false;

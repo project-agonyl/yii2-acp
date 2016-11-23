@@ -4,5 +4,9 @@ return [
         'gm1',
         'gm2'
     ],
-    'server-name' => 'A3'
+    'server-name' => 'A3',
+    'super_admins' => [
+        'gm1'
+    ],
+    'sendgrid.apikey' => 'blahblah'
 ];
