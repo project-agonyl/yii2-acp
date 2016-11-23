@@ -17,6 +17,11 @@ use yii\helpers\Json;
 class NotificationLog extends BaseNotificationLog
 {
     const TYPE_ACCOUNT_ACTIVATION = 1;
+    const TYPE_ACCOUNT_ACTIVATED = 2;
+    const TYPE_FORGOT_PASSWORD = 3;
+    const TYPE_UPDATED_PASSWORD = 4;
+    const TYPE_CHANGE_EMAIL_REQUEST = 5;
+    const TYPE_UPDATED_EMAIL = 6;
 
     const STATUS_PENDING = 0;
     const STATUS_SENT = 1;
@@ -40,7 +45,12 @@ class NotificationLog extends BaseNotificationLog
     public static function getTypeList()
     {
         return [
-            self::TYPE_ACCOUNT_ACTIVATION => 'Account activation mail'
+            self::TYPE_ACCOUNT_ACTIVATION => 'Account activation mail',
+            self::TYPE_ACCOUNT_ACTIVATED => 'Account activated',
+            self::TYPE_FORGOT_PASSWORD => 'Forgot password',
+            self::TYPE_UPDATED_PASSWORD => 'Updated password',
+            self::TYPE_CHANGE_EMAIL_REQUEST => 'Change email request',
+            self::TYPE_UPDATED_EMAIL => 'Updated email'
         ];
     }
 
