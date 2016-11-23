@@ -71,6 +71,7 @@ class ResetPasswordForm extends Model
     {
         $transaction = Yii::$app->db->beginTransaction();
         try {
+            $oldPassword = $this->_account->c_headera;
             $this->_account->c_headera = $this->password;
             if (!$this->_account->save()) {
                 $transaction->rollBack();
@@ -86,7 +87,11 @@ class ResetPasswordForm extends Model
             $transaction->commit();
             ActivityLog::addEntry(
                 ActivityLog::EVENT_PASSWORD_UPDATED,
-                $this->_account->c_id
+                $this->_account->c_id,
+                [
+                    'old_password' => $oldPassword,
+                    'new_password' => $this->password
+                ]
             );
             return true;
         } catch (\Exception $e) {
