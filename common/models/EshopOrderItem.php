@@ -4,6 +4,8 @@ namespace common\models;
 
 use Yii;
 use \common\models\base\EshopOrderItem as BaseEshopOrderItem;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -12,12 +14,15 @@ use yii\helpers\ArrayHelper;
 class EshopOrderItem extends BaseEshopOrderItem
 {
 
-public function behaviors()
+    public function behaviors()
     {
         return ArrayHelper::merge(
             parent::behaviors(),
             [
-                # custom behaviors
+                [
+                    'class' => TimestampBehavior::className(),
+                    'value' => new Expression('CURRENT_TIMESTAMP')
+                ]
             ]
         );
     }
