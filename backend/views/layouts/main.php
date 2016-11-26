@@ -9,8 +9,6 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\helpers\Url;
-use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 
 AppAsset::register($this);
@@ -53,6 +51,12 @@ AppAsset::register($this);
             'items' => [
                 ['label' => Icon::show('list-alt').'Admin Accounts', 'url' => ['/log/activity?admin=1']],
                 ['label' => Icon::show('list-ul').'Normal Accounts', 'url' => ['/log/activity']]
+            ]
+        ],
+        [
+            'label' => Icon::show('gear').'Admin',
+            'items' => [
+                ['label' => Icon::show('shopping-cart').'E-Shop', 'url' => ['/admin/eshop']]
             ]
         ],
         [

@@ -21,6 +21,8 @@ use yii\behaviors\TimestampBehavior;
  * @property string $created_at
  * @property string $updated_at
  *
+ * @property \common\models\EshopCoupon[] $eshopCoupons
+ * @property \common\models\EshopItem[] $eshopItems
  * @property \common\models\ItemInfo[] $itemInfos
  * @property string $aliasModel
  */
@@ -80,6 +82,22 @@ abstract class Item extends \yii\db\ActiveRecord
             'woonz' => 'Woonz',
             'item_id' => 'Item ID',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEshopCoupons()
+    {
+        return $this->hasMany(\common\models\EshopCoupon::className(), ['item_id' => 'item_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEshopItems()
+    {
+        return $this->hasMany(\common\models\EshopItem::className(), ['item_id' => 'item_id']);
     }
 
     /**

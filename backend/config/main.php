@@ -20,6 +20,9 @@ return [
         ],
         'notification' => [
             'class' => 'backend\modules\notification\Module',
+        ],
+        'admin' => [
+            'class' => 'backend\modules\admin\Module',
         ]
     ],
     'components' => [

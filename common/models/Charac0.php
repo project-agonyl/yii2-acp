@@ -51,10 +51,10 @@ class Charac0 extends BaseCharac0
     {
         switch ((int)$this->c_sheaderb) {
             case 1:
-                $type = 'Mage';
+                $type = 'Holy Knight';
                 break;
             case 2:
-                $type = 'Holy Knight';
+                $type = 'Mage';
                 break;
             case 3:
                 $type = 'Archer';
