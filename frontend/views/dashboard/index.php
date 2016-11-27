@@ -4,7 +4,6 @@ use kartik\icons\Icon;
 use yii\helpers\Url;
 
 $this->title = 'Welcome '.Yii::$app->user->id;
-$this->registerJsFile( "/js/character.js" , ['depends' => '\yii\web\YiiAsset' , 'position' => \yii\web\View::POS_END]);
 ?>
 <h2>Welcome to account control panel</h2>
 <h4>Make sure your character is <span class="text-danger">OFFLINE</span> before doing any operation. Not following this rule might mess up your character making it unusable!</h4><hr>

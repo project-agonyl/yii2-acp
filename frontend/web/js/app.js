@@ -1,3 +1,8 @@
+// Initialize tooltip
+$(function(){
+    $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
+});
+
 $('#char-grid-pjax').on('click', '.char-offline-tp', function (e){
     e.preventDefault();
     var url = $(this).data('url');
