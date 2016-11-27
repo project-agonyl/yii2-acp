@@ -117,7 +117,7 @@ class CharacterSearch extends Charac0
                                 'class' => 'char-view inherit-color btn btn-default',
                                 'data-url' => Url::to(['/character/view', 'id' => $model->c_id]),
                                 'data-toggle' => "tooltip",
-                                'title' => 'View Details',
+                                'title' => 'View Inventory and Wear',
                                 'data-pjax' => 0
                             ]
                         );
