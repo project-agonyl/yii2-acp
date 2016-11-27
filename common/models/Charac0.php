@@ -14,6 +14,9 @@ use yii\helpers\ArrayHelper;
 class Charac0 extends BaseCharac0
 {
     const STATUS_ACTIVE = 'A';
+    const STATUS_DELETED = 'X';
+
+    const TEMOZ_LOCATION = '1;32383';
 
     protected $_itemModels = [];
 

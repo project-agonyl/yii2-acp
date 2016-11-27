@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "32407e5c6096122857545c44129703e5",
-    "content-hash": "d86a277d5f270866b652e00ce114a4fd",
+    "hash": "7c7844d611aadd6a24e5a3ec2d8d7900",
+    "content-hash": "47fbf822af015a60e1d008390547257e",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -1158,6 +1158,60 @@
                 "shell"
             ],
             "time": "2016-07-16 09:42:31"
+        },
+        {
+            "name": "npm-asset/bootbox",
+            "version": "4.4.0",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/bootbox/-/bootbox-4.4.0.tgz",
+                "reference": null,
+                "shasum": "ff7f898fb87d4527e547feb64158f88450d1a0c9"
+            },
+            "require-dev": {
+                "npm-asset/grunt": "~0.4.1",
+                "npm-asset/grunt-contrib-jshint": "~0.6.3",
+                "npm-asset/grunt-contrib-uglify": "~0.2.2",
+                "npm-asset/grunt-karma": "~0.6.2",
+                "npm-asset/karma": "~0.10.1",
+                "npm-asset/karma-chai": "0.0.1",
+                "npm-asset/karma-coffee-preprocessor": "~0.1.0",
+                "npm-asset/karma-coverage": "~0.1.0",
+                "npm-asset/karma-junit-reporter": "~0.1.0",
+                "npm-asset/karma-mocha": "0.1.3",
+                "npm-asset/karma-phantomjs-launcher": "~0.1.0",
+                "npm-asset/mocha": "~1.12.0",
+                "npm-asset/sinon": "~1.7.3",
+                "npm-asset/sinon-chai": "~2.4.0"
+            },
+            "type": "npm-asset-library",
+            "extra": {
+                "npm-asset-bugs": {
+                    "url": "https://github.com/makeusabrew/bootbox/issues"
+                },
+                "npm-asset-main": "bootbox.js",
+                "npm-asset-directories": {
+                    "test": "tests"
+                },
+                "npm-asset-repository": {
+                    "type": "git",
+                    "url": "git://github.com/makeusabrew/bootbox.git"
+                },
+                "npm-asset-scripts": {
+                    "test": "karma start"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Payne",
+                    "email": "nick@kurai.co.uk"
+                }
+            ],
+            "description": "Wrappers for JavaScript alert(), confirm() and other flexible dialogs using the Bootstrap framework",
+            "homepage": "https://github.com/makeusabrew/bootbox"
         },
         {
             "name": "paragonie/random_compat",

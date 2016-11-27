@@ -26,6 +26,7 @@ class ActivityLog extends BaseActivityLog
     const EVENT_PASSWORD_UPDATED = 8;
     const EVENT_EMAIL_UPDATED = 9;
     const EVENT_ACCOUNT_INFO_UPDATED = 10;
+    const EVENT_OFFLINE_TELEPORT = 11;
     const EVENT_UNKNOWN = 999;
 
     public function behaviors()
@@ -66,6 +67,7 @@ class ActivityLog extends BaseActivityLog
             self::EVENT_PASSWORD_UPDATED => 'Password updated',
             self::EVENT_EMAIL_UPDATED => 'E-mail updated',
             self::EVENT_ACCOUNT_INFO_UPDATED => 'Account info updated',
+            self::EVENT_OFFLINE_TELEPORT => 'Offline teleport',
             self::EVENT_UNKNOWN => 'Unknown event'
         ];
     }

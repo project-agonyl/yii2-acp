@@ -8,16 +8,19 @@
 
 namespace frontend\controllers;
 
+use frontend\models\CharacterSearch;
 use Yii;
 use common\components\Controller;
 use yii\helpers\Url;
 
 class DashboardController extends Controller
 {
+    public $layout = '@app/views/layouts/main';
+
     public function actionIndex()
     {
-        echo 'Logged in as '.Yii::$app->user->id;
-        echo '<br>';
-        echo '<a href="'.Url::to(['/account/logout']).'">Logout</a>';
+        $characterSearchModel = new CharacterSearch(['account' => Yii::$app->user->id]);
+        $characterDataProvider = $characterSearchModel->search([]);
+        return $this->render('index', ['characterDataProvider' => $characterDataProvider, 'characterSearchModel' => $characterSearchModel]);
     }
 }
