@@ -37,7 +37,7 @@ class ImportController extends Controller
     public function actionIt0()
     {
         if ($this->path == null) {
-            $this->path =  Console::prompt('Please the path of the file to import:', ['required' => true]);
+            $this->path =  Console::prompt('Please input the path of the file to import:', ['required' => true]);
         }
         if (!file_exists($this->path)) {
             Console::error('File does not exists or you do not have the permission to access it!');
@@ -81,7 +81,7 @@ class ImportController extends Controller
     public function actionIt123()
     {
         if ($this->path == null) {
-            $this->path =  Console::prompt('Please the path of the file to import:', ['required' => true]);
+            $this->path =  Console::prompt('Please input the path of the file to import:', ['required' => true]);
         }
         if (!file_exists($this->path)) {
             Console::error('File does not exists or you do not have the permission to access it!');

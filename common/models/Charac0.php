@@ -79,6 +79,9 @@ class Charac0 extends BaseCharac0
         $itemArray = explode(';', $temp[1]);
         $toReturn = [];
         for ($i = 0; $i < count($itemArray);$i += 4) {
+            if (!isset($itemArray[$i + 3])) {
+                continue;
+            }
             $toReturn[(int)$itemArray[$i + 3]] = $this->processItem(
                 (int)$itemArray[$i],
                 (int)$itemArray[$i + 1],
@@ -98,6 +101,9 @@ class Charac0 extends BaseCharac0
         $itemArray = explode(';', $temp[1]);
         $toReturn = [];
         for ($i = 0; $i < count($itemArray);$i += 3) {
+            if (!isset($itemArray[$i + 2])) {
+                continue;
+            }
             $toReturn[] = $this->processItem(
                 (int)$itemArray[$i],
                 (int)$itemArray[$i + 1],
@@ -112,6 +118,11 @@ class Charac0 extends BaseCharac0
         $toReturn['original_item_code'] = implode(';', [$column1, $column2, $column3]);
         $mounted = 0;
         $bless = false;
+        $greyOption = 0;
+        $redOption = 0;
+        $blueOption = 0;
+        $level = 0;
+        $additionalStats = 0;
         while ($column1 > 65536) {
             $mounted++;
             $column1 -= 65536;
@@ -132,6 +143,10 @@ class Charac0 extends BaseCharac0
         } else {
             $item = $this->_itemModels[$column1];
         }
+        while ($column2 > 67108864) {
+            $column2 -= 67108864;
+            $greyOption++;
+        }
         $toReturn['item_name'] = $item->name;
         $toReturn['item_id'] = $item->item_id;
         $toReturn['full_item_name'] = $item->name;
@@ -143,7 +158,12 @@ class Charac0 extends BaseCharac0
         }
         $toReturn['options'] = [
             'mount' => $mounted,
-            'bless' => $bless
+            'bless' => $bless,
+            'greyOption' => $greyOption,
+            'redOption' => $redOption,
+            'blueOption' => $blueOption,
+            'level' => $level,
+            'additionalStats' => $additionalStats
         ];
         return $toReturn;
     }

@@ -17,6 +17,7 @@ class Account extends BaseAccount implements IdentityInterface
 {
     const STATUS_ACTIVE = 'A';
     const STATUS_NEW = 'F';
+    protected $_itemModels = [];
 
     public function behaviors()
     {
@@ -118,5 +119,82 @@ class Account extends BaseAccount implements IdentityInterface
                 'account' => $this->c_id
             ])
             ->one();
+    }
+
+    public function getParsedStorage()
+    {
+        $storage = ItemStorage0::find()
+            ->where([
+                'c_id' => $this->c_id
+            ])
+            ->one();
+        if ($storage == null) {
+            return [];
+        }
+        $itemArray = explode(';', $storage->m_body);
+        $toReturn = [];
+        for ($i = 0; $i < count($itemArray);$i += 4) {
+            $toReturn[(int)$itemArray[$i + 3]] = $this->processItem(
+                (int)$itemArray[$i],
+                (int)$itemArray[$i + 1],
+                (int)$itemArray[$i + 2]
+            );
+        }
+        return $toReturn;
+    }
+
+    public function processItem($column1, $column2, $column3)
+    {
+        $toReturn['original_item_code'] = implode(';', [$column1, $column2, $column3]);
+        $mounted = 0;
+        $bless = false;
+        $greyOption = 0;
+        $redOption = 0;
+        $blueOption = 0;
+        $level = 0;
+        $additionalStats = 0;
+        while ($column1 > 65536) {
+            $mounted++;
+            $column1 -= 65536;
+        }
+        if ($column1 > 32768) {
+            $bless = true;
+            $column1 -= 32768;
+        }
+        if (!isset($this->_itemModels[$column1])) {
+            $item = Item::find()
+                ->where(['item_id' => $column1])
+                ->one();
+            if ($item == null) {
+                $toReturn['item_name'] = 'Unknown Item';
+                return $toReturn;
+            }
+            $this->_itemModels[$column1] = $item;
+        } else {
+            $item = $this->_itemModels[$column1];
+        }
+        while ($column2 > 67108864) {
+            $column2 -= 67108864;
+            $greyOption++;
+        }
+        $toReturn['item_name'] = $item->name;
+        $toReturn['item_id'] = $item->item_id;
+        $toReturn['full_item_name'] = $item->name;
+        if ($mounted != 0) {
+            $toReturn['full_item_name'] = ($mounted*10).'% Mounted '.$toReturn['full_item_name'];
+        }
+        if ($bless) {
+            $toReturn['full_item_name'] = 'Blessed '.$toReturn['full_item_name'];
+        }
+        $toReturn['options'] = [
+            'mount' => $mounted,
+            'bless' => $bless,
+            'greyOption' => $greyOption,
+            'redOption' => $redOption,
+            'blueOption' => $blueOption,
+            'level' => $level,
+            'additionalStats' => $additionalStats
+        ];
+        return $toReturn;
     }
 }
