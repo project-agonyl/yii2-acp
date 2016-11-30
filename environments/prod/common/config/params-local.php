@@ -8,5 +8,8 @@ return [
     'super_admins' => [
         'gm1'
     ],
-    'sendgrid.apikey' => 'blahblah'
+    'sendgrid.apikey' => 'blahblah',
+    'item.cost' => [
+        1154 => 100
+    ]
 ];
