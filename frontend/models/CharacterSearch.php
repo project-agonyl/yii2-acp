@@ -141,7 +141,8 @@ class CharacterSearch extends Charac0
                             '#',
                             [
                                 'class' => 'char-rb inherit-color btn btn-default',
-                                'data-url' => Url::to(['/character/rebirth', 'id' => $model->c_id]),
+                                'data-url' => Url::to(['/character/view-rebirth-requirements', 'id' => $model->c_id]),
+                                'data-rb-url' => Url::to(['/character/take-rebirth', 'id' => $model->c_id]),
                                 'data-toggle' => "tooltip",
                                 'title' => 'Rebirth',
                                 'data-pjax' => 0

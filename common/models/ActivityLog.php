@@ -28,6 +28,7 @@ class ActivityLog extends BaseActivityLog
     const EVENT_ACCOUNT_INFO_UPDATED = 10;
     const EVENT_OFFLINE_TELEPORT = 11;
     const EVENT_TAKE_BEGINNERS_GIFT = 12;
+    const EVENT_TAKE_REBIRTH = 13;
     const EVENT_UNKNOWN = 999;
 
     public function behaviors()
@@ -70,6 +71,7 @@ class ActivityLog extends BaseActivityLog
             self::EVENT_ACCOUNT_INFO_UPDATED => 'Account info updated',
             self::EVENT_OFFLINE_TELEPORT => 'Offline teleport',
             self::EVENT_TAKE_BEGINNERS_GIFT => 'Beginner\'s gift',
+            self::EVENT_TAKE_REBIRTH => 'Take Rebirth',
             self::EVENT_UNKNOWN => 'Unknown event'
         ];
     }

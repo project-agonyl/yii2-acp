@@ -116,6 +116,27 @@ class CharacterController extends Controller
         throw new MethodNotAllowedHttpException();
     }
 
+    public function actionViewRebirthRequirements($id)
+    {
+        $characterModel = $this->loadCharacterModel($id);
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('requirementView', ['model' => $characterModel]);
+        }
+        return $this->render('requirementView', ['model' => $characterModel]);
+    }
+
+    public function actionTakeRebirth($id)
+    {
+        $characterModel = $this->loadCharacterModel($id);
+        if (Yii::$app->request->isPost) {
+            if (!$characterModel->takeRebirth()) {
+                return Json::encode(['status' => 'nok', 'msg' => Html::errorSummary($characterModel)]);
+            }
+            return Json::encode(['status' => 'ok', 'msg' => 'Rebirth was successfully taken.']);
+        }
+        throw new MethodNotAllowedHttpException();
+    }
+
     private function loadCharacterModel($id)
     {
         $model = Charac0::find()
