@@ -43,4 +43,20 @@ class ConnectOldAccount extends BaseConnectOldAccount
              ]
         );
     }
+
+    public static function listStatuses()
+    {
+        return [
+            self::STATUS_PENDING => 'Pending',
+            self::STATUS_VERIFIED => 'Verified',
+            self::STATUS_RESOLVED => 'Resolved',
+            self::STATUS_CLOSED => 'Closed',
+            self::STATUS_DECLINED => 'Declined'
+        ];
+    }
+
+    public function getStatusString()
+    {
+        return ArrayHelper::getValue(self::listStatuses(), $this->status, 'Unknown');
+    }
 }

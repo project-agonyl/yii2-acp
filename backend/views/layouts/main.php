@@ -43,7 +43,8 @@ AppAsset::register($this);
             'label' => Icon::show('database').'Database',
             'items' => [
                 ['label' => Icon::show('users').'Account', 'url' => ['/database/account']],
-                ['label' => Icon::show('user').'Character', 'url' => ['/database/character']]
+                ['label' => Icon::show('user').'Character', 'url' => ['/database/character']],
+                ['label' => Icon::show('exchange').'Transfer', 'url' => ['/database/transfer']]
             ]
         ],
         [
