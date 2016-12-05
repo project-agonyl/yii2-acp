@@ -29,6 +29,8 @@ class ActivityLog extends BaseActivityLog
     const EVENT_OFFLINE_TELEPORT = 11;
     const EVENT_TAKE_BEGINNERS_GIFT = 12;
     const EVENT_TAKE_REBIRTH = 13;
+    const EVENT_OLD_ACCOUNT_TRANSFER_REQUEST = 14;
+    const EVENT_OLD_ACCOUNT_TRANSFER_REQUEST_VERIFIED = 15;
     const EVENT_UNKNOWN = 999;
 
     public function behaviors()
@@ -72,6 +74,8 @@ class ActivityLog extends BaseActivityLog
             self::EVENT_OFFLINE_TELEPORT => 'Offline teleport',
             self::EVENT_TAKE_BEGINNERS_GIFT => 'Beginner\'s gift',
             self::EVENT_TAKE_REBIRTH => 'Take Rebirth',
+            self::EVENT_OLD_ACCOUNT_TRANSFER_REQUEST => 'Old account transfer request',
+            self::EVENT_OLD_ACCOUNT_TRANSFER_REQUEST_VERIFIED => 'Old account transfer request verified',
             self::EVENT_UNKNOWN => 'Unknown event'
         ];
     }

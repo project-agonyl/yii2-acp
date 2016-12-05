@@ -5,6 +5,5 @@
 <p>Password: <b><?= $password ?></b></p>
 <p>Please activate your account by clicking the following.</p>
 <p><a href="<?= $activationLink ?>"><?= $activationLink ?></a></p>
-<br>
 <p>Regards,</p>
 <p>A3Flamez Team</p>

@@ -4,6 +4,9 @@ namespace frontend\controllers;
 use common\models\Account;
 use common\models\Activation;
 use common\models\ActivityLog;
+use common\models\ConnectOldAccount;
+use common\models\ConnectOldAccountRequest;
+use common\models\NotificationLog;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -192,5 +195,43 @@ class AccountController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionConfirmTransfer($token)
+    {
+        $model = ConnectOldAccountRequest::find()
+            ->where(['token' => $token])
+            ->one();
+        if ($model == null) {
+            Yii::$app->session->setFlash('danger', 'Please check the confirmation link and try again.');
+        } else {
+            if ($model->connectOldAccount->status != ConnectOldAccount::STATUS_PENDING) {
+                Yii::$app->session->setFlash('danger', 'Account transfer request has already been verified.');
+            } else {
+                $model->connectOldAccount->status = ConnectOldAccount::STATUS_VERIFIED;
+                if (!$model->connectOldAccount->save()) {
+                    Yii::$app->session->setFlash('danger', 'Could not complete your verification process. Please try again later.');
+                } else {
+                    ActivityLog::addEntry(
+                        ActivityLog::EVENT_OLD_ACCOUNT_TRANSFER_REQUEST_VERIFIED,
+                        $model->connectOldAccount->current_account,
+                        [
+                            'old_account' => $model->connectOldAccount->old_account,
+                            'request_id' => $model->id
+                        ]
+                    );
+                    NotificationLog::sendMail(
+                        NotificationLog::TYPE_TRANSFER_OLD_ACCOUNT_CONFIRM,
+                        'support@a3-flamez.com',
+                        [
+                            'old_account' => $model->connectOldAccount->old_account,
+                            'current_account' => $model->connectOldAccount->current_account
+                        ]
+                    );
+                    Yii::$app->session->setFlash('success', 'Your request was confirmed successfully. It will shortly be processed.');
+                }
+            }
+        }
+        return $this->redirect(['login']);
     }
 }

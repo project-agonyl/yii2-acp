@@ -38,8 +38,15 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => Icon::show('home').'Home', 'url' => ['/']],
-        ['label' => Icon::show('user').'Character Services', 'url' => ['/']],
+        ['label' => Icon::show('home').'Home', 'url' => ['/dashboard']],
+        [
+            'label' => Icon::show('gear').'Services',
+            'items' => [
+                ['label' => Icon::show('user').'Account Details', 'url' => ['/services/account-details']],
+                ['label' => Icon::show('users').'Old Account Transfer', 'url' => ['/services/old-account-transfer']],
+                //['label' => Icon::show('key').'Update Password', 'url' => ['/services/update-password']]
+            ]
+        ],
         ['label' => Icon::show('sign-out').'Logout (' . trim(Yii::$app->user->id) . ')', 'url' => ['/account/logout']]
     ];
     echo Nav::widget([
