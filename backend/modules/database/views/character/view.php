@@ -31,6 +31,10 @@ $this->title = $model->c_id.' Details';
             'attribute' => 'c_sheaderc',
             'label' => 'Level'
         ],
+        'woons' => [
+            'attribute' => 'c_headerc',
+            'label' => 'Woonz'
+        ],
         'exp' => [
             'attribute' => 'exp',
             'label' => 'Experience'
