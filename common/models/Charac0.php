@@ -305,8 +305,11 @@ class Charac0 extends BaseCharac0
             $mBodyArray = explode('\_1', $this->m_body);
             $INVEN = explode("=", $mBodyArray[6]);
             $EXP = explode("=", $mBodyArray[0]);
+            $LORE = explode("=", $mBodyArray[19]);
             $EXP[1] = 0;
+            $LORE[1] -= ArrayHelper::getValue($requirements, 'lore', 0);
             $mBodyArray[0] = implode('=', $EXP);
+            $mBodyArray[19] = implode('=', $LORE);
             $itemArray = explode(';', $INVEN[1]);
             $slotsToClear = 0;
             $items = ArrayHelper::getValue($requirements, 'items');
@@ -351,5 +354,28 @@ class Charac0 extends BaseCharac0
         }
         $this->addError('rebirth', 'Please check whether you meet all requirements to take rebirth');
         return false;
+    }
+
+    public function getLore()
+    {
+        return $this->getIntFromMbody(19);
+    }
+
+    public function getExp()
+    {
+        return $this->getIntFromMbody(0);
+    }
+
+    protected function getIntFromMbody($index)
+    {
+        $string = ArrayHelper::getValue(explode('\_1', $this->m_body), $index);
+        if ($string == null) {
+            return 0;
+        }
+        $temp = explode('=', $string);
+        if (count($temp) < 2) {
+            return 0;
+        }
+        return (int)$temp[1];
     }
 }

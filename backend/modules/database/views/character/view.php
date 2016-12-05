@@ -31,10 +31,15 @@ $this->title = $model->c_id.' Details';
             'attribute' => 'c_sheaderc',
             'label' => 'Level'
         ],
+        'exp' => [
+            'attribute' => 'exp',
+            'label' => 'Experience'
+        ],
         'rb' => [
             'attribute' => 'rb',
             'label' => 'Rebirth'
         ],
+        'lore',
         'updated' => [
             'attribute' => 'd_udate',
             'label' => 'Last Updated',
