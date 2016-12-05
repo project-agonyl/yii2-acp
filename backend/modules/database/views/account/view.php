@@ -24,11 +24,11 @@ $this->title = $model->c_id.' Details';
         ],
         'wallet_cash' => [
             'attribute' => 'cash',
-            'label' => 'Wallet Cash'
+            'label' => 'Flamez Cash'
         ],
         'wallet_coins' => [
             'attribute' => 'coin',
-            'label' => 'Coins'
+            'label' => 'Flamez Coins'
         ],
         'created' => [
             'attribute' => 'd_cdate',
