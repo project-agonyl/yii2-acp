@@ -62,6 +62,7 @@ class TransferSearch extends Charac0
             'id',
             'current_account',
             'old_account',
+            'coin_given',
             'status' => [
                 'attribute' => 'status',
                 'value' => function ($model) {
@@ -89,6 +90,12 @@ class TransferSearch extends Charac0
                 'status' => [
                     'asc' => [new Expression('CAST(status AS int) ASC')],
                     'desc' => [new Expression('CAST(status AS int) DESC')],
+                    'default' => SORT_ASC,
+                    'label' => 'Status',
+                ],
+                'coin_given' => [
+                    'asc' => [new Expression('CAST(coin_given AS int) ASC')],
+                    'desc' => [new Expression('CAST(coin_given AS int) DESC')],
                     'default' => SORT_ASC,
                     'label' => 'Status',
                 ],

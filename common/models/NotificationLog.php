@@ -24,6 +24,7 @@ class NotificationLog extends BaseNotificationLog
     const TYPE_UPDATED_EMAIL = 6;
     const TYPE_TRANSFER_OLD_ACCOUNT_REQUEST = 7;
     const TYPE_TRANSFER_OLD_ACCOUNT_CONFIRM = 8;
+    const TYPE_TRANSFER_OLD_ACCOUNT_RESOLVED = 9;
 
     const STATUS_PENDING = 0;
     const STATUS_SENT = 1;
@@ -54,7 +55,8 @@ class NotificationLog extends BaseNotificationLog
             self::TYPE_CHANGE_EMAIL_REQUEST => 'Change email request',
             self::TYPE_UPDATED_EMAIL => 'Updated email',
             self::TYPE_TRANSFER_OLD_ACCOUNT_REQUEST => 'Transfer old account request',
-            self::TYPE_TRANSFER_OLD_ACCOUNT_CONFIRM => 'Transfer old account confirm'
+            self::TYPE_TRANSFER_OLD_ACCOUNT_CONFIRM => 'Transfer old account confirm',
+            self::TYPE_TRANSFER_OLD_ACCOUNT_RESOLVED => 'Transfer old account resolved'
         ];
     }
 

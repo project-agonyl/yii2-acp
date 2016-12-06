@@ -32,6 +32,7 @@ class ActivityLog extends BaseActivityLog
     const EVENT_OLD_ACCOUNT_TRANSFER_REQUEST = 14;
     const EVENT_OLD_ACCOUNT_TRANSFER_REQUEST_VERIFIED = 15;
     const EVENT_TRANSFER_COIN = 16;
+    const EVENT_OLD_ACCOUNT_COIN_TRANSFER = 17;
     const EVENT_UNKNOWN = 999;
 
     public function behaviors()
@@ -78,6 +79,7 @@ class ActivityLog extends BaseActivityLog
             self::EVENT_OLD_ACCOUNT_TRANSFER_REQUEST => 'Old account transfer request',
             self::EVENT_OLD_ACCOUNT_TRANSFER_REQUEST_VERIFIED => 'Old account transfer request verified',
             self::EVENT_TRANSFER_COIN => 'Wallet coin transfer',
+            self::EVENT_OLD_ACCOUNT_COIN_TRANSFER => 'Old account coin transfer',
             self::EVENT_UNKNOWN => 'Unknown event'
         ];
     }
