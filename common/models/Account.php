@@ -17,6 +17,7 @@ class Account extends BaseAccount implements IdentityInterface
 {
     const STATUS_ACTIVE = 'A';
     const STATUS_NEW = 'F';
+
     protected $_itemModels = [];
 
     public function behaviors()
@@ -196,5 +197,35 @@ class Account extends BaseAccount implements IdentityInterface
             'additionalStats' => $additionalStats
         ];
         return $toReturn;
+    }
+
+    public function getTotalItemValue()
+    {
+        $itemCosts = ArrayHelper::getValue(Yii::$app->params, 'item.cost');
+        if (!is_array($itemCosts)) {
+            return 0;
+        }
+        $accountCost = 0;
+        $storage = $this->parsedStorage;
+        foreach ($storage as $slot => $item) {
+            $accountCost += ArrayHelper::getValue($itemCosts, ArrayHelper::getValue($item, 'item_id'), 0);
+        }
+        $characters = Charac0::find()
+            ->where([
+                'c_sheadera' => $this->c_id,
+                'c_status' => Charac0::STATUS_ACTIVE
+            ])
+            ->all();
+        foreach ($characters as $character) {
+            $inventory = $character->parsedInventory;
+            foreach ($inventory as $slot => $item) {
+                $accountCost += ArrayHelper::getValue($itemCosts, ArrayHelper::getValue($item, 'item_id'), 0);
+            }
+            $wear = $character->parsedWear;
+            foreach ($wear as $slot => $item) {
+                $accountCost += ArrayHelper::getValue($itemCosts, ArrayHelper::getValue($item, 'item_id'), 0);
+            }
+        }
+        return $accountCost;
     }
 }

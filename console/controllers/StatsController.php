@@ -10,6 +10,7 @@ namespace console\controllers;
 
 use common\models\Account;
 use common\models\Charac0;
+use common\models\OldAccount;
 use Yii;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;
@@ -97,30 +98,31 @@ class StatsController extends Controller
         } else {
             $itemCosts = ArrayHelper::getValue(Yii::$app->params, 'item.cost');
             if (!is_array($itemCosts)) {
-                Console::error('Please add item costs params \'item.cost\'!');
+                Console::error('Please add item cost params \'item.cost\'!');
             } else {
-                $accountCost = 0;
-                $storage = $accountModel->parsedStorage;
-                foreach ($storage as $slot => $item) {
-                    $accountCost += ArrayHelper::getValue($itemCosts, ArrayHelper::getValue($item, 'item_id'), 0);
-                }
-                $characters = Charac0::find()
-                    ->where([
-                        'c_sheadera' => $this->account,
-                        'c_status' => Charac0::STATUS_ACTIVE
-                    ])
-                    ->all();
-                foreach ($characters as $character) {
-                    $inventory = $character->parsedInventory;
-                    foreach ($inventory as $slot => $item) {
-                        $accountCost += ArrayHelper::getValue($itemCosts, ArrayHelper::getValue($item, 'item_id'), 0);
-                    }
-                    $wear = $character->parsedWear;
-                    foreach ($wear as $slot => $item) {
-                        $accountCost += ArrayHelper::getValue($itemCosts, ArrayHelper::getValue($item, 'item_id'), 0);
-                    }
-                }
-                Console::output('Account value is '.$accountCost);
+                Console::output('Account value is '.$accountModel->totalItemValue);
+            }
+        }
+    }
+
+    public function actionCalculateOldAccountValue()
+    {
+        if ($this->account == null) {
+            $this->account =  Console::prompt('Please input the account name to calculate:', ['required' => true]);
+        }
+        $accountModel = OldAccount::find()
+            ->where([
+                'c_id' => $this->account
+            ])
+            ->one();
+        if ($accountModel == null) {
+            Console::error('Invalid account!');
+        } else {
+            $itemCosts = ArrayHelper::getValue(Yii::$app->params, 'old.item.cost');
+            if (!is_array($itemCosts)) {
+                Console::error('Please add old item cost params \'old.item.cost\'!');
+            } else {
+                Console::output('Account value is '.$accountModel->totalItemValue);
             }
         }
     }
