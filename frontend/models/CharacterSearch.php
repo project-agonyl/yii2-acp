@@ -91,6 +91,7 @@ class CharacterSearch extends Charac0
                 'attribute' => 'c_headerc',
                 'label' => 'Woonz'
             ],
+            'lore',
             'actions' => [
                 'header' => 'Actions',
                 'class' => '\kartik\grid\ActionColumn',
