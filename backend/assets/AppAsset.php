@@ -15,10 +15,12 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        'js/app.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'common\assets\FontAwesomeAsset'
+        'common\assets\FontAwesomeAsset',
+        'common\assets\BootboxAsset'
     ];
 }

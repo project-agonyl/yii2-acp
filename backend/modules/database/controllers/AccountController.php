@@ -3,6 +3,7 @@ namespace backend\modules\database\controllers;
 
 use backend\modules\database\models\AccountSearch;
 use backend\modules\database\models\TransferCash;
+use backend\modules\database\models\TransferCoin;
 use common\models\Account;
 use Yii;
 use common\components\Controller;
@@ -52,6 +53,24 @@ class AccountController extends Controller
             return $this->redirect(Url::previous());
         }
         return $this->render('transferCash', ['model' => $dataModel]);
+    }
+
+    public function actionTransferCoin($id)
+    {
+        $model = $this->getAccountModel($id);
+        if ($model->c_id == Yii::$app->user->id) {
+            throw new NotAcceptableHttpException('You cannot transfer wallet coin to your own account');
+        }
+        $dataModel = new TransferCoin([
+            'fromAid' => Yii::$app->user->id,
+            'toAid' => $model->c_id
+        ]);
+        if (Yii::$app->request->isPost &&
+            $dataModel->load(Yii::$app->request->post()) && $dataModel->save()) {
+            Yii::$app->session->setFlash('success', 'Successfully transferred wallet coin');
+            return $this->redirect(Url::previous());
+        }
+        return $this->render('transferCoin', ['model' => $dataModel]);
     }
 
     private function getAccountModel($id)

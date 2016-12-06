@@ -89,7 +89,7 @@ class AccountSearch extends Account
             'actions' => [
                 'header' => 'Actions',
                 'class' => '\kartik\grid\ActionColumn',
-                'template' => '{view} {add-credits}',
+                'template' => '{view} {add-credits} {add-coins}',
                 'buttons' => [
                     'add-credits' => function ($url, $model) {
                         return Html::a(
@@ -98,6 +98,17 @@ class AccountSearch extends Account
                             [
                                 'data-toggle' => "tooltip",
                                 'title' => 'Transfer wallet cash',
+                                'data-pjax' => 0
+                            ]
+                        );
+                    },
+                    'add-coins' => function ($url, $model) {
+                        return Html::a(
+                            Icon::show('plus-circle'),
+                            Url::to(['account/transfer-coin', 'id' => trim($model->c_id)]),
+                            [
+                                'data-toggle' => "tooltip",
+                                'title' => 'Transfer wallet coin',
                                 'data-pjax' => 0
                             ]
                         );
