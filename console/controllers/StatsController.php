@@ -30,6 +30,7 @@ class StatsController extends Controller
             case 'item-count':
                 $options = ['item_code'];
                 break;
+            case 'calculate-old-account-value':
             case 'calculate-account-value':
                 $options = ['account'];
                 break;

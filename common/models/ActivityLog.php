@@ -93,7 +93,7 @@ class ActivityLog extends BaseActivityLog
             'account' => $account,
             'data' => is_array($data)?Json::encode($data):$data,
             'description' => $description,
-            'ip_address' => Yii::$app->request->userIP,
+            'ip_address' => (isset(Yii::$app->request->userIP))?Yii::$app->request->userIP:'127.0.0.1',
             'browser' => $browser->getName().' '.$browser->getVersion(),
             'operating_system' => $os->getName().' '.$os->getVersion()
         ]);
