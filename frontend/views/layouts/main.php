@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use frontend\assets\AppAsset;
+use frontend\models\EshopItemSearch;
 use kartik\icons\Icon;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -47,6 +48,7 @@ AppAsset::register($this);
                 //['label' => Icon::show('key').'Update Password', 'url' => ['/services/update-password']]
             ]
         ],
+        ['label' => Icon::show('shopping-basket').'E-Shop', 'url' => ['/eshop']],
         ['label' => Icon::show('sign-out').'Logout (' . trim(Yii::$app->user->id) . ')', 'url' => ['/account/logout']]
     ];
     echo Nav::widget([

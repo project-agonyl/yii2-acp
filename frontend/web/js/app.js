@@ -1,9 +1,9 @@
 // Initialize tooltip
-$(function(){
-    $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
+$(function () {
+    $('body').tooltip({selector: '[data-toggle="tooltip"]'});
 });
 
-$('#char-grid-pjax').on('click', '.char-offline-tp', function (e){
+$('#char-grid-pjax').on('click', '.char-offline-tp', function (e) {
     e.preventDefault();
     var url = $(this).data('url');
     bootbox.confirm({
@@ -37,7 +37,7 @@ $('#char-grid-pjax').on('click', '.char-offline-tp', function (e){
     });
 });
 
-$('#char-grid-pjax').on('click', '.char-view', function (e){
+$('#char-grid-pjax').on('click', '.char-view', function (e) {
     e.preventDefault();
     var url = $(this).data('url');
     $.ajax({
@@ -54,7 +54,7 @@ $('#char-grid-pjax').on('click', '.char-view', function (e){
     });
 });
 
-$('#char-grid-pjax').on('click', '.char-gift', function (e){
+$('#char-grid-pjax').on('click', '.char-gift', function (e) {
     e.preventDefault();
     var url = $(this).data('url');
     bootbox.confirm({
@@ -88,7 +88,7 @@ $('#char-grid-pjax').on('click', '.char-gift', function (e){
     });
 });
 
-$('#char-grid-pjax').on('click', '.char-rb', function (e){
+$('#char-grid-pjax').on('click', '.char-rb', function (e) {
     e.preventDefault();
     var url = $(this).data('url');
     var rbUrl = $(this).data('rb-url');
@@ -129,4 +129,14 @@ $('#char-grid-pjax').on('click', '.char-rb', function (e){
             bootbox.alert(xhr.responseText);
         }
     });
+});
+
+$('#eshop-pjax-container').on('click', '#show-cart-btn', function (e) {
+    e.preventDefault();
+    bootbox.alert('Under construction!');
+});
+
+$('#eshop-pjax-container').on('click', '.add-to-cart-btn', function (e) {
+    e.preventDefault();
+    bootbox.alert('Under construction!');
 });
