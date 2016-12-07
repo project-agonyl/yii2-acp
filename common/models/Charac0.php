@@ -204,7 +204,7 @@ class Charac0 extends BaseCharac0
         if ($lore != null) {
             $loreString = ArrayHelper::getValue(explode('\_1', $this->m_body), 19);
             $temp = explode('=', $loreString);
-            if ((int)$temp[1] >= $lore) {
+            if (isset($temp[1]) && (int)$temp[1] >= $lore) {
                 $toReturn['Lore ' . $lore] = 'Yes';
             } else {
                 $toReturn['Lore ' . $lore] = 'No';
