@@ -332,7 +332,7 @@ class Charac0 extends BaseCharac0
                     }
                 }
             }
-            for ($i = 1; $i <= $slotsToClear * 4; $i++) {
+            for ($i = 0; $i < $slotsToClear * 4; $i++) {
                 if (isset($itemArray[$i])) {
                     unset($itemArray[$i]);
                 }
