@@ -226,7 +226,7 @@ class Charac0 extends BaseCharac0
                             continue;
                         }
                         while ($count > 0) {
-                            if ($itemId == $itemArray[$currentSlot * 4]) {
+                            if (isset($itemArray[$currentSlot * 4]) && $itemId == $itemArray[$currentSlot * 4]) {
                                 $toReturn[$itemModel->name . ' at slot ' . ($currentSlot + 1)] = 'Yes';
                             } else {
                                 $toReturn[$itemModel->name . ' at slot ' . ($currentSlot + 1)] = 'No';
@@ -242,7 +242,7 @@ class Charac0 extends BaseCharac0
                     if ($itemModel == null) {
                         continue;
                     }
-                    if ($items[$i] == $itemArray[$currentSlot * 4]) {
+                    if (isset($itemArray[$currentSlot * 4]) && $items[$i] == $itemArray[$currentSlot * 4]) {
                         $toReturn[$itemModel->name . ' at slot ' . ($currentSlot + 1)] = 'Yes';
                     } else {
                         $toReturn[$itemModel->name . ' at slot ' . ($currentSlot + 1)] = 'No';
