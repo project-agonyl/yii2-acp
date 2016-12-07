@@ -48,7 +48,7 @@ AppAsset::register($this);
                 //['label' => Icon::show('key').'Update Password', 'url' => ['/services/update-password']]
             ]
         ],
-        ['label' => Icon::show('shopping-basket').'E-Shop', 'url' => ['/eshop']],
+//        ['label' => Icon::show('shopping-basket').'E-Shop', 'url' => ['/eshop']],
         ['label' => Icon::show('sign-out').'Logout (' . trim(Yii::$app->user->id) . ')', 'url' => ['/account/logout']]
     ];
     echo Nav::widget([

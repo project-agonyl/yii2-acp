@@ -176,7 +176,9 @@ class Charac0 extends BaseCharac0
         if (!isset(Yii::$app->params['rebirth']) ||
             !isset(Yii::$app->params['rebirth']['character']) ||
             !isset(Yii::$app->params['rebirth']['character'][$this->rb + 1]) ||
-            !isset(Yii::$app->params['rebirth']['character'][$this->rb + 1]['requirements'])
+            !isset(Yii::$app->params['rebirth']['character'][$this->rb + 1]['requirements']) ||
+            !isset(Yii::$app->params['rebirth']['character'][$this->rb + 1]['gifts']) ||
+            !isset(Yii::$app->params['rebirth']['character'][$this->rb + 1]['gifts']['points'])
         ) {
             return ['Rebirth' => 'Not Available'];
         }
@@ -295,6 +297,8 @@ class Charac0 extends BaseCharac0
     {
         if ($this->canTakeRebirth) {
             $requirements = Yii::$app->params['rebirth']['character'][$this->rb + 1]['requirements'];
+            $points = Yii::$app->params['rebirth']['character'][$this->rb + 1]['gifts']['points'];
+            $oldStats = $this->c_headera;
             $oldMBody = $this->m_body;
             $oldLevel = $this->c_sheaderc;
             $oldRb = $this->rb;
@@ -336,6 +340,20 @@ class Charac0 extends BaseCharac0
             $INVEN[1] = implode(';', $itemArray);
             $mBodyArray[6] = implode('=', $INVEN);
             $this->m_body = implode('\_1', $mBodyArray);
+            switch ($this->c_sheaderb) {
+                case '0':
+                    $this->c_headera = "30;0;16;35;130;$points;75;20;120;120";
+                    break;
+                case '1':
+                    $this->c_headera = "30;0;20;35;130;$points;50;30;110;120";
+                    break;
+                case '2':
+                    $this->c_headera = "20;26;12;35;130;$points;30;80;30;120";
+                    break;
+                case '3':
+                    $this->c_headera = "30;0;16;35;130;$points;75;37;100;120";
+                    break;
+            }
             if ($this->save()) {
                 ActivityLog::addEntry(
                     ActivityLog::EVENT_TAKE_REBIRTH,
@@ -346,7 +364,9 @@ class Charac0 extends BaseCharac0
                         'new_m_body' => $this->m_body,
                         'old_level' => $oldLevel,
                         'old_rebirth' => $oldRb,
-                        'old_woonz' => $oldWz
+                        'old_woonz' => $oldWz,
+                        'old_stats' => $oldStats,
+                        'new_stats' => $this->c_headera
                     ]
                 );
             }

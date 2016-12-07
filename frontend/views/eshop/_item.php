@@ -4,6 +4,7 @@
  * @var $model common\models\EshopItem
  */
 use kartik\icons\Icon;
+use yii\helpers\Url;
 
 ?>
 <div class="col-sm-4 col-lg-4 col-md-4">
@@ -17,7 +18,7 @@ use kartik\icons\Icon;
             <h5 style="font-weight: bolder">Flamez Coins: <span class="text-warning"><?= ($model->coin == -1)?'N/A':$model->coin; ?></span></h5>
         </div>
         <div class="ratings">
-            <p><button class="btn btn-primary add-to-cart-btn" data-key="<?= $model->id; ?>"><?= Icon::show('shopping-cart');?> Add to cart</button></p>
+            <p><button class="btn btn-primary add-to-cart-btn" data-url="<?= Url::to(['/eshop/add-item'])?>" data-key="<?= $model->id; ?>"><?= Icon::show('shopping-cart');?> Add to cart</button></p>
         </div>
-    </div>
+    </div>chara
 </div>
