@@ -304,8 +304,9 @@ class Charac0 extends BaseCharac0
             $oldRb = $this->rb;
             $oldWz = $this->c_headerc;
             $this->rb++;
-            $this->c_sheaderc = 1;
+            $this->c_sheaderc = (string)1;
             $this->c_headerc -= ArrayHelper::getValue($requirements, 'woonz', 0);
+            $this->c_headerc = (string)$this->c_headerc;
             $mBodyArray = explode('\_1', $this->m_body);
             $INVEN = explode("=", $mBodyArray[6]);
             $EXP = explode("=", $mBodyArray[0]);
@@ -369,6 +370,7 @@ class Charac0 extends BaseCharac0
                         'new_stats' => $this->c_headera
                     ]
                 );
+                return true;
             }
             return false;
         }
