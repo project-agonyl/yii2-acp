@@ -12,7 +12,12 @@ $this->title = 'E-shop Checkout';
 ?>
 <div class="row">
     <div class="col-sm-12">
-        <h2>E-shop Checkout <span class="pull-right"><?= Html::a(Icon::show('arrow-circle-left').'Back', Url::to(['/eshop']), ['class' => 'btn btn-danger']);?></span></h2>
+        <h2>
+            E-shop Checkout
+            <span class="pull-right">
+                <?= Html::a(Icon::show('arrow-circle-left').'Shop More', Url::to(['/eshop']), ['class' => 'btn btn-info']);?>
+            </span>
+        </h2>
         <?= GridView::widget([
             'id' => 'cart-grid',
             'showPageSummary' => true,
@@ -113,5 +118,29 @@ $this->title = 'E-shop Checkout';
             'persistResize' => false,
             'summary' => false
         ]); ?>
+        <h2>
+            <span class="pull-right">
+                <?= Html::button(
+                    Icon::show('truck').'Buy with Coins',
+                    [
+                        'class' => 'btn btn-primary btn-lg buy-btn',
+                        'id' => 'coin-buy-btn',
+                        'data-purl' => Url::to(['can-buy-using-coins']),
+                        'data-curl' => Url::to(['list-deliverable-characters']),
+                        'data-loading-text' => 'Processing...'
+                    ]
+                );?>
+                <?= Html::button(
+                    Icon::show('truck').'Buy with Cash',
+                    [
+                        'class' => 'btn btn-primary btn-lg buy-btn',
+                        'id' => 'cash-buy-btn',
+                        'data-purl' => Url::to(['can-buy-using-cash']),
+                        'data-curl' => Url::to(['list-deliverable-characters']),
+                        'data-loading-text' => 'Processing...'
+                    ]
+                );?>
+            </span>
+        </h2>
     </div>
 </div>

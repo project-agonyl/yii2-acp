@@ -38,10 +38,10 @@ class Account extends BaseAccount implements IdentityInterface
     public function rules()
     {
         return ArrayHelper::merge(
-             parent::rules(),
-             [
-                  # custom validation rules
-             ]
+            parent::rules(),
+            [
+                # custom validation rules
+            ]
         );
     }
 
@@ -134,7 +134,7 @@ class Account extends BaseAccount implements IdentityInterface
         }
         $itemArray = explode(';', $storage->m_body);
         $toReturn = [];
-        for ($i = 0; $i < count($itemArray);$i += 4) {
+        for ($i = 0; $i < count($itemArray); $i += 4) {
             $toReturn[(int)$itemArray[$i + 3]] = $this->processItem(
                 (int)$itemArray[$i],
                 (int)$itemArray[$i + 1],
@@ -182,10 +182,10 @@ class Account extends BaseAccount implements IdentityInterface
         $toReturn['item_id'] = $item->item_id;
         $toReturn['full_item_name'] = $item->name;
         if ($mounted != 0) {
-            $toReturn['full_item_name'] = ($mounted*10).'% Mounted '.$toReturn['full_item_name'];
+            $toReturn['full_item_name'] = ($mounted * 10) . '% Mounted ' . $toReturn['full_item_name'];
         }
         if ($bless) {
-            $toReturn['full_item_name'] = 'Blessed '.$toReturn['full_item_name'];
+            $toReturn['full_item_name'] = 'Blessed ' . $toReturn['full_item_name'];
         }
         $toReturn['options'] = [
             'mount' => $mounted,
@@ -227,5 +227,32 @@ class Account extends BaseAccount implements IdentityInterface
             }
         }
         return $accountCost;
+    }
+
+    public function getDeliverableCharacters()
+    {
+        $characters = Charac0::find()
+            ->where([
+                'c_sheadera' => $this->c_id,
+                'c_status' => Charac0::STATUS_ACTIVE
+            ])
+            ->all();
+        $deliverableCharacters = [];
+        foreach ($characters as $character) {
+            $inventoryString = ArrayHelper::getValue(explode('\_1', $character->m_body), 6);
+            if ($inventoryString == null) {
+                continue;
+            }
+            $INVEN = explode("=", $inventoryString);
+            if (count($INVEN) < 2) {
+                continue;
+            }
+            $temp = explode(";", $INVEN[1]);
+            if (count($temp) != 4 || $temp[0] != '6144') {
+                continue;
+            }
+            $deliverableCharacters[$character->c_id] = trim($character->c_id);
+        }
+        return $deliverableCharacters;
     }
 }

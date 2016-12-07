@@ -31,10 +31,10 @@ class EshopOrder extends BaseEshopOrder
     public function rules()
     {
         return ArrayHelper::merge(
-             parent::rules(),
-             [
-                  # custom validation rules
-             ]
+            parent::rules(),
+            [
+                # custom validation rules
+            ]
         );
     }
 
@@ -48,5 +48,50 @@ class EshopOrder extends BaseEshopOrder
                 'eshop_order_id' => $this->id
             ])
             ->scalar();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEshopOrderItems()
+    {
+        return $this->hasMany(EshopOrderItem::className(), ['eshop_order_id' => 'id'])
+            ->onCondition(['is_deleted' => false]);
+    }
+
+    public function getTotalCoinValue()
+    {
+        $toReturn = 0;
+        foreach ($this->eshopOrderItems as $eshopOrderItem) {
+            if ($eshopOrderItem->eshopItem->coin == -1) {
+                $toReturn = -1;
+                break;
+            }
+            $toReturn += $eshopOrderItem->eshopItem->coin;
+        }
+        return $toReturn;
+    }
+
+    public function getTotalCashValue()
+    {
+        $toReturn = 0;
+        foreach ($this->eshopOrderItems as $eshopOrderItem) {
+            if ($eshopOrderItem->eshopItem->cash == -1) {
+                $toReturn = -1;
+                break;
+            }
+            $toReturn += $eshopOrderItem->eshopItem->cash;
+        }
+        return $toReturn;
+    }
+
+    public function getCanBuyUsingCoins()
+    {
+        return $this->totalCoinValue != -1;
+    }
+
+    public function getCanBuyUsingCash()
+    {
+        return $this->totalCashValue != -1;
     }
 }

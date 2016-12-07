@@ -163,4 +163,16 @@ class Cart extends Model
         ]);
         return $dataProvider;
     }
+
+    public function getCanBuyUsingCoins()
+    {
+        $order = $this->getOrder();
+        return $order->canBuyUsingCoins;
+    }
+
+    public function getCanBuyUsingCash()
+    {
+        $order = $this->getOrder();
+        return $order->canBuyUsingCash;
+    }
 }

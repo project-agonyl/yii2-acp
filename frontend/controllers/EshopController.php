@@ -8,6 +8,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Account;
 use frontend\models\Cart;
 use frontend\models\EshopItemSearch;
 use Yii;
@@ -53,5 +54,35 @@ class EshopController extends Controller
             return Json::encode(['status' => 'nok', 'msg' => Html::errorSummary($cart)]);
         }
         throw new MethodNotAllowedHttpException();
+    }
+
+    public function actionCanBuyUsingCoins()
+    {
+        $cart = new Cart(['account' => Yii::$app->user->id]);
+        if ($cart->canBuyUsingCoins) {
+            return Json::encode(['status' => 'ok', 'msg' => 'Can buy using Flamez coins']);
+        }
+        return Json::encode(['status' => 'nok', 'msg' => '<h4>Remove items that are not available for Flamez coins and try again!</h4>']);
+    }
+
+    public function actionCanBuyUsingCash()
+    {
+        $cart = new Cart(['account' => Yii::$app->user->id]);
+        if ($cart->canBuyUsingCash) {
+            return Json::encode(['status' => 'ok', 'msg' => 'Can buy using Flamez cash']);
+        }
+        return Json::encode(['status' => 'nok', 'msg' => '<h4>Remove items that are not available for Flamez cash and try again!</h4>']);
+    }
+
+    public function actionListDeliverableCharacters()
+    {
+        $model = Account::find()
+            ->where(['c_id' => Yii::$app->user->id])
+            ->one();
+        $characters = $model->deliverableCharacters;
+        if (count($characters) != 0) {
+            return Json::encode(['status' => 'ok', 'msg' => 'Character list', 'characters' => array_values($characters)]);
+        }
+        return Json::encode(['status' => 'nok', 'msg' => 'Please keep only Upgrade Jewel in the 1st slot of character inventory to which you want to deliver items!']);
     }
 }
