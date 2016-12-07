@@ -6,6 +6,7 @@ use Yii;
 use \common\models\base\EshopOrder as BaseEshopOrder;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\db\Query;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -35,5 +36,17 @@ class EshopOrder extends BaseEshopOrder
                   # custom validation rules
              ]
         );
+    }
+
+    public function getItemCount()
+    {
+        return (new Query())
+            ->select('SUM(quantity)')
+            ->from('eshop_order_item')
+            ->where([
+                'is_deleted' => false,
+                'eshop_order_id' => $this->id
+            ])
+            ->scalar();
     }
 }

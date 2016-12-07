@@ -18,7 +18,7 @@ use yii\helpers\Url;
             <h5 style="font-weight: bolder">Flamez Coins: <span class="text-warning"><?= ($model->coin == -1)?'N/A':$model->coin; ?></span></h5>
         </div>
         <div class="ratings">
-            <p><button class="btn btn-primary add-to-cart-btn" data-url="<?= Url::to(['/eshop/add-item'])?>" data-key="<?= $model->id; ?>"><?= Icon::show('shopping-cart');?> Add to cart</button></p>
+            <p><button class="btn btn-primary add-to-cart-btn" data-url="<?= Url::to(['/eshop/add-to-cart'])?>" data-key="<?= $model->id; ?>"><?= Icon::show('shopping-cart');?> Add to cart</button></p>
         </div>
-    </div>chara
+    </div>
 </div>

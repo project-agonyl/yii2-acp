@@ -13,6 +13,7 @@ use common\models\EshopOrder;
 use common\models\EshopOrderItem;
 use Yii;
 use yii\base\Model;
+use yii\data\ActiveDataProvider;
 
 class Cart extends Model
 {
@@ -44,6 +45,10 @@ class Cart extends Model
             return false;
         }
         $order = $this->getOrder();
+        if ($order->itemCount >= 25) {
+            $this->addError('account', 'Shopping cart is full. Please deliver the existing items to a character before ordering more!');
+            return false;
+        }
         $orderItem = EshopOrderItem::find()
             ->where([
                 'is_deleted' => false,
@@ -136,5 +141,26 @@ class Cart extends Model
             $this->_orderModel->save();
         }
         return $this->_orderModel;
+    }
+
+    public function getItemDataProvider()
+    {
+        $order = $this->getOrder();
+        $query = EshopOrderItem::find()
+            ->where([
+                'is_deleted' => false,
+                'eshop_order_id' => $order->id
+            ])
+            ->orderBy(['id' => SORT_DESC]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'key' => 'id',
+            'pagination' => [
+                'pageSize' => 30,
+                'validatePage' => false
+            ],
+            'sort' => false
+        ]);
+        return $dataProvider;
     }
 }

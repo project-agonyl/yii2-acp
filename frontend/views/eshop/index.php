@@ -5,11 +5,9 @@
  * @var $dataProvider yii\data\ActiveDataProvider
  */
 use kartik\icons\Icon;
-use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
-use yii\widgets\DetailView;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
 
@@ -62,7 +60,7 @@ $this->title = Inflector::pluralize(ArrayHelper::getValue($searchModel->getCateg
                 <a href="<?= Url::to(['/eshop', 'category' => $id]); ?>" class="list-group-item <?= ($id == $searchModel->category)?'active':'';?>"><?=$name; ?></a>
             <?php endforeach; ?>
         </div>
-        <a class="btn btn-success pull-right" id="show-cart-btn" href="#" data-pjax="0"><?= Icon::show('shopping-cart');?>Show cart</a>
+        <a class="btn btn-success pull-right" id="show-cart-btn" href="<?= Url::to(['cart']);?>" data-pjax="0"><?= Icon::show('shopping-cart');?>Show cart</a>
     </div>
     <div class="col-md-9">
         <legend><?= Inflector::pluralize(ArrayHelper::getValue($searchModel->getCategoryList(), $searchModel->category, 'All Item')); ?></legend>
