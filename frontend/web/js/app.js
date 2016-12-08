@@ -227,6 +227,9 @@ $('.buy-btn').click(function (e) {
                                         $btn.button('reset');
                                         bootbox.alert(data.msg);
                                         $.pjax.reload({container: '#cart-grid-pjax'});
+                                        setTimeout(function(){
+                                            $.pjax.reload({container: '#balance-pjax'});
+                                        }, 3000);
                                     });
                                 } else {
                                     $btn.button('reset');

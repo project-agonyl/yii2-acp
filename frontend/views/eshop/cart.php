@@ -7,18 +7,15 @@ use kartik\grid\GridView;
 use kartik\icons\Icon;
 use yii\bootstrap\Html;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 $this->title = 'E-shop Checkout';
 ?>
 <div class="row">
     <div class="col-sm-12">
-        <h2>
-            E-shop Checkout
-            <span class="pull-right">
-                <?= Html::a(Icon::show('arrow-circle-left').'Shop More', Url::to(['/eshop']), ['class' => 'btn btn-info']);?>
-            </span>
-        </h2>
-        <?= GridView::widget([
+        <div class="col-md-9">
+            <legend>E-shop Checkout</legend>
+            <?= GridView::widget([
             'id' => 'cart-grid',
             'showPageSummary' => true,
             'dataProvider' => $cart->itemDataProvider,
@@ -118,31 +115,76 @@ $this->title = 'E-shop Checkout';
             'persistResize' => false,
             'summary' => false
         ]); ?>
-        <h2>
-            <span class="pull-right">
-                <?= Html::button(
-                    Icon::show('truck').'Buy with Coins',
-                    [
-                        'class' => 'btn btn-primary btn-lg buy-btn',
-                        'id' => 'coin-buy-btn',
-                        'data-purl' => Url::to(['can-buy-using-coins']),
-                        'data-curl' => Url::to(['list-deliverable-characters']),
-                        'data-burl' => Url::to(['deliver-using-coins']),
-                        'data-loading-text' => 'Processing...'
-                    ]
-                );?>
-                <?= Html::button(
-                    Icon::show('truck').'Buy with Cash',
-                    [
-                        'class' => 'btn btn-primary btn-lg buy-btn',
-                        'id' => 'cash-buy-btn',
-                        'data-purl' => Url::to(['can-buy-using-cash']),
-                        'data-curl' => Url::to(['list-deliverable-characters']),
-                        'data-burl' => Url::to(['deliver-using-cash']),
-                        'data-loading-text' => 'Processing...'
-                    ]
-                );?>
-            </span>
-        </h2>
+            <h2>
+                <?= Html::a(Icon::show('arrow-circle-left').'Shop More', Url::to(['/eshop']), ['class' => 'btn btn-info']);?>
+                <span class="pull-right">
+                    <?= Html::button(
+                        Icon::show('truck').'Buy with Coins',
+                        [
+                            'class' => 'btn btn-primary buy-btn',
+                            'id' => 'coin-buy-btn',
+                            'data-purl' => Url::to(['can-buy-using-coins']),
+                            'data-curl' => Url::to(['list-deliverable-characters']),
+                            'data-burl' => Url::to(['deliver-using-coins']),
+                            'data-loading-text' => 'Processing...'
+                        ]
+                    );?>
+                    <?= Html::button(
+                        Icon::show('truck').'Buy with Cash',
+                        [
+                            'class' => 'btn btn-primary buy-btn',
+                            'id' => 'cash-buy-btn',
+                            'data-purl' => Url::to(['can-buy-using-cash']),
+                            'data-curl' => Url::to(['list-deliverable-characters']),
+                            'data-burl' => Url::to(['deliver-using-cash']),
+                            'data-loading-text' => 'Processing...'
+                        ]
+                    );?>
+                </span>
+            </h2>
+        </div>
+        <div class="col-md-3">
+            <legend>Account Balance</legend>
+            <?php Pjax::begin([
+                'id' => "balance-pjax",
+                'enablePushState' => false,
+                'timeout' => 4000,
+            ]); ?>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4>Flamez Coins <span class="badge"><?= $cart->accountModel->coin; ?></span></h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4>Flamez Cash <span class="badge"><?= $cart->accountModel->cash; ?></span></h4>
+                </div>
+            </div>
+            <?php Pjax::end(); ?>
+            <h2>
+                <span class="pull-right">
+                    <?= Html::button(
+                        Icon::show('truck').'Buy with Coins',
+                        [
+                            'class' => 'btn btn-primary buy-btn btn-sm',
+                            'data-purl' => Url::to(['can-buy-using-coins']),
+                            'data-curl' => Url::to(['list-deliverable-characters']),
+                            'data-burl' => Url::to(['deliver-using-coins']),
+                            'data-loading-text' => 'Processing...'
+                        ]
+                    );?>
+                    <?= Html::button(
+                        Icon::show('truck').'Buy with Cash',
+                        [
+                            'class' => 'btn btn-primary buy-btn btn-sm',
+                            'data-purl' => Url::to(['can-buy-using-cash']),
+                            'data-curl' => Url::to(['list-deliverable-characters']),
+                            'data-burl' => Url::to(['deliver-using-cash']),
+                            'data-loading-text' => 'Processing...'
+                        ]
+                    );?>
+                </span>
+            </h2>
+        </div>
     </div>
 </div>
