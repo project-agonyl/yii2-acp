@@ -11,15 +11,11 @@ use yii\helpers\ArrayHelper;
  */
 class Itemlog extends BaseItemlog
 {
-
-public function behaviors()
+    public function behaviors()
     {
-        return ArrayHelper::merge(
-            parent::behaviors(),
-            [
-                # custom behaviors
-            ]
-        );
+        return [
+
+        ];
     }
 
     public function rules()
@@ -30,5 +26,25 @@ public function behaviors()
                   # custom validation rules
              ]
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'charname' => 'From',
+            'tocharname' => 'To',
+            'ip' => 'From IP',
+            'toip' => 'To IP',
+            'itemname' => 'Item Name',
+            'itemcode' => 'Item Code',
+            'uniqcode' => 'Unique Code',
+            'loc' => 'Location',
+            'date' => 'Date',
+            'shopname' => 'Shop Name',
+            'event' => 'Event',
+        ];
     }
 }

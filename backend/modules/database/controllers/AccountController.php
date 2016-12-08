@@ -81,7 +81,7 @@ class AccountController extends Controller
             ])
             ->one();
         if ($model == null) {
-            throw new NotFoundHttpException('Character not found!');
+            throw new NotFoundHttpException('Account not found!');
         }
         return $model;
     }
