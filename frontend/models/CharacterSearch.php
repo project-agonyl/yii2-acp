@@ -102,7 +102,7 @@ class CharacterSearch extends Charac0
                             Icon::show('plane'),
                             '#',
                             [
-                                'class' => 'char-offline-tp black-text btn btn-default',
+                                'class' => 'char-offline-tp black-text btn btn-warning',
                                 'data-url' => Url::to(['/character/offline-teleport', 'id' => $model->c_id]),
                                 'data-toggle' => "tooltip",
                                 'title' => 'Offline Teleport',
@@ -115,7 +115,7 @@ class CharacterSearch extends Charac0
                             Icon::show('eye'),
                             '#',
                             [
-                                'class' => 'char-view inherit-color btn btn-default',
+                                'class' => 'char-view inherit-color btn btn-info',
                                 'data-url' => Url::to(['/character/view', 'id' => $model->c_id]),
                                 'data-toggle' => "tooltip",
                                 'title' => 'View Inventory and Wear',
@@ -128,7 +128,7 @@ class CharacterSearch extends Charac0
                             Icon::show('gift'),
                             '#',
                             [
-                                'class' => 'char-gift inherit-color btn btn-default',
+                                'class' => 'char-gift inherit-color btn btn-primary',
                                 'data-url' => Url::to(['/character/beginners-gift', 'id' => $model->c_id]),
                                 'data-toggle' => "tooltip",
                                 'title' => 'Beginner\'s Gift',
@@ -141,7 +141,7 @@ class CharacterSearch extends Charac0
                             Icon::show('fast-forward'),
                             '#',
                             [
-                                'class' => 'char-rb inherit-color btn btn-default',
+                                'class' => 'char-rb inherit-color btn btn-success',
                                 'data-url' => Url::to(['/character/view-rebirth-requirements', 'id' => $model->c_id]),
                                 'data-rb-url' => Url::to(['/character/take-rebirth', 'id' => $model->c_id]),
                                 'data-toggle' => "tooltip",
