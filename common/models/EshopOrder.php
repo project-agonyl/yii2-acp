@@ -59,6 +59,10 @@ class EshopOrder extends BaseEshopOrder
             ->onCondition(['is_deleted' => false]);
     }
 
+    /**
+     * @todo Take discount into consideration
+     * @return float|int
+     */
     public function getTotalCoinValue()
     {
         $toReturn = 0;
@@ -72,6 +76,10 @@ class EshopOrder extends BaseEshopOrder
         return $toReturn;
     }
 
+    /**
+     * @todo Take discount into consideration
+     * @return float|int
+     */
     public function getTotalCashValue()
     {
         $toReturn = 0;
@@ -93,5 +101,15 @@ class EshopOrder extends BaseEshopOrder
     public function getCanBuyUsingCash()
     {
         return $this->totalCashValue != -1;
+    }
+    
+    public function getIsEmpty()
+    {
+        return EshopOrderItem::find()
+            ->where([
+                'eshop_order_id' => $this->id,
+                'is_deleted' => false
+            ])
+            ->count() == 0;
     }
 }

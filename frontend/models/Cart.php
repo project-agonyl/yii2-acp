@@ -8,17 +8,26 @@
 
 namespace frontend\models;
 
+use common\helpers\Utils;
+use common\models\ActivityLog;
+use common\models\BuyUniqCode;
+use common\models\Charac0;
+use common\models\DeliveryTable;
 use common\models\EshopItem;
 use common\models\EshopOrder;
 use common\models\EshopOrderItem;
+use common\models\Wallet;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\db\Expression;
 
 class Cart extends Model
 {
     public $account;
-    private $_orderModel;
+    public $charToDeliver;
+    protected $_orderModel;
+    protected $_wallet;
 
     public function add($id, $quantity = 1)
     {
@@ -119,6 +128,9 @@ class Cart extends Model
         return true;
     }
 
+    /**
+     * @return EshopOrder
+     */
     public function getOrder()
     {
         if ($this->_orderModel != null) {
@@ -174,5 +186,191 @@ class Cart extends Model
     {
         $order = $this->getOrder();
         return $order->canBuyUsingCash;
+    }
+
+    /**
+     * @return Wallet
+     */
+    public function getWallet()
+    {
+        if ($this->_wallet != null) {
+            return $this->_wallet;
+        }
+        if ($this->account == null) {
+            return null;
+        }
+        $this->_wallet = Wallet::find()
+            ->where([
+                'is_deleted' => false,
+                'account' => $this->account
+            ])
+            ->one();
+        if ($this->_wallet == null) {
+            $this->_wallet = new Wallet();
+            $this->_wallet->account = $this->account;
+            $this->_wallet->save();
+        }
+        return $this->_wallet;
+    }
+
+    public function getIsEmpty()
+    {
+        $order = $this->getOrder();
+        return $order->isEmpty;
+    }
+
+    public function deliverUsingCoins()
+    {
+        return $this->deliverItems('coins');
+    }
+
+    public function deliverUsingCash()
+    {
+        return $this->deliverItems();
+    }
+
+    protected function deliverItems($type = 'cash')
+    {
+        if (!in_array($type, ['coins', 'cash'])) {
+            $type = 'cash';
+        }
+        if ($this->isEmpty) {
+            $this->addError('charToDeliver', 'Shopping cart is empty. Please add items to be delivered');
+            return false;
+        }
+        if ($type == 'coins' && !$this->canBuyUsingCoins) {
+            $this->addError('charToDeliver', 'Remove items that are not available for Flamez coins and try again!');
+            return false;
+        }
+        if ($type == 'cash' && !$this->canBuyUsingCash) {
+            $this->addError('charToDeliver', 'Remove items that are not available for Flamez cash and try again!');
+            return false;
+        }
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            $wallet = $this->getWallet();
+            $order = $this->getOrder();
+            if ($type == 'coins') {
+                $requiredCoins = $order->totalCoinValue;
+                if ($requiredCoins > $wallet->coin) {
+                    $this->addError('charToDeliver', "Your account does not have $requiredCoins Flamez coins to deliver these items!");
+                    $transaction->rollBack();
+                    return false;
+                }
+                $wallet->coin -= $requiredCoins;
+                if (!$wallet->save()) {
+                    $this->addErrors($wallet->errors);
+                    $transaction->rollBack();
+                    return false;
+                }
+            }
+            if ($type == 'cash') {
+                $requiredCash = $order->totalCashValue;
+                if ($requiredCash > $wallet->cash) {
+                    $this->addError('charToDeliver', "Your account does not have $requiredCash Flamez cash to deliver these items!");
+                    $transaction->rollBack();
+                    return false;
+                }
+                $wallet->cash -= $requiredCash;
+                if (!$wallet->save()) {
+                    $this->addErrors($wallet->errors);
+                    $transaction->rollBack();
+                    return false;
+                }
+            }
+            if (!$this->deliverItemsToCharacter($type)) {
+                $transaction->rollBack();
+                return false;
+            }
+            $order->is_delivered = true;
+            $order->delivered_to = $this->charToDeliver;
+            if (!$order->save()) {
+                $this->addErrors($order->errors);
+                $transaction->rollBack();
+                return false;
+            }
+            $transaction->commit();
+            return true;
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            $this->addError('charToDeliver', $e->getMessage());
+            return false;
+        }
+    }
+
+    protected function deliverItemsToCharacter($type)
+    {
+        $characterModel = Charac0::find()
+            ->where([
+                'c_id' => $this->charToDeliver,
+                'c_status' => Charac0::STATUS_ACTIVE
+            ])
+            ->one();
+        if ($characterModel == null) {
+            $this->addError('charToDeliver', 'Either invalid character or character is not active');
+            return false;
+        }
+        $order = $this->getOrder();
+        $transactionId = (string)$order->id;
+        $oldMBody = $characterModel->m_body;
+        $mBodyArray = explode('\_1', $characterModel->m_body);
+        $INVEN = explode("=", $mBodyArray[6]);
+        if (count($INVEN) < 2) {
+            $INVEN[1] = '';
+        }
+        $order = $this->getOrder();
+        $currentSlot = 1;
+        $itemIds = [];
+        foreach ($order->eshopOrderItems as $eshopOrderItem) {
+            $itemIds[] = $eshopOrderItem->id;
+            for ($k = 1; $k <= $eshopOrderItem->quantity; $k++) {
+                $uniqueItemCode = Utils::GenerateUniqueItemCode();
+                $uniqueCodeLog = new BuyUniqCode([
+                    'transaction_id' => $transactionId,
+                    'item_code' => $eshopOrderItem->eshopItem->item_id,
+                    'unique_code' => $uniqueItemCode
+                ]);
+                if (!$uniqueCodeLog->save()) {
+                    $this->addErrors($uniqueCodeLog->errors);
+                    return false;
+                }
+                $INVEN[1] .= $eshopOrderItem->eshopItem->item_id.
+                    ';'.$eshopOrderItem->eshopItem->item->second_column_id.';'.$uniqueItemCode.';'.$currentSlot;
+                $currentSlot++;
+            }
+        }
+        $mBodyArray[6] = implode('=', $INVEN);
+        $characterModel->m_body = implode('\_1', $mBodyArray);
+        if (!$characterModel->save()) {
+            $this->addErrors($characterModel->errors);
+            return false;
+        }
+        $deliveryTableModel = new DeliveryTable([
+            'transaction_id' => (string)$order->id,
+            'account_name' => $this->account,
+            'char_name' => $this->charToDeliver,
+            'item_ids' => '',
+            'delivery_time' => new Expression('CURRENT_TIMESTAMP'),
+            'credits_used' => $type,
+            'ip_address' => Yii::$app->request->userIP
+        ]);
+        if (!$deliveryTableModel->save()) {
+            $this->addErrors($deliveryTableModel->errors);
+            return false;
+        }
+        $amount = ($type == 'coins')?$order->totalCoinValue:$order->totalCashValue;
+        ActivityLog::addEntry(
+            ActivityLog::EVENT_ESHOP_DELIVERY,
+            $this->account,
+            [
+                'character' => $this->charToDeliver,
+                'old_m_body' => $oldMBody,
+                'new_m_body' => $characterModel->m_body,
+                'currency_type' => $type,
+                'amount' => $amount
+            ],
+            "E-shop items worth $amount $type delivered to $this->charToDeliver"
+        );
+        return true;
     }
 }

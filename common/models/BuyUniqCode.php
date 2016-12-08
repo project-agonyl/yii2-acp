@@ -12,14 +12,9 @@ use yii\helpers\ArrayHelper;
 class BuyUniqCode extends BaseBuyUniqCode
 {
 
-public function behaviors()
+    public function behaviors()
     {
-        return ArrayHelper::merge(
-            parent::behaviors(),
-            [
-                # custom behaviors
-            ]
-        );
+        return [];
     }
 
     public function rules()

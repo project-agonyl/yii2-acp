@@ -12,14 +12,9 @@ use yii\helpers\ArrayHelper;
 class DeliveryTable extends BaseDeliveryTable
 {
 
-public function behaviors()
+    public function behaviors()
     {
-        return ArrayHelper::merge(
-            parent::behaviors(),
-            [
-                # custom behaviors
-            ]
-        );
+        return [];
     }
 
     public function rules()
