@@ -39,4 +39,10 @@ class Utils
         }
         return (string)$uniqueCode;
     }
+
+    public static function CurrentDateTime()
+    {
+        date_default_timezone_set("Asia/Calcutta");
+        return date('Y-m-d H:i:s');
+    }
 }

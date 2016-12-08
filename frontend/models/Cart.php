@@ -359,14 +359,14 @@ class Cart extends Model
                 $uniqueItemCode = Utils::GenerateUniqueItemCode();
                 $uniqueCodeLog = new BuyUniqCode([
                     'transaction_id' => $transactionId,
-                    'item_code' => $eshopOrderItem->eshopItem->item_id,
+                    'item_code' => (string)$eshopOrderItem->eshopItem->item_id,
                     'unique_code' => $uniqueItemCode
                 ]);
                 if (!$uniqueCodeLog->save()) {
                     $this->addErrors($uniqueCodeLog->errors);
                     return false;
                 }
-                $INVEN[1] .= $eshopOrderItem->eshopItem->item_id.
+                $INVEN[1] .= ';'.$eshopOrderItem->eshopItem->item_id.
                     ';'.$eshopOrderItem->eshopItem->item->second_column_id.';'.$uniqueItemCode.';'.$currentSlot;
                 $currentSlot++;
             }
@@ -377,20 +377,20 @@ class Cart extends Model
             $this->addErrors($characterModel->errors);
             return false;
         }
+        $amount = ($type == 'coins')?$order->totalCoinValue:$order->totalCashValue;
         $deliveryTableModel = new DeliveryTable([
             'transaction_id' => (string)$order->id,
             'account_name' => $this->account,
             'char_name' => $this->charToDeliver,
-            'item_ids' => '',
-            'delivery_time' => new Expression('CURRENT_TIMESTAMP'),
-            'credits_used' => $type,
+            'item_ids' => '6144',
+            'delivery_time' => Utils::CurrentDateTime(),
+            'credits_used' => $amount,
             'ip_address' => Yii::$app->request->userIP
         ]);
         if (!$deliveryTableModel->save()) {
             $this->addErrors($deliveryTableModel->errors);
             return false;
         }
-        $amount = ($type == 'coins')?$order->totalCoinValue:$order->totalCashValue;
         ActivityLog::addEntry(
             ActivityLog::EVENT_ESHOP_DELIVERY,
             $this->account,

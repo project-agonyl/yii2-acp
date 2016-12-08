@@ -71,7 +71,7 @@ class EshopOrder extends BaseEshopOrder
                 $toReturn = -1;
                 break;
             }
-            $toReturn += $eshopOrderItem->eshopItem->coin;
+            $toReturn += $eshopOrderItem->eshopItem->coin * $eshopOrderItem->quantity;
         }
         return $toReturn;
     }
@@ -88,7 +88,7 @@ class EshopOrder extends BaseEshopOrder
                 $toReturn = -1;
                 break;
             }
-            $toReturn += $eshopOrderItem->eshopItem->cash;
+            $toReturn += $eshopOrderItem->eshopItem->cash * $eshopOrderItem->quantity;
         }
         return $toReturn;
     }
