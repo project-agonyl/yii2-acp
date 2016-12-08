@@ -127,6 +127,7 @@ $this->title = 'E-shop Checkout';
                         'id' => 'coin-buy-btn',
                         'data-purl' => Url::to(['can-buy-using-coins']),
                         'data-curl' => Url::to(['list-deliverable-characters']),
+                        'data-burl' => Url::to(['deliver-using-coins']),
                         'data-loading-text' => 'Processing...'
                     ]
                 );?>
@@ -137,6 +138,7 @@ $this->title = 'E-shop Checkout';
                         'id' => 'cash-buy-btn',
                         'data-purl' => Url::to(['can-buy-using-cash']),
                         'data-curl' => Url::to(['list-deliverable-characters']),
+                        'data-burl' => Url::to(['deliver-using-cash']),
                         'data-loading-text' => 'Processing...'
                     ]
                 );?>

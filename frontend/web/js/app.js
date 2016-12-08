@@ -223,8 +223,11 @@ $('.buy-btn').click(function (e) {
                             if (result) {
                                 var character = $('#deliver-char').val();
                                 if (character !== null && character !== '') {
-                                    $btn.button('reset');
-                                    bootbox.alert('I will deliver items to ' + character);
+                                    doJsonPostRequest($(me).data('burl'), {character: character}, function (data) {
+                                        $btn.button('reset');
+                                        bootbox.alert(data.msg);
+                                        $.pjax.reload({container: '#cart-grid-pjax'});
+                                    });
                                 } else {
                                     $btn.button('reset');
                                     bootbox.alert('Please choose a character to deliver items!');
