@@ -146,6 +146,18 @@ class OldAccount extends BaseOldAccount
             foreach ($wear as $slot => $item) {
                 $accountCost += ArrayHelper::getValue($itemCosts, ArrayHelper::getValue($item, 'item_id'), 0);
             }
+            $mercs = OldHstable::find()
+                ->where([
+                    'HSState' => OldHstable::STATUS_ACTIVE,
+                    'MasterName' => trim($character->c_id)
+                ])
+                ->all();
+            foreach ($mercs as $merc) {
+                $mercWear = $merc->parsedWear;
+                foreach ($mercWear as $slot => $item) {
+                    $accountCost += ArrayHelper::getValue($itemCosts, ArrayHelper::getValue($item, 'item_id'), 0);
+                }
+            }
         }
         return $accountCost;
     }
