@@ -9,6 +9,7 @@
 namespace frontend\models;
 
 use common\helpers\Utils;
+use common\models\Account;
 use common\models\ActivityLog;
 use common\models\BuyUniqCode;
 use common\models\Charac0;
@@ -16,6 +17,7 @@ use common\models\DeliveryTable;
 use common\models\EshopItem;
 use common\models\EshopOrder;
 use common\models\EshopOrderItem;
+use common\models\NotificationLog;
 use common\models\Wallet;
 use Yii;
 use yii\base\Model;
@@ -28,6 +30,7 @@ class Cart extends Model
     public $charToDeliver;
     protected $_orderModel;
     protected $_wallet;
+    protected $_accountModel;
 
     public function add($id, $quantity = 1)
     {
@@ -213,6 +216,22 @@ class Cart extends Model
         return $this->_wallet;
     }
 
+    /**
+     * @return Account
+     */
+    public function getAccountModel()
+    {
+        if ($this->account == null) {
+            return null;
+        }
+        $this->_accountModel = Account::find()
+            ->where([
+                'c_id' => $this->account
+            ])
+            ->one();
+        return $this->_accountModel;
+    }
+
     public function getIsEmpty()
     {
         $order = $this->getOrder();
@@ -250,8 +269,10 @@ class Cart extends Model
         try {
             $wallet = $this->getWallet();
             $order = $this->getOrder();
+            $amount = 0;
             if ($type == 'coins') {
                 $requiredCoins = $order->totalCoinValue;
+                $amount = $requiredCoins;
                 if ($requiredCoins > $wallet->coin) {
                     $this->addError('charToDeliver', "Your account does not have $requiredCoins Flamez coins to deliver these items!");
                     $transaction->rollBack();
@@ -266,6 +287,7 @@ class Cart extends Model
             }
             if ($type == 'cash') {
                 $requiredCash = $order->totalCashValue;
+                $amount = $requiredCash;
                 if ($requiredCash > $wallet->cash) {
                     $this->addError('charToDeliver', "Your account does not have $requiredCash Flamez cash to deliver these items!");
                     $transaction->rollBack();
@@ -290,6 +312,16 @@ class Cart extends Model
                 return false;
             }
             $transaction->commit();
+            $accountModel = $this->getAccountModel();
+            NotificationLog::sendMail(
+                NotificationLog::TYPE_ESHOP_DELIVERY,
+                $accountModel->c_headerb,
+                [
+                    'character' => $this->charToDeliver,
+                    'type' => $type,
+                    'amount' => $amount
+                ]
+            );
             return true;
         } catch (\Exception $e) {
             $transaction->rollBack();
