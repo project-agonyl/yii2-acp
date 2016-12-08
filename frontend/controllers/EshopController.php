@@ -60,6 +60,9 @@ class EshopController extends Controller
     public function actionCanBuyUsingCoins()
     {
         $cart = new Cart(['account' => Yii::$app->user->id]);
+        if ($cart->isEmpty) {
+             return Json::encode(['status' => 'nok', 'msg' => 'Shopping cart is empty!']);
+        }
         if ($cart->canBuyUsingCoins) {
             return Json::encode(['status' => 'ok', 'msg' => 'Can buy using Flamez coins']);
         }
@@ -69,6 +72,9 @@ class EshopController extends Controller
     public function actionCanBuyUsingCash()
     {
         $cart = new Cart(['account' => Yii::$app->user->id]);
+        if ($cart->isEmpty) {
+             return Json::encode(['status' => 'nok', 'msg' => 'Shopping cart is empty!']);
+        }
         if ($cart->canBuyUsingCash) {
             return Json::encode(['status' => 'ok', 'msg' => 'Can buy using Flamez cash']);
         }

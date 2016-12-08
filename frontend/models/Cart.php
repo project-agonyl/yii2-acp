@@ -23,6 +23,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
+use yii\helpers\Json;
 
 class Cart extends Model
 {
@@ -306,6 +307,8 @@ class Cart extends Model
             }
             $order->is_delivered = true;
             $order->delivered_to = $this->charToDeliver;
+            $order->current_value = $amount;
+            $order->meta = Json::encode(['currency_type' => $type]);
             if (!$order->save()) {
                 $this->addErrors($order->errors);
                 $transaction->rollBack();
