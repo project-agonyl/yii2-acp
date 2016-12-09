@@ -11,6 +11,7 @@ namespace console\controllers;
 use common\models\Account;
 use common\models\Charac0;
 use common\models\Item;
+use common\models\OldHstable;
 use Yii;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;
@@ -61,6 +62,61 @@ class ExportController extends Controller
                             $itemCount[ArrayHelper::getValue($item, 'item_id')] = 0;
                         }
                         $itemCount[ArrayHelper::getValue($item, 'item_id')]++;
+                    }
+                }
+            }
+        }
+        $header = ['Item Code', 'Item Name', 'Count'];
+        $body = [];
+        $items = Item::find()
+            ->where('id IS NOT NULL')
+            ->orderBy('item_id')
+            ->all();
+        foreach ($items as $item) {
+            $body[] = [$item->item_id, $item->name, ArrayHelper::getValue($itemCount, $item->item_id, 0)];
+        }
+        $fp = fopen($filePath, 'w');
+        fputcsv($fp, $header);
+        for ($i = 0; $i < count($body); $i++) {
+            fputcsv($fp, $body[$i]);
+        }
+        fclose($fp);
+        Console::output('Item counts were exported to '.$filePath);
+    }
+
+    public function actionOldHsItemCount()
+    {
+        Console::output('Sit tight while I generate report. This might take a while...');
+        $filePath = Yii::$app->runtimePath.'/'.time().'_old_hs_item_count.csv';
+        $itemCount = [];
+        $accounts = Account::find()
+            ->where([
+                'c_status' => Account::STATUS_ACTIVE
+            ])
+            ->all();
+        foreach ($accounts as $account) {
+            $characters = Charac0::find()
+                ->where([
+                    'c_sheadera' => $account->c_id,
+                    'c_status' => Charac0::STATUS_ACTIVE
+                ])
+                ->all();
+            foreach ($characters as $character) {
+                $mercs = OldHstable::find()
+                    ->where([
+                        'HSState' => OldHstable::STATUS_ACTIVE,
+                        'MasterName' => trim($character->c_id)
+                    ])
+                    ->all();
+                foreach ($mercs as $merc) {
+                    $mercWear = $merc->parsedWear;
+                    foreach ($mercWear as $slot => $item) {
+                        if (ArrayHelper::getValue($item, 'item_id') != null) {
+                            if (!isset($itemCount[ArrayHelper::getValue($item, 'item_id')])) {
+                                $itemCount[ArrayHelper::getValue($item, 'item_id')] = 0;
+                            }
+                            $itemCount[ArrayHelper::getValue($item, 'item_id')]++;
+                        }
                     }
                 }
             }
