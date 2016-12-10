@@ -64,23 +64,19 @@ $this->title = Inflector::pluralize(ArrayHelper::getValue($searchModel->getCateg
     </div>
     <div class="col-md-9">
         <legend><?= Inflector::pluralize(ArrayHelper::getValue($searchModel->getCategoryList(), $searchModel->category, 'All Item')); ?></legend>
-        <table border='4' width='100%'>
-            <tr>
-            <?= ListView::widget([
-                'dataProvider' => $dataProvider,
-                'options' => [
-                    'tag' => 'div',
-                    'class' => 'row',
-                ],
-                'itemOptions' => [
-                    'tag' => false,
-                ],
-                'layout' => "{items}\n<div class='col-sm-12'>{pager}</div>",
-                'itemView' => '_item',
-                'emptyText' => 'Not items found'
-            ]); ?>
-            </tr>
-        </table>
+        <?= ListView::widget([
+            'dataProvider' => $dataProvider,
+            'options' => [
+                'tag' => 'div',
+                'class' => 'row',
+            ],
+            'itemOptions' => [
+                'tag' => false,
+            ],
+            'layout' => "{items}\n<div class='col-sm-12'>{pager}</div>",
+            'itemView' => '_item',
+            'emptyText' => 'Not items found'
+        ]); ?>
     </div>
     <?php Pjax::end(); ?>
 </div>

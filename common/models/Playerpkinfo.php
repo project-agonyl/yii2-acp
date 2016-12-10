@@ -11,24 +11,18 @@ use yii\helpers\ArrayHelper;
  */
 class Playerpkinfo extends BasePlayerpkinfo
 {
-
-public function behaviors()
+    public function behaviors()
     {
-        return ArrayHelper::merge(
-            parent::behaviors(),
-            [
-                # custom behaviors
-            ]
-        );
+        return [];
     }
 
     public function rules()
     {
         return ArrayHelper::merge(
-             parent::rules(),
-             [
-                  # custom validation rules
-             ]
+            parent::rules(),
+            [
+                # custom validation rules
+            ]
         );
     }
 }

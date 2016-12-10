@@ -32,4 +32,36 @@ class Charloginlog extends BaseCharloginlog
             ->where('c_id IS NOT NULL')
             ->count();
     }
+
+    public function getTypeString()
+    {
+        switch ((int)$this->class) {
+            case 1:
+                $type = 'Holy Knight';
+                break;
+            case 2:
+                $type = 'Mage';
+                break;
+            case 3:
+                $type = 'Archer';
+                break;
+            default:
+                $type = 'Warrior';
+                break;
+        }
+        return $type;
+    }
+
+    public function getNationString()
+    {
+        switch ((int)$this->Nation) {
+            case 1:
+                $nation = 'Quanato';
+                break;
+            default:
+                $nation = 'Temoz';
+                break;
+        }
+        return $nation;
+    }
 }
