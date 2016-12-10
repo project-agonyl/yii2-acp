@@ -55,7 +55,7 @@ class TopCharacterSearch extends Charac0
             'query' => $query,
             'key' => 'id',
             'pagination' => false,
-            'sort' => $this->sortObject()
+            'sort' => false
         ]);
         $this->load($params, '');
         return $dataProvider;
@@ -85,59 +85,6 @@ class TopCharacterSearch extends Charac0
             'rb' => [
                 'attribute' => 'rb',
                 'label' => 'Rebirth'
-            ]
-        ];
-    }
-
-    protected function sortObject()
-    {
-        return [
-            'attributes' => [
-                'c_sheaderc' => [
-                    'asc' => [new Expression('CAST(c_sheaderc AS int) ASC')],
-                    'desc' => [new Expression('CAST(c_sheaderc AS int) DESC')],
-                    'default' => SORT_DESC,
-                    'label' => 'Level',
-                ],
-                'c_sheaderb' => [
-                    'asc' => [new Expression('CAST(c_sheaderb AS int) ASC')],
-                    'desc' => [new Expression('CAST(c_sheaderb AS int) DESC')],
-                    'default' => SORT_DESC,
-                    'label' => 'Type',
-                ],
-                'c_headerc' => [
-                    'asc' => [new Expression('CAST(c_sheaderc AS int) ASC')],
-                    'desc' => [new Expression('CAST(c_sheaderc AS int) DESC')],
-                    'default' => SORT_ASC,
-                    'label' => 'Level',
-                ],
-                'rb' => [
-                    'asc' => [new Expression('CAST(rb AS int) ASC')],
-                    'desc' => [new Expression('CAST(rb AS int) DESC')],
-                    'default' => SORT_DESC,
-                    'label' => 'Rebirth',
-                ],
-                'c_id' => [
-                    'asc' => [new Expression('c_id ASC')],
-                    'desc' => [new Expression('c_id DESC')],
-                    'default' => SORT_ASC,
-                    'label' => 'Name',
-                ],
-                'c_sheadera' => [
-                    'asc' => [new Expression('c_sheadera ASC')],
-                    'desc' => [new Expression('c_sheadera DESC')],
-                    'default' => SORT_ASC,
-                    'label' => 'Account',
-                ],
-                'd_udate' => [
-                    'asc' => [new Expression('d_udate ASC')],
-                    'desc' => [new Expression('d_udate DESC')],
-                    'default' => SORT_DESC,
-                    'label' => 'Updated',
-                ]
-            ],
-            'defaultOrder' => [
-                'rb' => SORT_DESC
             ]
         ];
     }
