@@ -13,6 +13,7 @@ use common\models\Account;
 use common\models\ConnectOldAccount;
 use common\models\OldAccount;
 use frontend\models\OldAccountTransfer;
+use frontend\models\UpdatePassword;
 use Yii;
 use common\components\Controller;
 
@@ -60,6 +61,17 @@ class ServicesController extends Controller
     {
         $model = $this->getAccountModel();
         return $this->render('viewAccountDetails', ['model' => $model]);
+    }
+
+    public function actionUpdatePassword()
+    {
+        $model = new UpdatePassword(['account' => Yii::$app->user->id]);
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['/dashboard']);
+            }
+        }
+        return $this->render('updatePasswordForm', ['model' => $model]);
     }
 
     private function getAccountModel()
