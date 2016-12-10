@@ -4,6 +4,7 @@ namespace frontend\models;
 use common\models\Account;
 use common\models\AccountInfo;
 use common\models\ActivityLog;
+use common\models\NotificationLog;
 use yii\base\Model;
 use yii\base\InvalidParamException;
 use Yii;
@@ -91,6 +92,14 @@ class ResetPasswordForm extends Model
                 [
                     'old_password' => $oldPassword,
                     'new_password' => $this->password
+                ]
+            );
+            NotificationLog::sendMail(
+                NotificationLog::TYPE_UPDATED_PASSWORD,
+                $this->_account->c_headerb,
+                [
+                    'username' => $this->_account->c_id,
+                    'password' => $this->_account->c_headera
                 ]
             );
             return true;

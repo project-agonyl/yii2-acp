@@ -189,7 +189,7 @@ class AccountController extends Controller
             throw new BadRequestHttpException($e->getMessage());
         }
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password was saved.');
+            Yii::$app->session->setFlash('success', 'Account password was successfully updated.');
             return $this->redirect(['login']);
         }
         return $this->render('resetPassword', [
