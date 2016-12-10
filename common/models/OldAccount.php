@@ -43,6 +43,28 @@ class OldAccount extends BaseOldAccount
         );
     }
 
+    public function getParsedOldStorage()
+    {
+        $storage = OldItemstorage0::find()
+            ->where([
+                'c_id' => $this->c_id
+            ])
+            ->one();
+        if ($storage == null) {
+            return [];
+        }
+        $itemArray = explode(';', $storage->m_body);
+        $toReturn = [];
+        for ($i = 0; $i < count($itemArray);$i += 4) {
+            $toReturn[(int)$itemArray[$i + 3]] = $this->processItem(
+                (int)$itemArray[$i],
+                (int)$itemArray[$i + 1],
+                (int)$itemArray[$i + 2]
+            );
+        }
+        return $toReturn;
+    }
+
     public function getParsedStorage()
     {
         $storage = ItemStorage0::find()
@@ -127,7 +149,7 @@ class OldAccount extends BaseOldAccount
             return 0;
         }
         $accountCost = 0;
-        $storage = $this->parsedStorage;
+        $storage = $this->parsedOldStorage;
         foreach ($storage as $slot => $item) {
             $accountCost += ArrayHelper::getValue($itemCosts, ArrayHelper::getValue($item, 'item_id'), 0);
         }
