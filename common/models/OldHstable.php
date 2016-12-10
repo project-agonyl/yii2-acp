@@ -32,12 +32,10 @@ class OldHstable extends BaseOldHstable
 
     public function getParsedWear()
     {
-        $wearString = ArrayHelper::getValue(explode(' ', $this->HSBody), 2);
+        $temp = explode('WEAR=', $this->HSBody);
+        $temp1 = explode('OPTION=', $temp[1]);
+        $wearString = ArrayHelper::getValue($temp1, 0);
         if ($wearString == null) {
-            return [];
-        }
-        $temp = explode('=', $wearString);
-        if (count($temp) == 1) {
             return [];
         }
         $itemArray = explode(';', $temp[1]);
