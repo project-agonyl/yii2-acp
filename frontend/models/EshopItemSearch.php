@@ -52,7 +52,8 @@ class EshopItemSearch extends EshopItem
             ->where([
                 'is_deleted' => false
             ])
-            ->andWhere('cash > -1 OR coin > -1');
+            ->andWhere('cash > -1 OR coin > -1')
+            ->orderBy('display_name');
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'key' => 'id',
