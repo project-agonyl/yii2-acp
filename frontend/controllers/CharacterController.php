@@ -14,6 +14,7 @@ use common\models\Charloginlog;
 use Yii;
 use common\components\Controller;
 use yii\bootstrap\Html;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\MethodNotAllowedHttpException;
 use yii\web\NotAcceptableHttpException;
@@ -38,6 +39,53 @@ class CharacterController extends Controller
                 ]
             );
             return Json::encode(['status' => 'ok', 'msg' => 'Character was successfully teleported to temoz.']);
+        }
+        throw new MethodNotAllowedHttpException();
+    }
+
+    public function actionTakeQuest($id)
+    {
+        $characterModel = $this->loadCharacterModel($id);
+        if (Yii::$app->request->isPost) {
+            $type = Yii::$app->request->post('type', 1);
+            switch ((int)$type) {
+                case 2:
+                    $questId = 1;
+                    break;
+                default:
+                    switch ((int)$characterModel->c_sheaderb) {
+                        case 1:
+                            $questId = 709;
+                            break;
+                        case 2:
+                            $questId = 432;
+                            break;
+                        case 3:
+                            $questId = 383;
+                            break;
+                        default:
+                            $questId = 398;
+                            break;
+                    }
+                    break;
+            }
+            $mBodyArray = explode('\_1', $characterModel->m_body);
+            $CQUEST = explode("=", $mBodyArray[8]);
+            $CQUEST[1] = "$questId;0;0;0;0;0;0;0;1";
+            $mBodyArray[8] = implode('=', $CQUEST);
+            $characterModel->m_body = implode('\_1', $mBodyArray);
+            if (!$characterModel->save()) {
+                return Json::encode(['status' => 'nok', 'msg' => Html::errorSummary($characterModel)]);
+            }
+            ActivityLog::addEntry(
+                ActivityLog::EVENT_TAKE_QUEST,
+                Yii::$app->user->id,
+                [
+                    'character' => $characterModel->c_id,
+                    'quest_id' => $questId
+                ]
+            );
+            return Json::encode(['status' => 'ok', 'msg' => 'Quest was successfully assigned to your character.']);
         }
         throw new MethodNotAllowedHttpException();
     }
