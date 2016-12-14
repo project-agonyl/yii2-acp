@@ -21,6 +21,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $created_at
  * @property string $updated_at
  *
+ * @property \common\models\BundleItem[] $bundleItems
  * @property \common\models\EshopCoupon[] $eshopCoupons
  * @property \common\models\EshopItem[] $eshopItems
  * @property \common\models\ItemInfo[] $itemInfos
@@ -82,6 +83,14 @@ abstract class Item extends \yii\db\ActiveRecord
             'woonz' => 'Woonz',
             'item_id' => 'Item ID',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBundleItems()
+    {
+        return $this->hasMany(\common\models\BundleItem::className(), ['item_id' => 'item_id']);
     }
 
     /**

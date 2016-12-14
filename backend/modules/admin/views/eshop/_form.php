@@ -6,6 +6,7 @@
  */
 
 use backend\modules\admin\models\EshopItem;
+use common\models\Bundle;
 use common\models\Item;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
@@ -28,8 +29,14 @@ $form = ActiveForm::begin([
                 ); ?>
         </div>
         <div class="col-sm-6">
-            <?= $form->field($model, 'category')
-                ->dropDownList(EshopItem::getCategoryList()); ?>
+            <?= $form->field($model, 'bundle_id')
+                ->dropDownList(
+                    ArrayHelper::map(Bundle::find()->where(['is_deleted' => false])->orderBy('name')->all(), 'id', 'name'),
+                    [
+                        'onchange' => "$('#eshopitem-display_name').val($('#eshopitem-bundle_id option:selected').text());$('#eshopitem-image_url').val('/img/bundle/' + $(this).val() + '.jpg')",
+                        'prompt' => '-- Select Item --'
+                    ]
+                ); ?>
         </div>
     </div>
     <div class="row">
@@ -37,6 +44,12 @@ $form = ActiveForm::begin([
             <?= $form->field($model, 'display_name')->textInput() ?>
         </div>
         <div class="col-sm-6">
+            <?= $form->field($model, 'category')
+                ->dropDownList(EshopItem::getCategoryList()); ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
             <?= $form->field($model, 'description')->textarea() ?>
         </div>
     </div>

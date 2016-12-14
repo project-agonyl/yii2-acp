@@ -359,19 +359,37 @@ class Cart extends Model
         foreach ($order->eshopOrderItems as $eshopOrderItem) {
             $itemIds[] = $eshopOrderItem->id;
             for ($k = 1; $k <= $eshopOrderItem->quantity; $k++) {
-                $uniqueItemCode = Utils::GenerateUniqueItemCode();
-                $uniqueCodeLog = new BuyUniqCode([
-                    'transaction_id' => $transactionId,
-                    'item_code' => (string)$eshopOrderItem->eshopItem->item_id,
-                    'unique_code' => $uniqueItemCode
-                ]);
-                if (!$uniqueCodeLog->save()) {
-                    $this->addErrors($uniqueCodeLog->errors);
-                    return false;
+                if ($eshopOrderItem->eshopItem->bundle_id != null) {
+                    foreach ($eshopOrderItem->eshopItem->bundle->bundleItems as $bundleItem) {
+                        $uniqueItemCode = Utils::GenerateUniqueItemCode();
+                        $uniqueCodeLog = new BuyUniqCode([
+                            'transaction_id' => $transactionId,
+                            'item_code' => (string)$bundleItem->item_id,
+                            'unique_code' => $uniqueItemCode
+                        ]);
+                        if (!$uniqueCodeLog->save()) {
+                            $this->addErrors($uniqueCodeLog->errors);
+                            return false;
+                        }
+                        $INVEN[1] .= ';' . $bundleItem->item_id .
+                            ';' . $bundleItem->item->second_column_id . ';' . $uniqueItemCode . ';' . $currentSlot;
+                        $currentSlot++;
+                    }
+                } else {
+                    $uniqueItemCode = Utils::GenerateUniqueItemCode();
+                    $uniqueCodeLog = new BuyUniqCode([
+                        'transaction_id' => $transactionId,
+                        'item_code' => (string)$eshopOrderItem->eshopItem->item_id,
+                        'unique_code' => $uniqueItemCode
+                    ]);
+                    if (!$uniqueCodeLog->save()) {
+                        $this->addErrors($uniqueCodeLog->errors);
+                        return false;
+                    }
+                    $INVEN[1] .= ';' . $eshopOrderItem->eshopItem->item_id .
+                        ';' . $eshopOrderItem->eshopItem->item->second_column_id . ';' . $uniqueItemCode . ';' . $currentSlot;
+                    $currentSlot++;
                 }
-                $INVEN[1] .= ';'.$eshopOrderItem->eshopItem->item_id.
-                    ';'.$eshopOrderItem->eshopItem->item->second_column_id.';'.$uniqueItemCode.';'.$currentSlot;
-                $currentSlot++;
             }
         }
         $mBodyArray[6] = implode('=', $INVEN);

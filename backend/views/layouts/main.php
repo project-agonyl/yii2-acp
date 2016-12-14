@@ -51,14 +51,14 @@ AppAsset::register($this);
             'label' => Icon::show('list').'Logs',
             'items' => [
                 ['label' => Icon::show('list-alt').'Admin Accounts', 'url' => ['/log/activity?admin=1']],
-                ['label' => Icon::show('list-ul').'Normal Accounts', 'url' => ['/log/activity']],
-                ['label' => Icon::show('list-ol').'Item Transfer', 'url' => ['/log/item']]
+                ['label' => Icon::show('list-ul').'Normal Accounts', 'url' => ['/log/activity']]
             ]
         ],
         [
             'label' => Icon::show('gear').'Admin',
             'items' => [
-                ['label' => Icon::show('shopping-cart').'E-Shop', 'url' => ['/admin/eshop']]
+                ['label' => Icon::show('shopping-cart').'E-Shop', 'url' => ['/admin/eshop']],
+                ['label' => Icon::show('shopping-basket').'E-shop Bundle', 'url' => ['/database/bundle']]
             ]
         ],
         [

@@ -8,30 +8,22 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the base-model class for table "eshop_item".
+ * This is the base-model class for table "bundle_item".
  *
  * @property integer $id
  * @property integer $is_deleted
- * @property integer $item_id
- * @property string $display_name
- * @property string $description
- * @property string $image_url
- * @property integer $category
- * @property double $coin
- * @property double $cash
- * @property double $credit
- * @property string $meta
  * @property integer $bundle_id
+ * @property integer $item_id
+ * @property integer $quantity
+ * @property string $meta
  * @property string $created_at
  * @property string $updated_at
  *
- * @property \common\models\EshopCoupon[] $eshopCoupons
  * @property \common\models\Bundle $bundle
  * @property \common\models\Item $item
- * @property \common\models\EshopOrderItem[] $eshopOrderItems
  * @property string $aliasModel
  */
-abstract class EshopItem extends \yii\db\ActiveRecord
+abstract class BundleItem extends \yii\db\ActiveRecord
 {
 
 
@@ -41,7 +33,7 @@ abstract class EshopItem extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'eshop_item';
+        return 'bundle_item';
     }
 
 
@@ -63,10 +55,9 @@ abstract class EshopItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_deleted', 'item_id', 'category', 'bundle_id'], 'integer'],
-            [['item_id'], 'required'],
-            [['display_name', 'description', 'image_url', 'meta'], 'string'],
-            [['coin', 'cash', 'credit'], 'number'],
+            [['bundle_id', 'item_id'], 'required'],
+            [['bundle_id', 'item_id', 'quantity'], 'integer'],
+            [['meta'], 'string'],
             [['bundle_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Bundle::className(), 'targetAttribute' => ['bundle_id' => 'id']],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Item::className(), 'targetAttribute' => ['item_id' => 'item_id']]
         ];
@@ -79,28 +70,13 @@ abstract class EshopItem extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'is_deleted' => 'Is Deleted',
+            'bundle_id' => 'Bundle ID',
             'item_id' => 'Item ID',
-            'display_name' => 'Display Name',
-            'description' => 'Description',
-            'image_url' => 'Image Url',
-            'category' => 'Category',
-            'coin' => 'Coin',
-            'cash' => 'Cash',
-            'credit' => 'Credit',
+            'quantity' => 'Quantity',
             'meta' => 'Meta',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
-            'bundle_id' => 'Bundle ID',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getEshopCoupons()
-    {
-        return $this->hasMany(\common\models\EshopCoupon::className(), ['eshop_item_id' => 'id']);
     }
 
     /**
@@ -119,23 +95,15 @@ abstract class EshopItem extends \yii\db\ActiveRecord
         return $this->hasOne(\common\models\Item::className(), ['item_id' => 'item_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getEshopOrderItems()
-    {
-        return $this->hasMany(\common\models\EshopOrderItem::className(), ['eshop_item_id' => 'id']);
-    }
-
 
     
     /**
      * @inheritdoc
-     * @return \common\models\query\EshopItemQuery the active query used by this AR class.
+     * @return \common\models\query\BundleItemQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \common\models\query\EshopItemQuery(get_called_class());
+        return new \common\models\query\BundleItemQuery(get_called_class());
     }
 
 

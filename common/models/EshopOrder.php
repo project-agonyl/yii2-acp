@@ -40,14 +40,15 @@ class EshopOrder extends BaseEshopOrder
 
     public function getItemCount()
     {
-        return (new Query())
-            ->select('SUM(quantity)')
-            ->from('eshop_order_item')
-            ->where([
-                'is_deleted' => false,
-                'eshop_order_id' => $this->id
-            ])
-            ->scalar();
+        $toReturn = 0;
+        foreach ($this->eshopOrderItems as $eshopOrderItem) {
+            if ($eshopOrderItem->eshopItem->bundle_id == null) {
+                $toReturn += $eshopOrderItem->quantity;
+            } else {
+                $toReturn += $eshopOrderItem->eshopItem->bundle->itemCount * $eshopOrderItem->quantity;
+            }
+        }
+        return $toReturn;
     }
 
     /**

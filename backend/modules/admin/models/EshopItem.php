@@ -35,8 +35,8 @@ class EshopItem extends \common\models\EshopItem
         return ArrayHelper::merge(
             parent::scenarios(),
             [
-                'create' => ['item_id' , 'display_name' , 'coin', 'cash', 'credit', 'category', 'description', 'image_url'],
-                'update' => ['item_id' , 'display_name' , 'coin', 'cash', 'credit', 'category', 'description', 'image_url']
+                'create' => ['item_id' , 'bundle_id', 'display_name' , 'coin', 'cash', 'credit', 'category', 'description', 'image_url'],
+                'update' => ['item_id' , 'bundle_id', 'display_name' , 'coin', 'cash', 'credit', 'category', 'description', 'image_url']
             ]
         );
     }
