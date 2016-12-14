@@ -95,7 +95,7 @@ class CharacterSearch extends Charac0
             'actions' => [
                 'header' => 'Actions',
                 'class' => '\kartik\grid\ActionColumn',
-                'template' => '{view} {offline-tp} {gift} {rb}',
+                'template' => '{view} {offline-tp} {gift} {rb} {lquest}',
                 'buttons' => [
                     'offline-tp' => function ($url, $model) {
                         return Html::a(
@@ -146,6 +146,20 @@ class CharacterSearch extends Charac0
                                 'data-rb-url' => Url::to(['/character/take-rebirth', 'id' => $model->c_id]),
                                 'data-toggle' => "tooltip",
                                 'title' => 'Rebirth',
+                                'data-pjax' => 0
+                            ]
+                        );
+                    },
+                    'lquest' => function ($url, $model) {
+                        return Html::a(
+                            Icon::show('briefcase'),
+                            '#',
+                            [
+                                'class' => 'char-take-quest inherit-color btn btn-default',
+                                'data-url' => Url::to(['/character/take-quest', 'id' => $model->c_id]),
+                                'data-quest-type' => 1,
+                                'data-toggle' => "tooltip",
+                                'title' => 'Take Letter Quest',
                                 'data-pjax' => 0
                             ]
                         );

@@ -131,6 +131,32 @@ $('#char-grid-pjax').on('click', '.char-rb', function (e) {
     });
 });
 
+$('#char-grid-pjax').on('click', '.char-take-quest', function (e) {
+    e.preventDefault();
+    var url = $(this).data('url');
+    var type = $(this).data('quest-type');
+    bootbox.confirm({
+        message: "This will replace current QUEST. Are you sure?",
+        buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                doJsonPostRequest(url, {type: type}, function (data) {
+                    bootbox.alert(data.msg);
+                });
+            }
+        }
+    });
+});
+
 $('#eshop-pjax-container').on('click', '.add-to-cart-btn', function (e) {
     e.preventDefault();
     var url = $(this).data('url');

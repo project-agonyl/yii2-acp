@@ -34,6 +34,7 @@ class ActivityLog extends BaseActivityLog
     const EVENT_TRANSFER_COIN = 16;
     const EVENT_OLD_ACCOUNT_COIN_TRANSFER = 17;
     const EVENT_ESHOP_DELIVERY = 18;
+    const EVENT_TAKE_QUEST = 19;
     const EVENT_UNKNOWN = 999;
 
     public function behaviors()
@@ -82,6 +83,7 @@ class ActivityLog extends BaseActivityLog
             self::EVENT_TRANSFER_COIN => 'Wallet coin transfer',
             self::EVENT_OLD_ACCOUNT_COIN_TRANSFER => 'Old account coin transfer',
             self::EVENT_ESHOP_DELIVERY => 'E-shop delivery',
+            self::EVENT_TAKE_QUEST => 'Quest taken from ACP',
             self::EVENT_UNKNOWN => 'Unknown event'
         ];
     }

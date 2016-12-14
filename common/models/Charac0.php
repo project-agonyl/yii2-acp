@@ -134,6 +134,9 @@ class Charac0 extends BaseCharac0
             $bless = true;
             $column1 -= 32768;
         }
+        if ($column1 > 16384) {
+            $column1 -= 16384;
+        }
         if (!isset($this->_itemModels[$column1])) {
             $item = Item::find()
                 ->where(['item_id' => $column1])
