@@ -10,7 +10,7 @@ class m161123_073540_misc_stuff extends Migration
         $this->addColumn('AccountInfo', 'id', $this->primaryKey());
         $this->createTable('item',[
             'id'                                => $this->primaryKey(),
-            'second_column_id'                  => $this->integer()->defaultValue(35)->notNull(),
+            'second_column_id'                  => $this->bigInteger()->defaultValue(32)->notNull(),
             'is_available_eshop'                => $this->boolean()->defaultValue('FALSE')->notNull(),
             'name'                              => $this->text()->notNull(),
             'type'                              => $this->integer()->defaultValue(1)->notNull(),
