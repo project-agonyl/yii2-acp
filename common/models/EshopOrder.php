@@ -8,12 +8,14 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "eshop_order".
  */
 class EshopOrder extends BaseEshopOrder
 {
+    const CURRENCY_TYPE = 'currency_type';
 
     public function behaviors()
     {
@@ -112,5 +114,13 @@ class EshopOrder extends BaseEshopOrder
                 'is_deleted' => false
             ])
             ->count() == 0;
+    }
+
+    public function getCurrencyType()
+    {
+        if ($this->account == null || $this->meta == null) {
+            return 'coins';
+        }
+        return ArrayHelper::getValue(Json::decode($this->meta), self::CURRENCY_TYPE);
     }
 }

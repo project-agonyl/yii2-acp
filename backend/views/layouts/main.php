@@ -44,7 +44,8 @@ AppAsset::register($this);
             'items' => [
                 ['label' => Icon::show('users').'Account', 'url' => ['/database/account']],
                 ['label' => Icon::show('user').'Character', 'url' => ['/database/character']],
-                ['label' => Icon::show('exchange').'Transfer', 'url' => ['/database/transfer']]
+                ['label' => Icon::show('exchange').'Transfer', 'url' => ['/database/transfer']],
+                ['label' => Icon::show('shopping-cart').'E-Shop Delivery', 'url' => ['/database/eshop-delivery']],
             ]
         ],
         [
