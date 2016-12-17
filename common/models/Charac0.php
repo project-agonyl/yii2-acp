@@ -335,14 +335,13 @@ class Charac0 extends BaseCharac0
                         $slotsToClear++;
                     }
                 }
-                $itemArray = array_filter($itemArray);
-                $INVEN[1] = implode(';', $itemArray);
-                $mBodyArray[$this->getInventoryIndex()] = implode('=', $INVEN);
                 for ($i = 0; $i < $slotsToClear * 4; $i++) {
                     if (isset($itemArray[$i])) {
                         unset($itemArray[$i]);
                     }
                 }
+                $INVEN[1] = implode(';', $itemArray);
+                $mBodyArray[$this->getInventoryIndex()] = implode('=', $INVEN);
             }
             $this->m_body = implode('\_1', $mBodyArray);
             switch ($this->c_sheaderb) {
