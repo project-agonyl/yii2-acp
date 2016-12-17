@@ -30,7 +30,7 @@ $this->title = 'E-shop Checkout';
                 'quantity' => [
                     'attribute' => 'quantity',
                     'pageSummary' => 'Total',
-                    'pageSummaryOptions' => ['class'=>'text-right text-warning']
+                    'pageSummaryOptions' => ['class'=>'text-right text-black']
                 ],
                 'coin' => [
                     'label' => 'Flamez Coins',

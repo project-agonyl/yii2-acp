@@ -45,7 +45,8 @@ AppAsset::register($this);
             'items' => [
                 ['label' => Icon::show('user').'Account Details', 'url' => ['/services/account-details']],
                 ['label' => Icon::show('users').'Old Account Transfer', 'url' => ['/services/old-account-transfer']],
-                ['label' => Icon::show('key').'Update Password', 'url' => ['/services/update-password']]
+                ['label' => Icon::show('key').'Update Password', 'url' => ['/services/update-password']],
+                ['label' => Icon::show('shopping-cart').'My E-shop Deliveries', 'url' => ['/services/eshop-deliveries']]
             ]
         ],
         ['label' => Icon::show('shopping-basket').'E-Shop', 'url' => ['/eshop']],

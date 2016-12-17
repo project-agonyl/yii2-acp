@@ -25,4 +25,13 @@ class Controller extends BaseController
         ];
         return $behaviors;
     }
+
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            date_default_timezone_set("Asia/Calcutta");
+            return true;
+        }
+        return false;
+    }
 }

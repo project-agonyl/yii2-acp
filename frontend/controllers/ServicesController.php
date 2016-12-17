@@ -12,6 +12,7 @@ use common\helpers\Utils;
 use common\models\Account;
 use common\models\ConnectOldAccount;
 use common\models\OldAccount;
+use frontend\models\EshopDeliverySearch;
 use frontend\models\OldAccountTransfer;
 use frontend\models\UpdatePassword;
 use Yii;
@@ -72,6 +73,13 @@ class ServicesController extends Controller
             }
         }
         return $this->render('updatePasswordForm', ['model' => $model]);
+    }
+
+    public function actionEshopDeliveries()
+    {
+        $searchModel = new EshopDeliverySearch(['account' => Yii::$app->user->id]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('eshopDeliveryView', ['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
     }
 
     private function getAccountModel()
