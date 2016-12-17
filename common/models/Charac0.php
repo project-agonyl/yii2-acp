@@ -71,7 +71,7 @@ class Charac0 extends BaseCharac0
 
     public function getParsedInventory()
     {
-        $inventoryString = ArrayHelper::getValue(explode('\_1', $this->m_body), 6);
+        $inventoryString = ArrayHelper::getValue(explode('\_1', $this->m_body), $this->getInventoryIndex());
         if ($inventoryString == null) {
             return [];
         }
@@ -93,7 +93,7 @@ class Charac0 extends BaseCharac0
 
     public function getParsedWear()
     {
-        $wearString = ArrayHelper::getValue(explode('\_1', $this->m_body), 5);
+        $wearString = ArrayHelper::getValue(explode('\_1', $this->m_body), $this->getWearIndex());
         if ($wearString == null) {
             return [];
         }
@@ -142,7 +142,8 @@ class Charac0 extends BaseCharac0
                 ->where(['item_id' => $column1])
                 ->one();
             if ($item == null) {
-                $toReturn['item_name'] = 'Unknown Item';
+                $toReturn['item_name'] = $column1;
+                $toReturn['item_id'] = $column1;
                 return $toReturn;
             }
             $this->_itemModels[$column1] = $item;
@@ -205,7 +206,7 @@ class Charac0 extends BaseCharac0
         }
         $lore = ArrayHelper::getValue($requirements, 'lore');
         if ($lore != null) {
-            $loreString = ArrayHelper::getValue(explode('\_1', $this->m_body), 19);
+            $loreString = ArrayHelper::getValue(explode('\_1', $this->m_body), $this->getLoreIndex());
             $temp = explode('=', $loreString);
             if (isset($temp[1]) && (int)$temp[1] >= $lore) {
                 $toReturn['Lore ' . $lore] = 'Yes';
@@ -215,7 +216,7 @@ class Charac0 extends BaseCharac0
         }
         $items = ArrayHelper::getValue($requirements, 'items');
         if (is_array($items)) {
-            $inventoryString = ArrayHelper::getValue(explode('\_1', $this->m_body), 6);
+            $inventoryString = ArrayHelper::getValue(explode('\_1', $this->m_body), $this->getInventoryIndex());
             $temp = explode('=', $inventoryString);
             $itemArray = explode(';', $temp[1]);
             $currentSlot = 0;
@@ -254,7 +255,7 @@ class Charac0 extends BaseCharac0
                 }
             }
         }
-        $wearString = ArrayHelper::getValue(explode('\_1', $this->m_body), 5);
+        $wearString = ArrayHelper::getValue(explode('\_1', $this->m_body), $this->getWearIndex());
         if ($wearString == null) {
             $toReturn['Wear cleared'] = 'Yes';
         } else {
@@ -311,17 +312,17 @@ class Charac0 extends BaseCharac0
             $this->c_headerc -= ArrayHelper::getValue($requirements, 'woonz', 0);
             $this->c_headerc = (string)$this->c_headerc;
             $mBodyArray = explode('\_1', $this->m_body);
-            $INVEN = explode("=", $mBodyArray[6]);
-            $EXP = explode("=", $mBodyArray[0]);
-            $LORE = explode("=", $mBodyArray[19]);
+            $EXP = explode("=", $mBodyArray[$this->getExpIndex()]);
+            $LORE = explode("=", $mBodyArray[$this->getLoreIndex()]);
             $EXP[1] = 0;
             $LORE[1] -= ArrayHelper::getValue($requirements, 'lore', 0);
-            $mBodyArray[0] = implode('=', $EXP);
-            $mBodyArray[19] = implode('=', $LORE);
-            $itemArray = explode(';', $INVEN[1]);
-            $slotsToClear = 0;
+            $mBodyArray[$this->getExpIndex()] = implode('=', $EXP);
+            $mBodyArray[$this->getLoreIndex()] = implode('=', $LORE);
             $items = ArrayHelper::getValue($requirements, 'items');
             if (is_array($items)) {
+                $slotsToClear = 0;
+                $INVEN = explode("=", $mBodyArray[$this->getInventoryIndex()]);
+                $itemArray = explode(';', $INVEN[1]);
                 for ($i = 0; $i < count($items); $i++) {
                     if (is_array($items[$i])) {
                         foreach ($items[$i] as $itemId => $count) {
@@ -334,15 +335,15 @@ class Charac0 extends BaseCharac0
                         $slotsToClear++;
                     }
                 }
-            }
-            for ($i = 0; $i < $slotsToClear * 4; $i++) {
-                if (isset($itemArray[$i])) {
-                    unset($itemArray[$i]);
+                $itemArray = array_filter($itemArray);
+                $INVEN[1] = implode(';', $itemArray);
+                $mBodyArray[$this->getInventoryIndex()] = implode('=', $INVEN);
+                for ($i = 0; $i < $slotsToClear * 4; $i++) {
+                    if (isset($itemArray[$i])) {
+                        unset($itemArray[$i]);
+                    }
                 }
             }
-            $itemArray = array_filter($itemArray);
-            $INVEN[1] = implode(';', $itemArray);
-            $mBodyArray[6] = implode('=', $INVEN);
             $this->m_body = implode('\_1', $mBodyArray);
             switch ($this->c_sheaderb) {
                 case '0':
@@ -383,12 +384,12 @@ class Charac0 extends BaseCharac0
 
     public function getLore()
     {
-        return $this->getIntFromMbody(19);
+        return $this->getIntFromMbody($this->getLoreIndex());
     }
 
     public function getExp()
     {
-        return $this->getIntFromMbody(0);
+        return $this->getIntFromMbody($this->getExpIndex());
     }
 
     protected function getIntFromMbody($index)
@@ -402,5 +403,46 @@ class Charac0 extends BaseCharac0
             return 0;
         }
         return (int)$temp[1];
+    }
+
+    public function getInventoryIndex()
+    {
+        return $this->getMbodyIndex('INVEN');
+    }
+
+    public function getWearIndex()
+    {
+        return $this->getMbodyIndex('WEAR');
+    }
+
+    public function getLoreIndex()
+    {
+        return $this->getMbodyIndex('LORE');
+    }
+
+    public function getExpIndex()
+    {
+        return $this->getMbodyIndex('EXP');
+    }
+
+    public function getCurrentQuestIndex()
+    {
+        return $this->getMbodyIndex('CQUEST');
+    }
+
+    public function getSkillIndex()
+    {
+        return $this->getMbodyIndex('SKILL');
+    }
+
+    protected function getMbodyIndex($type)
+    {
+        $mBodyArray = explode('\_1', $this->m_body);
+        $data = [];
+        for ($i = 0; $i < count($mBodyArray); $i++) {
+            $temp = explode("=", $mBodyArray[$i]);
+            $data[] = $temp[0];
+        }
+        return ArrayHelper::getValue(array_flip($data), $type, 1000);
     }
 }
