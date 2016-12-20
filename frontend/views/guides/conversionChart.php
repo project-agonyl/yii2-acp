@@ -12,15 +12,15 @@ $this->title = 'Conversion Chart';
             </thead>
             <tbody>
             <tr>
-                <td>Grade 9 Item Part</td>
+                <td>Grade 9 Item(each) Part</td>
                 <td>20</td>
             </tr>
             <tr>
-                <td>Grade 10 Item Part</td>
+                <td>Grade 10 Item(each) Part</td>
                 <td>400</td>
             </tr>
             <tr>
-                <td>Grade 8.5 Unique Wear Item</td>
+                <td>Grade 8.5 Unique Wear(each) Item</td>
                 <td>400</td>
             </tr>
             <tr>
@@ -44,7 +44,7 @@ $this->title = 'Conversion Chart';
                 <td>400</td>
             </tr>
             <tr>
-                <td>Grade 10 Unique Wear Item</td>
+                <td>Grade 10 Unique Wear(each) Item</td>
                 <td>500</td>
             </tr>
             <tr>

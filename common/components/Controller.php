@@ -34,6 +34,7 @@ class Controller extends BaseController
             if (ArrayHelper::getValue(Yii::$app->params, 'maintenance', false) &&
                 !in_array(trim(Yii::$app->user->id), ArrayHelper::getValue(Yii::$app->params, 'admins', []))) {
                 echo 'ACP under maintenance. Please try after some time!';
+                die;
             }
             return true;
         }

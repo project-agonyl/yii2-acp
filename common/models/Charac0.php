@@ -430,6 +430,11 @@ class Charac0 extends BaseCharac0
         return $this->getMbodyIndex('CQUEST');
     }
 
+    public function getLastQuestIndex()
+    {
+        return $this->getMbodyIndex('LQUEST');
+    }
+
     public function getSkillIndex()
     {
         return $this->getMbodyIndex('SKILL');
@@ -467,13 +472,13 @@ class Charac0 extends BaseCharac0
     public function saveDailyQuestSubmission()
     {
         $mBodyArray = explode('\_1', $this->m_body);
-        $CQUEST = explode("=", $mBodyArray[$this->currentQuestIndex]);
+        $CQUEST = explode("=", $mBodyArray[$this->lastQuestIndex]);
         if (count($CQUEST) < 2) {
             $this->addError('c_id', 'Please complete the daily quest before submitting.');
             return false;
         }
         $questCheck = explode(';', $CQUEST[1]);
-        if ($questCheck[0] != 1) {
+        if ($questCheck[0] != 2465) {
             $this->addError('c_id', 'Please complete the daily quest before submitting.');
             return false;
         }
@@ -538,8 +543,8 @@ class Charac0 extends BaseCharac0
                 $this->addErrors($dailyQuest->errors);
                 return false;
             }
-            $CQUEST[1] = "0;0;0;0;0;0;0;0;0";
-            $mBodyArray[$this->currentQuestIndex] = implode('=', $CQUEST);
+            $CQUEST[1] = "0";
+            $mBodyArray[$this->lastQuestIndex] = implode('=', $CQUEST);
             $this->m_body = implode('\_1', $mBodyArray);
             if (!$this->save()) {
                 $transaction->rollBack();
