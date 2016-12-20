@@ -55,8 +55,8 @@ abstract class BundleItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['is_deleted', 'bundle_id', 'item_id', 'quantity'], 'integer'],
             [['bundle_id', 'item_id'], 'required'],
-            [['bundle_id', 'item_id', 'quantity'], 'integer'],
             [['meta'], 'string'],
             [['bundle_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Bundle::className(), 'targetAttribute' => ['bundle_id' => 'id']],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Item::className(), 'targetAttribute' => ['item_id' => 'item_id']]
@@ -70,6 +70,7 @@ abstract class BundleItem extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'is_deleted' => 'Is Deleted',
             'bundle_id' => 'Bundle ID',
             'item_id' => 'Item ID',
             'quantity' => 'Quantity',

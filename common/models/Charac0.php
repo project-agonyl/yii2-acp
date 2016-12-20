@@ -6,6 +6,7 @@ use Yii;
 use \common\models\base\Charac0 as BaseCharac0;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\db\Query;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -434,6 +435,24 @@ class Charac0 extends BaseCharac0
         return $this->getMbodyIndex('SKILL');
     }
 
+    public function getCanTakeDailyQuest()
+    {
+        $dailyQuest = DailyQuest::find()
+            ->where([
+                'is_deleted' => false,
+                'character' => $this->c_id
+            ])
+            ->orderBy(['taken_at' => SORT_DESC])
+            ->one();
+        if ($dailyQuest == null) {
+            return true;
+        }
+        $questTakenInterval = (new Query())
+            ->select(["DATEDIFF(DAY, '$dailyQuest->taken_at', CURRENT_TIMESTAMP)"])
+            ->scalar();
+        return $questTakenInterval != 0;
+    }
+
     protected function getMbodyIndex($type)
     {
         $mBodyArray = explode('\_1', $this->m_body);
@@ -443,5 +462,95 @@ class Charac0 extends BaseCharac0
             $data[] = $temp[0];
         }
         return ArrayHelper::getValue(array_flip($data), $type, 1000);
+    }
+
+    public function saveDailyQuestSubmission()
+    {
+        $mBodyArray = explode('\_1', $this->m_body);
+        $CQUEST = explode("=", $mBodyArray[$this->currentQuestIndex]);
+        if (count($CQUEST) < 2) {
+            $this->addError('c_id', 'Please complete the daily quest before submitting.');
+            return false;
+        }
+        $questCheck = explode(';', $CQUEST[1]);
+        if ($questCheck[0] != 1) {
+            $this->addError('c_id', 'Please complete the daily quest before submitting.');
+            return false;
+        }
+        $dailyQuest = DailyQuest::find()
+            ->where([
+                'character' => $this->c_id,
+                'is_deleted' => false,
+            ])
+            ->andWhere('submitted_at IS NULL')
+            ->orderBy('id')
+            ->one();
+        if ($dailyQuest == null) {
+            $this->addError('c_id', 'Could not save the submitted quest.');
+            return false;
+        }
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            $oldDailyQuest = DailyQuest::find()
+                ->where([
+                    'character' => $this->c_id,
+                    'is_deleted' => false,
+                ])
+                ->andWhere('submitted_at IS NOT NULL')
+                ->orderBy(['submitted_at' => SORT_DESC])
+                ->one();
+            if ($oldDailyQuest == null) {
+                $spree = new CharacterSpree([
+                    'character' => $this->c_id,
+                    'type' => CharacterSpree::TYPE_DAILY_QUEST,
+                    'count' => 1
+                ]);
+            } else {
+                $questSubmitInterval = (new Query())
+                    ->select(["DATEDIFF(DAY, '$oldDailyQuest->submitted_at', CURRENT_TIMESTAMP)"])
+                    ->scalar();
+                if ($questSubmitInterval < 2) {
+                    $spree = CharacterSpree::find()
+                        ->where([
+                            'is_deleted' => false,
+                            'character' => $this->c_id,
+                            'type' => CharacterSpree::TYPE_DAILY_QUEST
+                        ])
+                        ->orderBy(['id' => SORT_DESC])
+                        ->one();
+                    $spree->count++;
+                } else {
+                    $spree = new CharacterSpree([
+                        'character' => $this->c_id,
+                        'type' => CharacterSpree::TYPE_DAILY_QUEST,
+                        'count' => 1
+                    ]);
+                }
+            }
+            if (!$spree->save()) {
+                $transaction->rollBack();
+                $this->addErrors($spree->errors);
+                return false;
+            }
+            $dailyQuest->submitted_at = date('Y-m-d', time());
+            if (!$dailyQuest->save()) {
+                $transaction->rollBack();
+                $this->addErrors($dailyQuest->errors);
+                return false;
+            }
+            $CQUEST[1] = "0;0;0;0;0;0;0;0;0";
+            $mBodyArray[$this->currentQuestIndex] = implode('=', $CQUEST);
+            $this->m_body = implode('\_1', $mBodyArray);
+            if (!$this->save()) {
+                $transaction->rollBack();
+                return false;
+            }
+            $transaction->commit();
+            return true;
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            $this->addError('c_id', $e->getMessage());
+            return false;
+        }
     }
 }

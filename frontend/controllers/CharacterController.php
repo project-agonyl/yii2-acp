@@ -10,10 +10,13 @@ namespace frontend\controllers;
 
 use common\models\ActivityLog;
 use common\models\Charac0;
+use common\models\CharacterSpree;
 use common\models\Charloginlog;
+use common\models\DailyQuest;
 use Yii;
 use common\components\Controller;
 use yii\bootstrap\Html;
+use yii\db\Query;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\MethodNotAllowedHttpException;
@@ -51,6 +54,9 @@ class CharacterController extends Controller
             if ($type == 1 && $characterModel->c_sheaderc < 160) {
                 return Json::encode(['status' => 'nok', 'msg' => 'Character has to be 160 level to take quest']);
             }
+            if ($type == 2 && !$characterModel->canTakeDailyQuest) {
+                return Json::encode(['status' => 'nok', 'msg' => 'Daily quest can only be taken once per day per character']);
+            }
             switch ((int)$type) {
                 case 2:
                     $questId = 1;
@@ -73,12 +79,19 @@ class CharacterController extends Controller
                     break;
             }
             $mBodyArray = explode('\_1', $characterModel->m_body);
-            $CQUEST = explode("=", $mBodyArray[8]);
+            $CQUEST = explode("=", $mBodyArray[$characterModel->currentQuestIndex]);
             $CQUEST[1] = "$questId;0;0;0;0;0;0;0;1";
-            $mBodyArray[8] = implode('=', $CQUEST);
+            $mBodyArray[$characterModel->currentQuestIndex] = implode('=', $CQUEST);
             $characterModel->m_body = implode('\_1', $mBodyArray);
             if (!$characterModel->save()) {
                 return Json::encode(['status' => 'nok', 'msg' => Html::errorSummary($characterModel)]);
+            }
+            if ($type == 2) {
+                $dq = new DailyQuest([
+                    'character' => $characterModel->c_id,
+                    'taken_at' => date('Y-m-d', time())
+                ]);
+                $dq->save();
             }
             ActivityLog::addEntry(
                 ActivityLog::EVENT_TAKE_QUEST,
@@ -89,6 +102,23 @@ class CharacterController extends Controller
                 ]
             );
             return Json::encode(['status' => 'ok', 'msg' => 'Quest was successfully assigned to your character.']);
+        }
+        throw new MethodNotAllowedHttpException();
+    }
+
+    public function actionSubmitQuest($id)
+    {
+        $characterModel = $this->loadCharacterModel($id);
+        if (Yii::$app->request->isPost) {
+            $type = Yii::$app->request->post('type', 2);
+            if ($type == 2) {
+                if (!$characterModel->saveDailyQuestSubmission()) {
+                    return Json::encode(['status' => 'nok', 'msg' => Html::errorSummary($characterModel)]);
+                }
+                return Json::encode(['status' => 'ok', 'msg' => 'Quest was submitted successfully.']);
+            } else {
+                return Json::encode(['status' => 'nok', 'msg' => 'Invalid quest type.']);
+            }
         }
         throw new MethodNotAllowedHttpException();
     }

@@ -70,7 +70,21 @@ class CharacterSearch extends Charac0
             ],
             'name' => [
                 'attribute' => 'c_id',
-                'label' => 'Name'
+                'label' => 'Name',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::a(
+                        $model->c_id,
+                        '#',
+                        [
+                            'class' => 'char-view',
+                            'data-pjax' => 0,
+                            'data-toggle' => "tooltip",
+                            'title' => 'View Inventory and Wear',
+                            'data-url' => Url::to(['/character/view', 'id' => $model->c_id]),
+                        ]
+                    );
+                }
             ],
             'type' => [
                 'attribute' => 'c_sheaderb',
@@ -95,7 +109,7 @@ class CharacterSearch extends Charac0
             'actions' => [
                 'header' => 'Actions',
                 'class' => '\kartik\grid\ActionColumn',
-                'template' => '{view} {offline-tp} {gift} {rb} {lquest}',
+                'template' => '{offline-tp} {gift} {rb} {lquest} {sdquest}',
                 'buttons' => [
                     'offline-tp' => function ($url, $model) {
                         return Html::a(
@@ -110,15 +124,15 @@ class CharacterSearch extends Charac0
                             ]
                         );
                     },
-                    'view' => function ($url, $model) {
+                    'sdquest' => function ($url, $model) {
                         return Html::a(
-                            Icon::show('eye'),
+                            Icon::show('bolt'),
                             '#',
                             [
-                                'class' => 'char-view inherit-color btn btn-info',
-                                'data-url' => Url::to(['/character/view', 'id' => $model->c_id]),
+                                'class' => 'char-submit-daily-quest inherit-color btn btn-info',
+                                'data-url' => Url::to(['/character/submit-quest', 'id' => $model->c_id]),
                                 'data-toggle' => "tooltip",
-                                'title' => 'View Inventory and Wear',
+                                'title' => 'Submit Daily Quest',
                                 'data-pjax' => 0
                             ]
                         );
@@ -159,7 +173,7 @@ class CharacterSearch extends Charac0
                                 'data-url' => Url::to(['/character/take-quest', 'id' => $model->c_id]),
                                 'data-quest-type' => 1,
                                 'data-toggle' => "tooltip",
-                                'title' => 'Take Letter Quest',
+                                'title' => 'Take Quest',
                                 'data-pjax' => 0
                             ]
                         );

@@ -134,22 +134,51 @@ $('#char-grid-pjax').on('click', '.char-rb', function (e) {
 $('#char-grid-pjax').on('click', '.char-take-quest', function (e) {
     e.preventDefault();
     var url = $(this).data('url');
-    var type = $(this).data('quest-type');
+    var content = '<center><div class="row"><div class="col-sm-3"><label class="control-label">Quest Type: ' +
+        '</label></div><div class="col-sm-5"><select id="quest-type" class="col-sm-4 form-control">';
+    content += '<option value="1">Letter Quest</option>';
+    content += '<option value="2">Daily Quest</option>';
+    content += '</select></div></div></center>';
     bootbox.confirm({
-        message: "This will replace current QUEST. Are you sure?",
+        message: content,
         buttons: {
             confirm: {
-                label: 'Yes',
+                label: 'Take Quest',
                 className: 'btn-success'
             },
             cancel: {
-                label: 'No',
+                label: 'Cancel',
                 className: 'btn-danger'
             }
         },
         callback: function (result) {
             if (result) {
-                doJsonPostRequest(url, {type: type}, function (data) {
+                doJsonPostRequest(url, {type: $('#quest-type').val()}, function (data) {
+                    bootbox.alert(data.msg);
+                });
+            }
+        }
+    });
+});
+
+$('#char-grid-pjax').on('click', '.char-submit-daily-quest', function (e) {
+    e.preventDefault();
+    var url = $(this).data('url');
+    bootbox.confirm({
+        message: 'This will submit the daily quest and clear your quest status. Are you sure?',
+        buttons: {
+            confirm: {
+                label: 'Submit Quest',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'Cancel',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                doJsonPostRequest(url, {type: 2}, function (data) {
                     bootbox.alert(data.msg);
                 });
             }

@@ -27,12 +27,16 @@ use yii\behaviors\TimestampBehavior;
  * @property string $use_before
  * @property string $use_after
  * @property string $meta
+ * @property integer $minimum_coins
+ * @property integer $minimum_cash
+ * @property integer $minimum_credit
  * @property string $created_at
  * @property string $updated_at
  *
  * @property \common\models\EshopItem $eshopItem
  * @property \common\models\Item $item
  * @property \common\models\EshopOrderAppliedCoupon[] $eshopOrderAppliedCoupons
+ * @property \common\models\Gift[] $gifts
  * @property string $aliasModel
  */
 abstract class EshopCoupon extends \yii\db\ActiveRecord
@@ -67,7 +71,7 @@ abstract class EshopCoupon extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_deleted', 'category', 'eshop_item_id', 'item_id', 'is_used', 'allow_multiple_use', 'allow_use_with_other_coupons', 'use_count', 'discount', 'minimum_amount'], 'integer'],
+            [['is_deleted', 'category', 'eshop_item_id', 'item_id', 'is_used', 'allow_multiple_use', 'allow_use_with_other_coupons', 'use_count', 'discount', 'minimum_amount', 'minimum_coins', 'minimum_cash', 'minimum_credit'], 'integer'],
             [['code'], 'required'],
             [['code', 'account', 'character', 'meta'], 'string'],
             [['use_before', 'use_after'], 'safe'],
@@ -102,6 +106,9 @@ abstract class EshopCoupon extends \yii\db\ActiveRecord
             'meta' => 'Meta',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'minimum_coins' => 'Minimum Coins',
+            'minimum_cash' => 'Minimum Cash',
+            'minimum_credit' => 'Minimum Credit',
         ];
     }
 
@@ -127,6 +134,14 @@ abstract class EshopCoupon extends \yii\db\ActiveRecord
     public function getEshopOrderAppliedCoupons()
     {
         return $this->hasMany(\common\models\EshopOrderAppliedCoupon::className(), ['eshop_coupon_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getGifts()
+    {
+        return $this->hasMany(\common\models\Gift::className(), ['eshop_coupon_id' => 'id']);
     }
 
 

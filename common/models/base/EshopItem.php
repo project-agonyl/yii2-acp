@@ -29,6 +29,7 @@ use yii\behaviors\TimestampBehavior;
  * @property \common\models\Bundle $bundle
  * @property \common\models\Item $item
  * @property \common\models\EshopOrderItem[] $eshopOrderItems
+ * @property \common\models\Gift[] $gifts
  * @property string $aliasModel
  */
 abstract class EshopItem extends \yii\db\ActiveRecord
@@ -125,6 +126,14 @@ abstract class EshopItem extends \yii\db\ActiveRecord
     public function getEshopOrderItems()
     {
         return $this->hasMany(\common\models\EshopOrderItem::className(), ['eshop_item_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getGifts()
+    {
+        return $this->hasMany(\common\models\Gift::className(), ['eshop_item_id' => 'id']);
     }
 
 
