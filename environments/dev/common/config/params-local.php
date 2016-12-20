@@ -149,5 +149,6 @@ return [
                 ]
             ]
         ]
-    ]
+    ],
+    'maintenance' => false
 ];
