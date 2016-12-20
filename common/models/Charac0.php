@@ -440,6 +440,11 @@ class Charac0 extends BaseCharac0
         return $this->getMbodyIndex('SKILL');
     }
 
+    public function getCurrentShueIndex()
+    {
+        return $this->getMbodyIndex('PETACT');
+    }
+
     public function getCanTakeDailyQuest()
     {
         $dailyQuest = DailyQuest::find()

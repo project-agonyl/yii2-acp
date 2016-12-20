@@ -58,7 +58,7 @@ $('#char-grid-pjax').on('click', '.char-gift', function (e) {
     e.preventDefault();
     var url = $(this).data('url');
     bootbox.confirm({
-        message: "This will replace current SHUE. Are you sure?",
+        message: "This will replace current SHUE, SKILLS and WEAR. Are you sure?",
         buttons: {
             confirm: {
                 label: 'Yes',

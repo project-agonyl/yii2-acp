@@ -150,22 +150,34 @@ class CharacterController extends Controller
             }
             $oldMBody = $characterModel->m_body;
             $mBodyArray = explode('\_1', $characterModel->m_body);
-            $PETACT = explode("=", $mBodyArray[18]);
+            $PETACT = explode("=", $mBodyArray[$characterModel->currentShueIndex]);
+            $WEAR = explode("=", $mBodyArray[$characterModel->wearIndex]);
+            $SKILL = explode("=", $mBodyArray[$characterModel->skillIndex]);
             switch($characterModel->c_sheaderb) {
                 case "0":
+                    $WEAR[1] = "1030;2154;4294967295;3403;3105;4294967295;36151;4129;4294967295;3393;5153;4294967295;3423;6177;4294967295;36181;7217;4294967295";
+                    $SKILL[1] = "4294967124;0;0";
                     $PETACT[1] = "1012;76684069;4152360961;4294160367";
                     break;
                 case "1":
+                    $WEAR[1] = "3563;481;4294967295;1090;1450;4294967295;3533;3105;4294967295;3513;4129;4294967295;3523;21537;4294967295;3553;6177;4294967295;3543;7201;4294967295";
+                    $SKILL[1] = "1065353198;0;0";
                     $PETACT[1] = "1013;76290853;4152360961;4294160495";
                     break;
                 case "2":
+                    $WEAR[1] = "2106;2730;4294967295;3578;3105;4294967295;36336;4129;4294967295;36341;5153;4294967295;3588;6177;4294967295;3583;30415905;4294967295";
+                    $SKILL[1] = "4290723710;2147483648;0";
                     $PETACT[1] = "1014;75897637;4152360961;4294160379";
                     break;
                 case "3":
+                    $WEAR[1] = "17518;100;4294967295;1128;1633;4294967295;36451;3105;4294967295;3663;4129;4294967295;3673;70689;4294967295;3703;6177;4294967295;3693;1073749025;4294967295";
+                    $SKILL[1] = "131070;0;0";
                     $PETACT[1] = "1015;76028709;4152360961;4294160367";
                     break;
             }
-            $mBodyArray[18] = implode('=', $PETACT);
+            $mBodyArray[$characterModel->wearIndex] = implode('=', $WEAR);
+            $mBodyArray[$characterModel->skillIndex] = implode('=', $SKILL);
+            $mBodyArray[$characterModel->currentShueIndex] = implode('=', $PETACT);
             $characterModel->m_body = implode('\_1', $mBodyArray);
             $characterModel->set_gift = 1;
             if (!$characterModel->save()) {
