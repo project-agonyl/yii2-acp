@@ -62,5 +62,28 @@ $this->title = $model->c_id.' Details';
             </tbody>
         </table>
     </div>
+    <div class="col-sm-6">
+        <table class="table table-striped table-bordered detail-view">
+            <legend>Characters</legend>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Level</th>
+                <th>Rebirth</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($model->characters as $character): ?>
+                <tr>
+                    <td><?= Html::a($character->c_id, Url::to(['character/view', 'id' => $character->c_id], ['target' => '_blank'])); ?></td>
+                    <td><?= $character->typeString; ?></td>
+                    <td><?= $character->c_sheaderc; ?></td>
+                    <td><?= $character->rb; ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 <?= Html::a('Back', Url::previous(), ['class' => 'btn btn-info']);?>

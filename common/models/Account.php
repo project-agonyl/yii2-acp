@@ -258,4 +258,14 @@ class Account extends BaseAccount implements IdentityInterface
         }
         return $deliverableCharacters;
     }
+
+    public function getCharacters()
+    {
+        return Charac0::find()
+            ->where([
+                'c_sheadera' => $this->c_id,
+                'c_status' => Charac0::STATUS_ACTIVE
+            ])
+            ->all();
+    }
 }
