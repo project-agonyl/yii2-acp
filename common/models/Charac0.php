@@ -215,6 +215,21 @@ class Charac0 extends BaseCharac0
                 $toReturn['Lore ' . $lore] = 'No';
             }
         }
+        $dailyQuestCount = ArrayHelper::getValue($requirements, 'daily_quest_count');
+        if ($dailyQuestCount != null) {
+            $characterDailyQuestCount = DailyQuest::find()
+                ->where([
+                    'is_deleted' => false,
+                    'character' => $this->c_id
+                ])
+                ->andWhere('submitted_at IS NOT NULL')
+                ->count();
+            if ($characterDailyQuestCount < $dailyQuestCount) {
+                $toReturn[$dailyQuestCount . ' daily quest(s)'] = 'No';
+            } else {
+                $toReturn[$dailyQuestCount . ' daily quest(s)'] = 'Yes';
+            }
+        }
         $items = ArrayHelper::getValue($requirements, 'items');
         if (is_array($items)) {
             $inventoryString = ArrayHelper::getValue(explode('\_1', $this->m_body), $this->getInventoryIndex());
