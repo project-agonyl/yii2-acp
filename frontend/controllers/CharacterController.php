@@ -51,9 +51,6 @@ class CharacterController extends Controller
         $characterModel = $this->loadCharacterModel($id);
         if (Yii::$app->request->isPost) {
             $type = Yii::$app->request->post('type', 1);
-            if ($type == 2) {
-                return Json::encode(['status' => 'nok', 'msg' => 'Daily quest not implemented yet']);
-            }
             if ($type == 1 && $characterModel->c_sheaderc < 160) {
                 return Json::encode(['status' => 'nok', 'msg' => 'Character has to be 160 level to take quest']);
             }

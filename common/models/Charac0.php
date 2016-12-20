@@ -471,6 +471,7 @@ class Charac0 extends BaseCharac0
 
     public function saveDailyQuestSubmission()
     {
+        $oldMBody = $this->m_body;
         $mBodyArray = explode('\_1', $this->m_body);
         $CQUEST = explode("=", $mBodyArray[$this->lastQuestIndex]);
         if (count($CQUEST) < 2) {
@@ -551,6 +552,15 @@ class Charac0 extends BaseCharac0
                 return false;
             }
             $transaction->commit();
+            ActivityLog::addEntry(
+                ActivityLog::EVENT_SUBMIT_DAILY_QUEST,
+                Yii::$app->user->id,
+                [
+                    'character' => $this->c_id,
+                    'old_mbody' => $oldMBody,
+                    'new_mbody' => $this->m_body
+                ]
+            );
             return true;
         } catch (\Exception $e) {
             $transaction->rollBack();

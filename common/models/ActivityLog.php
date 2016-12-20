@@ -35,6 +35,7 @@ class ActivityLog extends BaseActivityLog
     const EVENT_OLD_ACCOUNT_COIN_TRANSFER = 17;
     const EVENT_ESHOP_DELIVERY = 18;
     const EVENT_TAKE_QUEST = 19;
+    const EVENT_SUBMIT_DAILY_QUEST = 20;
     const EVENT_UNKNOWN = 999;
 
     public function behaviors()
