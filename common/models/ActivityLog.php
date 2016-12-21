@@ -36,6 +36,7 @@ class ActivityLog extends BaseActivityLog
     const EVENT_ESHOP_DELIVERY = 18;
     const EVENT_TAKE_QUEST = 19;
     const EVENT_SUBMIT_DAILY_QUEST = 20;
+    const EVENT_TAKE_DAILY_QUEST = 21;
     const EVENT_UNKNOWN = 999;
 
     public function behaviors()
@@ -78,13 +79,15 @@ class ActivityLog extends BaseActivityLog
             self::EVENT_ACCOUNT_INFO_UPDATED => 'Account info updated',
             self::EVENT_OFFLINE_TELEPORT => 'Offline teleport',
             self::EVENT_TAKE_BEGINNERS_GIFT => 'Beginner\'s gift',
-            self::EVENT_TAKE_REBIRTH => 'Take Rebirth',
-            self::EVENT_OLD_ACCOUNT_TRANSFER_REQUEST => 'Old account transfer request',
+            self::EVENT_TAKE_REBIRTH => 'Took Rebirth',
+            self::EVENT_OLD_ACCOUNT_TRANSFER_REQUEST => 'Old account transfer requested',
             self::EVENT_OLD_ACCOUNT_TRANSFER_REQUEST_VERIFIED => 'Old account transfer request verified',
-            self::EVENT_TRANSFER_COIN => 'Wallet coin transfer',
-            self::EVENT_OLD_ACCOUNT_COIN_TRANSFER => 'Old account coin transfer',
-            self::EVENT_ESHOP_DELIVERY => 'E-shop delivery',
+            self::EVENT_TRANSFER_COIN => 'Wallet coin transferred',
+            self::EVENT_OLD_ACCOUNT_COIN_TRANSFER => 'Old account coin transferred',
+            self::EVENT_ESHOP_DELIVERY => 'E-shop delivered',
             self::EVENT_TAKE_QUEST => 'Quest taken from ACP',
+            self::EVENT_SUBMIT_DAILY_QUEST => 'Daily quest submitted',
+            self::EVENT_TAKE_DAILY_QUEST => 'Daily quest taken',
             self::EVENT_UNKNOWN => 'Unknown event'
         ];
     }

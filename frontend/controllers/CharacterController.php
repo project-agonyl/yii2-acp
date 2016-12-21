@@ -93,8 +93,13 @@ class CharacterController extends Controller
                 ]);
                 $dq->save();
             }
+            if ($type == 1) {
+                $logType = ActivityLog::EVENT_TAKE_QUEST;
+            } else {
+                $logType = ActivityLog::EVENT_TAKE_DAILY_QUEST;
+            }
             ActivityLog::addEntry(
-                ActivityLog::EVENT_TAKE_QUEST,
+                $logType,
                 Yii::$app->user->id,
                 [
                     'character' => $characterModel->c_id,
