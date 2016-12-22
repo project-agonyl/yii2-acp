@@ -52,5 +52,13 @@ $this->title = $model->c_id.' Details';
             </tbody>
         </table>
     </div>
+    <div class="col-sm-6">
+        <legend>Daily Quest Log</legend>
+        <div class="panel-group">
+        <?php foreach ($model->characters as $character): ?>
+            <?= $this->render(['_dailyQuestItem', ['model' => $character]]); ?>
+        <?php endforeach; ?>
+        </div>
+    </div>
 </div>
 <?= Html::a('Back', Url::to(['/']), ['class' => 'btn btn-info']);?>

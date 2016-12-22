@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use \common\models\base\Charac0 as BaseCharac0;
 use yii\behaviors\TimestampBehavior;
+use yii\data\ActiveDataProvider;
 use yii\db\Expression;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
@@ -598,5 +599,24 @@ class Charac0 extends BaseCharac0
             ])
             ->andWhere('submitted_at IS NULL')
             ->count() != 0;
+    }
+
+    public function getDailyQuestDataProvider($pageSize = 10)
+    {
+        $query = DailyQuest::find()
+            ->where([
+                'is_deleted' => false,
+                'character' => $this->c_id
+            ])
+            ->orderBy(['taken_at' => SORT_DESC]);
+        return new ActiveDataProvider([
+            'query' => $query,
+            'key' => 'id',
+            'pagination' => [
+                'pageSize' => $pageSize,
+                'validatePage' => false
+            ],
+            'sort' => false
+        ]);
     }
 }
