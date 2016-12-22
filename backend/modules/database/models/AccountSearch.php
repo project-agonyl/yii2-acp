@@ -54,7 +54,11 @@ class AccountSearch extends Account
             ],
             'sort' => $this->sortObject()
         ]);
-        $this->load($params, '');
+        $this->load($params);
+        $query->andFilterWhere(['and',
+            ['LIKE', 'lower(c_id)', strtolower($this->c_id)],
+            ['LIKE', 'lower(c_headerb)', strtolower($this->c_headerb)]
+        ]);
         return $dataProvider;
     }
 

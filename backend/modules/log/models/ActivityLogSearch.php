@@ -25,7 +25,7 @@ class ActivityLogSearch extends ActivityLog
     public function rules()
     {
         return [
-            [['event', 'description', 'data']
+            [['event', 'description', 'account']
                 , 'filter', 'filter' => '\yii\helpers\HtmlPurifier::process']
         ];
     }
@@ -36,7 +36,7 @@ class ActivityLogSearch extends ActivityLog
     public function scenarios()
     {
         return [
-            'search' => ['event', 'description', 'data']
+            'search' => ['event', 'description', 'account']
         ];
     }
 
@@ -60,7 +60,12 @@ class ActivityLogSearch extends ActivityLog
             ],
             'sort' => $this->sortObject()
         ]);
-        $this->load($params, '');
+        $this->load($params);
+        $query->andFilterWhere(['and',
+            ['LIKE', 'lower(account)', strtolower($this->account)],
+            ['LIKE', 'lower(event)', strtolower($this->event)],
+            ['LIKE', 'lower(description)', strtolower($this->description)]
+        ]);
         return $dataProvider;
     }
 

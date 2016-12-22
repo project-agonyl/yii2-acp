@@ -11,7 +11,7 @@ class TransferController extends Controller
     public function actionIndex()
     {
         Url::remember();
-        $searchModel = new TransferSearch();
+        $searchModel = new TransferSearch(['scenario' => 'search']);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', ['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
     }

@@ -56,7 +56,14 @@ class CharacterSearch extends Charac0
             ],
             'sort' => $this->sortObject()
         ]);
-        $this->load($params, '');
+        $this->load($params);
+        $query->andFilterWhere(['and',
+            ['LIKE', 'lower(c_id)', strtolower($this->c_id)],
+            ['LIKE', 'lower(c_sheadera)', strtolower($this->c_sheadera)],
+            ['LIKE', 'lower(c_sheaderb)', strtolower($this->c_sheaderb)],
+            ['LIKE', 'lower(c_sheaderc)', strtolower($this->c_sheaderc)],
+            ['LIKE', 'lower(rb)', strtolower($this->rb)]
+        ]);
         return $dataProvider;
     }
 

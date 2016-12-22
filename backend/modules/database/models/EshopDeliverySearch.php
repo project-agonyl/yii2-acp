@@ -17,7 +17,7 @@ use yii\data\ActiveDataProvider;
 use yii\db\Expression;
 use yii\helpers\Url;
 
-class EshopDeliverySearch extends Charac0
+class EshopDeliverySearch extends EshopOrder
 {
     public $pageSize = 10;
 
@@ -27,7 +27,7 @@ class EshopDeliverySearch extends Charac0
     public function rules()
     {
         return [
-            [['account', 'delivered_to', 'value']
+            [['account', 'delivered_to', 'current_value']
                 , 'filter', 'filter' => '\yii\helpers\HtmlPurifier::process']
         ];
     }
@@ -38,7 +38,7 @@ class EshopDeliverySearch extends Charac0
     public function scenarios()
     {
         return [
-            'search' => ['account', 'delivered_to', 'value']
+            'search' => ['account', 'delivered_to', 'current_value']
         ];
     }
 
@@ -57,7 +57,12 @@ class EshopDeliverySearch extends Charac0
             ],
             'sort' => $this->sortObject()
         ]);
-        $this->load($params, '');
+        $this->load($params);
+        $query->andFilterWhere(['and',
+            ['LIKE', 'lower(account)', strtolower($this->account)],
+            ['LIKE', 'lower(delivered_to)', strtolower($this->delivered_to)],
+            ['LIKE', 'lower(current_value)', strtolower($this->current_value)]
+        ]);
         return $dataProvider;
     }
 

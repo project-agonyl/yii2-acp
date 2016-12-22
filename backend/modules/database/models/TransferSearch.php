@@ -14,7 +14,7 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
 
-class TransferSearch extends Charac0
+class TransferSearch extends ConnectOldAccount
 {
     public $pageSize = 10;
 
@@ -35,7 +35,7 @@ class TransferSearch extends Charac0
     public function scenarios()
     {
         return [
-            'search' => ['c_id', 'c_sheadera', 'c_sheaderb', 'c_sheaderc', 'c_status', 'rb']
+            'search' => ['current_account', 'old_account', 'coin_given', 'status']
         ];
     }
 
@@ -52,7 +52,13 @@ class TransferSearch extends Charac0
             ],
             'sort' => $this->sortObject()
         ]);
-        $this->load($params, '');
+        $this->load($params);
+        $query->andFilterWhere(['and',
+            ['LIKE', 'lower(current_account)', strtolower($this->current_account)],
+            ['LIKE', 'lower(old_account)', strtolower($this->old_account)],
+            ['LIKE', 'lower(coin_given)', strtolower($this->coin_given)],
+            ['LIKE', 'lower(status)', strtolower($this->status)]
+        ]);
         return $dataProvider;
     }
 

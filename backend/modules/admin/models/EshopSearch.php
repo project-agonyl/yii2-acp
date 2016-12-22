@@ -23,7 +23,7 @@ class EshopSearch extends EshopItem
     public function rules()
     {
         return [
-            [['id', 'item_id', 'display_name']
+            [['id', 'item_id', 'display_name', 'cash', 'coin', 'credit']
                 , 'filter', 'filter' => '\yii\helpers\HtmlPurifier::process']
         ];
     }
@@ -34,7 +34,7 @@ class EshopSearch extends EshopItem
     public function scenarios()
     {
         return [
-            'search' => ['id', 'item_id', 'display_name']
+            'search' => ['id', 'item_id', 'display_name', 'cash', 'coin', 'credit']
         ];
     }
 
@@ -51,7 +51,15 @@ class EshopSearch extends EshopItem
             ],
             'sort' => $this->sortObject()
         ]);
-        $this->load($params, '');
+        $this->load($params);
+        $query->andFilterWhere(['and',
+            ['LIKE', 'lower(id)', strtolower($this->id)],
+            ['LIKE', 'lower(item_id)', strtolower($this->item_id)],
+            ['LIKE', 'lower(display_name)', strtolower($this->display_name)],
+            ['LIKE', 'lower(cash)', strtolower($this->cash)],
+            ['LIKE', 'lower(coin)', strtolower($this->coin)],
+            ['LIKE', 'lower(credit)', strtolower($this->credit)]
+        ]);
         return $dataProvider;
     }
 

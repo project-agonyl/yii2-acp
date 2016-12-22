@@ -13,7 +13,7 @@ class CharacterController extends Controller
     public function actionIndex()
     {
         Url::remember();
-        $searchModel = new CharacterSearch();
+        $searchModel = new CharacterSearch(['scenario' => 'search']);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', ['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
     }

@@ -51,7 +51,11 @@ class BundleSearch extends Bundle
             ],
             'sort' => $this->sortObject()
         ]);
-        $this->load($params, '');
+        $this->load($params);
+        $query->andFilterWhere(['and',
+            ['LIKE', 'lower(id)', strtolower($this->id)],
+            ['LIKE', 'lower(name)', strtolower($this->name)]
+        ]);
         return $dataProvider;
     }
 

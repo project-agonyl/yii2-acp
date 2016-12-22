@@ -17,7 +17,8 @@ class ActivityController extends Controller
     public function actionIndex($admin = '0')
     {
         $searchModel = new ActivityLogSearch([
-            'isAdmin' => (bool)$admin
+            'isAdmin' => (bool)$admin,
+            'scenario' => 'search'
         ]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', ['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);

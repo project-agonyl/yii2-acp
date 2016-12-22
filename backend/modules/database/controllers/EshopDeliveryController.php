@@ -15,7 +15,7 @@ class EshopDeliveryController extends Controller
     public function actionIndex()
     {
         Url::remember();
-        $searchModel = new EshopDeliverySearch();
+        $searchModel = new EshopDeliverySearch(['scenario' => 'search']);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', ['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
     }

@@ -24,7 +24,7 @@ class NotificationLogSearch extends NotificationLog
     public function rules()
     {
         return [
-            [['id', 'subject'], 'filter', 'filter' => '\yii\helpers\HtmlPurifier::process']
+            [['id', 'subject', 'to_address', 'type'], 'filter', 'filter' => '\yii\helpers\HtmlPurifier::process']
         ];
     }
 
@@ -34,7 +34,7 @@ class NotificationLogSearch extends NotificationLog
     public function scenarios()
     {
         return [
-            'search' => ['id', 'subject']
+            'search' => ['id', 'subject', 'to_address', 'type']
         ];
     }
 
@@ -51,7 +51,13 @@ class NotificationLogSearch extends NotificationLog
             ],
             'sort' => $this->sortObject()
         ]);
-        $this->load($params, '');
+        $this->load($params);
+        $query->andFilterWhere(['and',
+            ['LIKE', 'lower(id)', strtolower($this->id)],
+            ['LIKE', 'lower(subject)', strtolower($this->subject)],
+            ['LIKE', 'lower(to_address)', strtolower($this->to_address)],
+            ['LIKE', 'lower(type)', strtolower($this->type)]
+        ]);
         return $dataProvider;
     }
 
