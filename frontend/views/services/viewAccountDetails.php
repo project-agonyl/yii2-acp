@@ -56,7 +56,7 @@ $this->title = $model->c_id.' Details';
         <legend>Daily Quest Log</legend>
         <div class="panel-group">
         <?php foreach ($model->characters as $character): ?>
-            <?= $this->render(['_dailyQuestItem', ['model' => $character]]); ?>
+            <?= $this->render('_dailyQuestItem', ['model' => $character]); ?>
         <?php endforeach; ?>
         </div>
     </div>
