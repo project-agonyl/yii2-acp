@@ -46,6 +46,10 @@ class LoginForm extends Model
                 $this->addError('username', 'Please activate your account');
                 return false;
             }
+            if ($account->c_status != Account::STATUS_ACTIVE) {
+                $this->addError('username', 'Account has been suspended/banned. Please contact admin');
+                return false;
+            }
             switch (Yii::$app->id) {
                 case 'a3-admin':
                     $event = ActivityLog::EVENT_ADMIN_PANEL_LOGIN;
