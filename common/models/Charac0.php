@@ -588,4 +588,15 @@ class Charac0 extends BaseCharac0
             return false;
         }
     }
+
+    public function getHasNonSubmittedDailyQuest()
+    {
+        return DailyQuest::find()
+            ->where([
+                'is_deleted' => false,
+                'character' => $this->c_id
+            ])
+            ->andWhere('submitted_at IS NULL')
+            ->count() != 0;
+    }
 }

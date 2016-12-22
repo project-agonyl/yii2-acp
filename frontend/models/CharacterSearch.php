@@ -171,6 +171,7 @@ class CharacterSearch extends Charac0
                             [
                                 'class' => 'char-take-quest inherit-color btn btn-default',
                                 'data-url' => Url::to(['/character/take-quest', 'id' => $model->c_id]),
+                                'data-warn-url' => Url::to(['/character/quest-warning', 'id' => $model->c_id]),
                                 'data-quest-type' => 1,
                                 'data-toggle' => "tooltip",
                                 'title' => 'Take Quest',

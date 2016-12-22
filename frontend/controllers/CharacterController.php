@@ -46,6 +46,25 @@ class CharacterController extends Controller
         throw new MethodNotAllowedHttpException();
     }
 
+    public function actionQuestWarning($id, $type)
+    {
+        $characterModel = $this->loadCharacterModel($id);
+        if ($type == 2) {
+            if ($characterModel->c_sheaderc < 100) {
+                return Json::encode(['status' => 'ok', 'msg' => 'Character level is below 100 hence may not be able to complete quest. Are you sure?']);
+            }
+        }
+        if ($type == 1) {
+            if (!$characterModel->canTakeDailyQuest && $characterModel->hasNonSubmittedDailyQuest) {
+                return Json::encode(['status' => 'ok', 'msg' => 'Character might have pending/non-submitted daily quest. Are you sure?']);
+            }
+            if ($characterModel->hasNonSubmittedDailyQuest) {
+                return Json::encode(['status' => 'ok', 'msg' => 'Character might have previously non-submitted daily quest. Are you sure?']);
+            }
+        }
+        return Json::encode(['status' => 'ok', 'msg' => 'This will replace any current QUEST you have. Are you sure?']);
+    }
+
     public function actionTakeQuest($id)
     {
         $characterModel = $this->loadCharacterModel($id);

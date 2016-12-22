@@ -134,11 +134,12 @@ $('#char-grid-pjax').on('click', '.char-rb', function (e) {
 $('#char-grid-pjax').on('click', '.char-take-quest', function (e) {
     e.preventDefault();
     var url = $(this).data('url');
+    var warnUrl = $(this).data('warn-url');
     var content = '<center><div class="row"><div class="col-sm-3"><label class="control-label">Quest Type: ' +
         '</label></div><div class="col-sm-5"><select id="quest-type" class="col-sm-4 form-control">';
     content += '<option value="1">Letter Quest</option>';
     content += '<option value="2">Daily Quest</option>';
-    content += '</select></div></div></center>';
+    content += '</select></div></div><br>This will replace your current QUEST</center>';
     bootbox.confirm({
         message: content,
         buttons: {
@@ -153,8 +154,28 @@ $('#char-grid-pjax').on('click', '.char-take-quest', function (e) {
         },
         callback: function (result) {
             if (result) {
-                doJsonPostRequest(url, {type: $('#quest-type').val()}, function (data) {
-                    bootbox.alert(data.msg);
+                var type = $('#quest-type').val();
+                doJsonGetRequest(warnUrl + '&type=' + type, function (data) {
+                    bootbox.confirm({
+                        message: data.msg,
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                doJsonPostRequest(url, {type: type}, function (data) {
+                                    bootbox.alert(data.msg);
+                                });
+                            }
+                        }
+                    });
                 });
             }
         }
