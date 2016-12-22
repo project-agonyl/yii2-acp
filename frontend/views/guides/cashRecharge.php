@@ -44,15 +44,15 @@
         <legend>Payment Options</legend>
         <div class="row">
             <div class="col-sm-12">
-                Indian players can send money using PayTM to mobile number +918951420048 or using their Paypal account by visiting this
-                <a href="https://www.paypal.me/cyberinferno">link</a>
+                <h3>Indian players can send money using PayTM to mobile number +918951420048 or using their Paypal account by visiting this
+                <a href="https://www.paypal.me/cyberinferno">link</a></h3>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                International players can send money using their Paypal account by visiting this <a href="https://www.paypal.me/cyberinferno">link</a>
-                <br>
-                <b>PS: If money is sent in any other currency than INR, 10% extra processing fee has to included!</b>
+                <h3>International players can send money using their Paypal account by visiting this <a href="https://www.paypal.me/cyberinferno">link</a>
+                <br><br>
+                <b>PS: If money is sent in any other currency than INR, 10% extra processing fee has to included!</b></h3>
             </div>
         </div>
     </div>
