@@ -22,4 +22,14 @@ class GuidesController extends Controller
     {
         return $this->render('rebirth');
     }
+
+    public function actionRebirthCrafting()
+    {
+        return $this->render('rebirthCrafting');
+    }
+
+    public function actionCashRecharge()
+    {
+        return $this->render('cashRecharge');
+    }
 }
