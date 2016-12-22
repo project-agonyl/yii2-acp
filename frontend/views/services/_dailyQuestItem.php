@@ -19,7 +19,6 @@ use kartik\grid\GridView;
             <div class="col-sm-12">
                 <?= GridView::widget([
                     'id' => 'daily-quest-grid-'.md5($model->c_id),
-                    'showPageSummary' => true,
                     'dataProvider' => $model->dailyQuestDataProvider,
                     'columns' => [
                         'serial' => [
