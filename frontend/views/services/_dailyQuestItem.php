@@ -7,18 +7,18 @@ use kartik\grid\GridView;
 
 ?>
 <div class="panel panel-info">
-    <div class="panel-heading" role="tab" id="heading<?= $model->c_id; ?>">
+    <div class="panel-heading" role="tab" id="heading<?= md5($model->c_id); ?>">
         <h4 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?= $model->c_id; ?>" aria-controls="collapse<?= $model->c_id; ?>" data-pjax="0">
-                <?= $model->c_id; ?>
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?= md5($model->c_id); ?>" aria-controls="collapse<?= md5($model->c_id); ?>" data-pjax="0">
+                <?= md5($model->c_id); ?>
             </a>
         </h4>
     </div>
-    <div id="collapse<?= $model->c_id; ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?= $model->c_id; ?>">
+    <div id="collapse<?= md5($model->c_id); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?= md5($model->c_id); ?>">
         <div class="panel-body">
             <div class="col-sm-12">
                 <?= GridView::widget([
-                    'id' => 'daily-quest-grid-'.$model->c_id,
+                    'id' => 'daily-quest-grid-'.md5($model->c_id),
                     'showPageSummary' => true,
                     'dataProvider' => $model->dailyQuestDataProvider,
                     'columns' => [
