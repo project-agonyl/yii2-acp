@@ -10,7 +10,7 @@ use kartik\grid\GridView;
     <div class="panel-heading" role="tab" id="heading<?= md5($model->c_id); ?>">
         <h4 class="panel-title">
             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?= md5($model->c_id); ?>" aria-controls="collapse<?= md5($model->c_id); ?>" data-pjax="0">
-                <?= md5($model->c_id); ?>
+                <?= $model->c_id; ?>
             </a>
         </h4>
     </div>
