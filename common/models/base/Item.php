@@ -25,6 +25,7 @@ use yii\behaviors\TimestampBehavior;
  * @property \common\models\EshopCoupon[] $eshopCoupons
  * @property \common\models\EshopItem[] $eshopItems
  * @property \common\models\ItemInfo[] $itemInfos
+ * @property \common\models\MonsterItem[] $monsterItems
  * @property string $aliasModel
  */
 abstract class Item extends \yii\db\ActiveRecord
@@ -115,6 +116,14 @@ abstract class Item extends \yii\db\ActiveRecord
     public function getItemInfos()
     {
         return $this->hasMany(\common\models\ItemInfo::className(), ['item_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMonsterItems()
+    {
+        return $this->hasMany(\common\models\MonsterItem::className(), ['item_id' => 'item_id']);
     }
 
 

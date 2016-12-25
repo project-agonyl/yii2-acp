@@ -23,7 +23,8 @@
         "sinergi/browser-detector": "^6.1",
         "ramsey/uuid": "^3.5",
         "sendgrid/sendgrid": "^5.1",
-        "npm-asset/bootbox": "^4.4"
+        "npm-asset/bootbox": "^4.4",
+        "phpoffice/phpexcel": "^1.8"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
