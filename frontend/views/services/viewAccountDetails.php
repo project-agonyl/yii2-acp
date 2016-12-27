@@ -38,7 +38,7 @@ $this->title = $model->c_id.' Details';
             ],
         ]); ?>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <legend>Update Details</legend>
         <?php $form = ActiveForm::begin([
             'id' => 'update-account-form'
@@ -50,6 +50,7 @@ $this->title = $model->c_id.' Details';
         <?php ActiveForm::end(); ?>
     </div>
 </div>
+<hr>
 <div class="row">
     <div class="col-sm-6">
         <table class="table table-striped table-bordered detail-view">
