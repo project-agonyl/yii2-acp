@@ -10,6 +10,7 @@ namespace frontend\controllers;
 
 use common\helpers\Utils;
 use common\models\Account;
+use common\models\AccountInfo;
 use common\models\ConnectOldAccount;
 use common\models\OldAccount;
 use frontend\models\EshopDeliverySearch;
@@ -61,7 +62,20 @@ class ServicesController extends Controller
     public function actionAccountDetails()
     {
         $model = $this->getAccountModel();
-        return $this->render('viewAccountDetails', ['model' => $model]);
+        $formModel = AccountInfo::find()
+            ->where(['account' => $model->c_id])
+            ->one();
+        if (Yii::$app->request->isPost) {
+            $formModel->scenario = 'update';
+            if ($formModel->load(Yii::$app->request->post()) && $formModel->save()) {
+                Yii::$app->session->setFlash('success', 'Account info was successfully updated');
+                Yii::$app->session->set('theme', $formModel->theme);
+                return $this->redirect(['account-details']);
+            } else {
+                Yii::$app->session->setFlash('error', 'There was some error updating account info. Please try again later!');
+            }
+        }
+        return $this->render('viewAccountDetails', ['model' => $model, 'formModel' => $formModel]);
     }
 
     public function actionUpdatePassword()

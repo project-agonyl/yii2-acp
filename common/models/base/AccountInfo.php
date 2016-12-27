@@ -23,6 +23,7 @@ use Yii;
  * @property double $flamez_coins
  * @property string $forgot_pass_key
  * @property integer $id
+ * @property string $theme
  * @property string $aliasModel
  */
 abstract class AccountInfo extends \yii\db\ActiveRecord

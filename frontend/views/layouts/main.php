@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use common\models\AccountInfo;
 use frontend\assets\AppAsset;
 use frontend\models\EshopItemSearch;
 use kartik\icons\Icon;
@@ -25,6 +26,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <link rel="stylesheet" href="<?= AccountInfo::getThemeCssUrl(Yii::$app->session->get('theme', 'default'));?>">
 </head>
 <body data-controller="<?= \Yii::$app->controller->id ?>"  data-action="<?= \Yii::$app->controller->action->id ;?>"
       data-module="<?= \Yii::$app->controller->module->id ;?>">

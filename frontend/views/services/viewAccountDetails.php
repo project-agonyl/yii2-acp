@@ -2,7 +2,10 @@
 
 /* @var $this yii\web\View
  * @var $model common\models\Charac0
+ * @var $formModel common\models\AccountInfo
  */
+use common\models\AccountInfo;
+use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -11,27 +14,42 @@ use yii\widgets\DetailView;
 $this->title = $model->c_id.' Details';
 ?>
 <h1>Account Details <span class="pull-right"><?= Html::a('Back', Url::previous(), ['class' => 'btn btn-info']);?></span></h1>
-<?= DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-        'name' => [
-            'attribute' => 'c_id',
-            'label' => 'Username'
-        ],
-        'email' => [
-            'attribute' => 'c_headerb',
-            'label' => 'E-mail'
-        ],
-        'wallet_cash' => [
-            'attribute' => 'cash',
-            'label' => 'Flamez Cash'
-        ],
-        'wallet_coins' => [
-            'attribute' => 'coin',
-            'label' => 'Flamez Coins'
-        ]
-    ],
-]); ?>
+<div class="row">
+    <div class="col-sm-6">
+        <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                'name' => [
+                    'attribute' => 'c_id',
+                    'label' => 'Username'
+                ],
+                'email' => [
+                    'attribute' => 'c_headerb',
+                    'label' => 'E-mail'
+                ],
+                'wallet_cash' => [
+                    'attribute' => 'cash',
+                    'label' => 'Flamez Cash'
+                ],
+                'wallet_coins' => [
+                    'attribute' => 'coin',
+                    'label' => 'Flamez Coins'
+                ]
+            ],
+        ]); ?>
+    </div>
+    <div class="col-sm-6">
+        <legend>Update Details</legend>
+        <?php $form = ActiveForm::begin([
+            'id' => 'update-account-form'
+        ]); ?>
+        <?= $form->field($formModel, 'name')->textInput(['autofocus' => true]); ?>
+        <?= $form->field($formModel, 'contact')->textInput()->label('Phone Number'); ?>
+        <?= $form->field($formModel, 'theme')->dropDownList(AccountInfo::getThemes()); ?>
+        <button class="btn btn-success" type="submit">Save</button>
+        <?php ActiveForm::end(); ?>
+    </div>
+</div>
 <div class="row">
     <div class="col-sm-6">
         <table class="table table-striped table-bordered detail-view">

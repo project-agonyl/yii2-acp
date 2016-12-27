@@ -2,6 +2,7 @@
 namespace common\models\virtual;
 
 use common\models\Account;
+use common\models\AccountInfo;
 use common\models\ActivityLog;
 use Yii;
 use yii\base\Model;
@@ -50,6 +51,10 @@ class LoginForm extends Model
                 $this->addError('username', 'Account has been suspended/banned. Please contact admin');
                 return false;
             }
+            $formModel = AccountInfo::find()
+                ->where(['account' => $account->c_id])
+                ->one();
+            Yii::$app->session->set('theme', $formModel->theme);
             switch (Yii::$app->id) {
                 case 'a3-admin':
                     $event = ActivityLog::EVENT_ADMIN_PANEL_LOGIN;
