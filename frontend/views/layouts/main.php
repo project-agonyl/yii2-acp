@@ -58,7 +58,8 @@ AppAsset::register($this);
                 ['label' => Icon::show('money').'Cash Recharge', 'url' => ['/guides/cash-recharge']],
                 ['label' => Icon::show('exchange').'Conversion Chart', 'url' => ['/guides/conversion-chart']],
                 ['label' => Icon::show('forward').'Rebirth', 'url' => ['/guides/rebirth']],
-                ['label' => Icon::show('industry').'Rebirth Crafting', 'url' => ['/guides/rebirth-crafting']]
+                ['label' => Icon::show('industry').'Rebirth Crafting', 'url' => ['/guides/rebirth-crafting']],
+                ['label' => Icon::show('tint').'Item Drop', 'url' => ['/guides/item-drop']]
             ]
         ],
         ['label' => Icon::show('sign-out').'Logout (' . trim(Yii::$app->user->id) . ')', 'url' => ['/account/logout']]

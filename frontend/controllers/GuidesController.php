@@ -8,6 +8,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\MonsterItemSearch;
 use Yii;
 use common\components\Controller;
 
@@ -31,5 +32,12 @@ class GuidesController extends Controller
     public function actionCashRecharge()
     {
         return $this->render('cashRecharge');
+    }
+
+    public function actionItemDrop()
+    {
+        $searchModel = new MonsterItemSearch(['scenario' => 'search']);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('itemDrop', ['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
     }
 }

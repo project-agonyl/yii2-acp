@@ -22,6 +22,7 @@ use yii\helpers\Json;
 class ImportController extends Controller
 {
     public $path;
+    public $clearPrevious = false;
 
     /**
      * @inheritdoc
@@ -30,7 +31,7 @@ class ImportController extends Controller
     {
         switch ($id) {
             default:
-                $options = ['path'];
+                $options = ['path', 'clearPrevious'];
                 break;
         }
         return array_merge(parent::options($id), $options);
@@ -214,6 +215,9 @@ class ImportController extends Controller
         if (!file_exists($this->path)) {
             Console::error('File does not exists or you do not have the permission to access it!');
             return;
+        }
+        if ($this->clearPrevious) {
+            MonsterItem::deleteAll();
         }
         $inputFileType = PHPExcel_IOFactory::identify($this->path);
         $objReader = PHPExcel_IOFactory::createReader($inputFileType);
