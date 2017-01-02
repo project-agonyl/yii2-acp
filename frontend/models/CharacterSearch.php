@@ -102,7 +102,7 @@ class CharacterSearch extends Charac0
             'actions' => [
                 'header' => 'Actions',
                 'class' => '\kartik\grid\ActionColumn',
-                'template' => '{offline-tp} {gift} {rb} {lquest} {sdquest} {reset}',
+                'template' => '{offline-tp} {gift} {rb} {lquest} {sdquest} {reset} {submit}',
                 'buttons' => [
                     'offline-tp' => function ($url, $model) {
                         return Html::a(
@@ -184,7 +184,20 @@ class CharacterSearch extends Charac0
                                 'data-pjax' => 0
                             ]
                         );
-                    }
+                    },
+                    'submit' => function ($url, $model) {
+                        return Html::a(
+                            Icon::show('share'),
+                            '#',
+                            [
+                                'class' => 'char-submit-item inherit-color btn btn-primary',
+                                'data-url' => Url::to(['/character/submit-item', 'id' => $model->c_id]),
+                                'data-toggle' => "tooltip",
+                                'title' => 'Collection Event Submit',
+                                'data-pjax' => 0
+                            ]
+                        );
+                    },
                 ]
             ]
         ];

@@ -213,6 +213,36 @@ $('#char-grid-pjax').on('click', '.char-reset-stats', function (e) {
     });
 });
 
+$('#char-grid-pjax').on('click', '.char-submit-item', function (e) {
+    e.preventDefault();
+    var url = $(this).data('url');
+    var content = '<center><div class="row"><div class="col-sm-3"><label class="control-label">Currency Type: ' +
+        '</label></div><div class="col-sm-5"><select id="submit-type" class="col-sm-4 form-control">';
+    content += '<option value="1">Submit Pumpkins</option>';
+    content += '</select></div></div><br>Please keep boxes of 100 items in your inventory to submit</center>';
+    bootbox.confirm({
+        message: content,
+        buttons: {
+            confirm: {
+                label: 'Submit',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'Cancel',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                var type = $('#submit-type').val();
+                doJsonPostRequest(url, {type: type}, function (data) {
+                    bootbox.alert(data.msg);
+                });
+            }
+        }
+    });
+});
+
 $('#char-grid-pjax').on('click', '.char-submit-daily-quest', function (e) {
     e.preventDefault();
     var url = $(this).data('url');

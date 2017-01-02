@@ -46,7 +46,7 @@ abstract class AccountInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['account', 'contact', 'name', 'email', 'ip', 'login_ip', 'referer', 'forgot_pass_key'], 'string'],
+            [['account', 'contact', 'name', 'email', 'ip', 'login_ip', 'referer', 'forgot_pass_key', 'theme'], 'string'],
             [['event_points', 'cevent_points', 'refresh_count', 'ref_add_allow'], 'integer'],
             [['cevent_points', 'refresh_count', 'ref_add_allow'], 'required'],
             [['flamez_coins'], 'number']
@@ -73,6 +73,7 @@ abstract class AccountInfo extends \yii\db\ActiveRecord
             'flamez_coins' => 'Flamez Coins',
             'forgot_pass_key' => 'Forgot Pass Key',
             'id' => 'ID',
+            'theme' => 'Theme',
         ];
     }
 

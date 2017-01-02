@@ -667,6 +667,7 @@ class Charac0 extends BaseCharac0
                     break;
             }
             if (!$wallet->save()) {
+                $this->addErrors($wallet->errors);
                 $transaction->rollBack();
                 return false;
             }
@@ -682,6 +683,100 @@ class Charac0 extends BaseCharac0
                     'character' => $this->c_id,
                     'old_stats' => $oldStats,
                     'new_stats' => $this->c_headera
+                ]
+            );
+            return true;
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            $this->addError('c_id', $e->getMessage());
+            return false;
+        }
+    }
+
+    public function submitEventItem($type = 1)
+    {
+        $event = ArrayHelper::getValue(EventPoints::getEventTypes(), $type);
+        if ($event == null) {
+            $this->addError('c_id', 'Invalid event');
+            return false;
+        }
+        $itemCode = ArrayHelper::getValue(EventPoints::getSubmissionEventItemCode(), $type);
+        if ($itemCode == null) {
+            $this->addError('c_id', 'Submission event not configured');
+            return false;
+        }
+        // Ref: http://forum.ragezone.com/f488/items-100-storage-boxes-927247/
+        $secondCode = 16384 * 100 + $itemCode;
+        $oldMBody = $this->m_body;
+        $mBodyArray = explode('\_1', $this->m_body);
+        $INVEN = explode("=", $mBodyArray[$this->getInventoryIndex()]);
+        $itemArray = explode(';', $INVEN[1]);
+        $count = 0;
+        for ($i = 0; $i < count($itemArray); $i += 3) {
+            if (!isset($itemArray[$i + 2])) {
+                continue;
+            }
+            if ($itemArray[$i] == 17 && $itemArray[$i + 1] == $secondCode) {
+                $itemArray[$i + 1] = '0';
+                $count++;
+            }
+        }
+        if ($count == 0) {
+            $this->addError('c_id', 'Please make sure you have kept at least 1 box of 100 collection item');
+            return false;
+        }
+        $INVEN[1] = implode(';', $itemArray);
+        $mBodyArray[$this->getInventoryIndex()] = implode('=', $INVEN);
+        $this->m_body = implode('\_1', $mBodyArray);
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            if (!$this->save()) {
+                $transaction->rollBack();
+                return false;
+            }
+            if ($type == EventPoints::TYPE_PUMPKIN) {
+                $wallet = $this->getWallet();
+                if ($wallet == null) {
+                    $wallet = new Wallet();
+                    $wallet->account = $this->c_sheadera;
+                    $wallet->coin = 0;
+                }
+                $wallet->coin += $count * 100;
+                if (!$wallet->save()) {
+                    $this->addErrors($wallet->errors);
+                    $transaction->rollBack();
+                    return false;
+                }
+            }
+            $eventPoints = EventPoints::find()
+                ->where([
+                    'account' => $this->c_sheadera,
+                    'type' => $type
+                ])
+                ->one();
+            if ($eventPoints == null) {
+                $eventPoints = new EventPoints([
+                    'account' => $this->c_sheadera,
+                    'type' => $type,
+                    'points' => 0
+                ]);
+            }
+            $eventPoints->points += $count * 100;
+            if (!$eventPoints->save()) {
+                $this->addErrors($eventPoints->errors);
+                $transaction->rollBack();
+                return false;
+            }
+            $transaction->commit();
+            ActivityLog::addEntry(
+                ActivityLog::EVENT_SUBMIT_EVENT_ITEM,
+                $this->c_sheadera,
+                [
+                    'character' => $this->c_id,
+                    'old_mbody' => $oldMBody,
+                    'new_mbody' => $this->m_body,
+                    'type' => $type,
+                    'count' => $count
                 ]
             );
             return true;
