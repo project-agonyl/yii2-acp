@@ -249,7 +249,7 @@ class CharacterController extends Controller
             if (!$characterModel->resetStats(Yii::$app->request->post('type', 'coin'))) {
                 return Json::encode(['status' => 'nok', 'msg' => Html::errorSummary($characterModel)]);
             }
-            return Json::encode(['status' => 'ok', 'msg' => 'Rebirth was successfully taken.']);
+            return Json::encode(['status' => 'ok', 'msg' => 'Stats were reset successfully.']);
         }
         throw new MethodNotAllowedHttpException();
     }
@@ -261,7 +261,7 @@ class CharacterController extends Controller
             if (!$characterModel->submitEventItem(Yii::$app->request->post('type', 1))) {
                 return Json::encode(['status' => 'nok', 'msg' => Html::errorSummary($characterModel)]);
             }
-            return Json::encode(['status' => 'ok', 'msg' => 'Rebirth was successfully taken.']);
+            return Json::encode(['status' => 'ok', 'msg' => 'Items were submitted successfully.']);
         }
     }
 

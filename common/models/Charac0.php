@@ -625,7 +625,7 @@ class Charac0 extends BaseCharac0
         $wearString = ArrayHelper::getValue(explode('\_1', $this->m_body), $this->getWearIndex());
         if ($wearString != null) {
             $temp = explode('=', $wearString);
-            if (count($temp) != 1) {
+            if (count($temp) != 1 && $temp[1] != "") {
                 $this->addError('c_id', 'Please clear your WEAR before resetting stats');
                 return false;
             }
