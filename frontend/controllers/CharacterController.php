@@ -242,6 +242,18 @@ class CharacterController extends Controller
         throw new MethodNotAllowedHttpException();
     }
 
+    public function actionResetStats($id)
+    {
+        $characterModel = $this->loadCharacterModel($id);
+        if (Yii::$app->request->isPost) {
+            if (!$characterModel->resetStats(Yii::$app->request->post('type', 'coin'))) {
+                return Json::encode(['status' => 'nok', 'msg' => Html::errorSummary($characterModel)]);
+            }
+            return Json::encode(['status' => 'ok', 'msg' => 'Rebirth was successfully taken.']);
+        }
+        throw new MethodNotAllowedHttpException();
+    }
+
     private function loadCharacterModel($id)
     {
         $model = Charac0::find()

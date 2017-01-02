@@ -182,6 +182,37 @@ $('#char-grid-pjax').on('click', '.char-take-quest', function (e) {
     });
 });
 
+$('#char-grid-pjax').on('click', '.char-reset-stats', function (e) {
+    e.preventDefault();
+    var url = $(this).data('url');
+    var content = '<center><div class="row"><div class="col-sm-3"><label class="control-label">Currency Type: ' +
+        '</label></div><div class="col-sm-5"><select id="currency-type" class="col-sm-4 form-control">';
+    content += '<option value="coin">Flamez Coins</option>';
+    content += '<option value="cash">Flamez Cash</option>';
+    content += '</select></div></div><br>Please clear your WEAR before reset</center>';
+    bootbox.confirm({
+        message: content,
+        buttons: {
+            confirm: {
+                label: 'Reset Stats',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'Cancel',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                var type = $('#currency-type').val();
+                doJsonPostRequest(url, {type: type}, function (data) {
+                    bootbox.alert(data.msg);
+                });
+            }
+        }
+    });
+});
+
 $('#char-grid-pjax').on('click', '.char-submit-daily-quest', function (e) {
     e.preventDefault();
     var url = $(this).data('url');

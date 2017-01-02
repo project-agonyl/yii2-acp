@@ -619,4 +619,104 @@ class Charac0 extends BaseCharac0
             'sort' => false
         ]);
     }
+
+    public function resetStats($currencyType = 'coin')
+    {
+        $wearString = ArrayHelper::getValue(explode('\_1', $this->m_body), $this->getWearIndex());
+        if ($wearString != null) {
+            $temp = explode('=', $wearString);
+            if (count($temp) != 1) {
+                $this->addError('c_id', 'Please clear your WEAR before resetting stats');
+                return false;
+            }
+        }
+        $wallet = $this->getWallet();
+        if ($currencyType == 'coin') {
+            $availableCoins = $this->coin;
+            $requiredCoins  = ArrayHelper::getValue(Yii::$app->params, 'reset.coins', 10);
+            if ($availableCoins < $requiredCoins) {
+                $this->addError('c_id', 'Do not have enough coins to reset stats');
+                return false;
+            }
+            $wallet->coin -= $requiredCoins;
+        } else {
+            $availableCash = $this->cash;
+            $requiredCash  = ArrayHelper::getValue(Yii::$app->params, 'reset.cash', 5);
+            if ($availableCash < $requiredCash) {
+                $this->addError('c_id', 'Do not have enough cash to reset stats');
+                return false;
+            }
+            $wallet->cash -= $requiredCash;
+        }
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            $oldStats = $this->c_sheaderb;
+            $points = Yii::$app->params['rebirth']['character'][$this->rb]['gifts']['points'];
+            switch ($this->c_sheaderb) {
+                case '0':
+                    $this->c_headera = "30;0;16;35;130;$points;75;20;120;120";
+                    break;
+                case '1':
+                    $this->c_headera = "30;0;20;35;130;$points;50;30;110;120";
+                    break;
+                case '2':
+                    $this->c_headera = "20;26;12;35;130;$points;30;80;30;120";
+                    break;
+                case '3':
+                    $this->c_headera = "30;0;16;35;130;$points;75;37;100;120";
+                    break;
+            }
+            if (!$wallet->save()) {
+                $transaction->rollBack();
+                return false;
+            }
+            if (!$this->save()) {
+                $transaction->rollBack();
+                return false;
+            }
+            $transaction->commit();
+            ActivityLog::addEntry(
+                ActivityLog::EVENT_RESET_STATS,
+                $this->c_sheadera,
+                [
+                    'character' => $this->c_id,
+                    'old_stats' => $oldStats,
+                    'new_stats' => $this->c_headera
+                ]
+            );
+            return true;
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            $this->addError('c_id', $e->getMessage());
+            return false;
+        }
+    }
+
+    public function getCoin()
+    {
+        $wallet = $this->getWallet();
+        if ($wallet == null) {
+            return 0;
+        }
+        return $wallet->coin;
+    }
+
+    public function getCredit()
+    {
+        $wallet = $this->getWallet();
+        if ($wallet == null) {
+            return 0;
+        }
+        return $wallet->credit;
+    }
+
+    protected function getWallet()
+    {
+        return Wallet::find()
+            ->where([
+                'is_deleted' => false,
+                'account' => $this->c_sheadera
+            ])
+            ->one();
+    }
 }

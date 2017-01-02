@@ -37,6 +37,7 @@ class ActivityLog extends BaseActivityLog
     const EVENT_TAKE_QUEST = 19;
     const EVENT_SUBMIT_DAILY_QUEST = 20;
     const EVENT_TAKE_DAILY_QUEST = 21;
+    const EVENT_RESET_STATS = 22;
     const EVENT_UNKNOWN = 999;
 
     public function behaviors()
@@ -88,6 +89,7 @@ class ActivityLog extends BaseActivityLog
             self::EVENT_TAKE_QUEST => 'Quest taken from ACP',
             self::EVENT_SUBMIT_DAILY_QUEST => 'Daily quest submitted',
             self::EVENT_TAKE_DAILY_QUEST => 'Daily quest taken',
+            self::EVENT_RESET_STATS => 'Reset Stats',
             self::EVENT_UNKNOWN => 'Unknown event'
         ];
     }

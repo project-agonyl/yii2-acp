@@ -86,13 +86,6 @@ class CharacterSearch extends Charac0
                     );
                 }
             ],
-            'type' => [
-                'attribute' => 'c_sheaderb',
-                'label' => 'Type',
-                'value' => function ($model) {
-                    return $model->typeString;
-                }
-            ],
             'level' => [
                 'attribute' => 'c_sheaderc',
                 'label' => 'Level'
@@ -109,7 +102,7 @@ class CharacterSearch extends Charac0
             'actions' => [
                 'header' => 'Actions',
                 'class' => '\kartik\grid\ActionColumn',
-                'template' => '{offline-tp} {gift} {rb} {lquest} {sdquest}',
+                'template' => '{offline-tp} {gift} {rb} {lquest} {sdquest} {reset}',
                 'buttons' => [
                     'offline-tp' => function ($url, $model) {
                         return Html::a(
@@ -175,6 +168,19 @@ class CharacterSearch extends Charac0
                                 'data-quest-type' => 1,
                                 'data-toggle' => "tooltip",
                                 'title' => 'Take Quest',
+                                'data-pjax' => 0
+                            ]
+                        );
+                    },
+                    'reset' => function ($url, $model) {
+                        return Html::a(
+                            Icon::show('refresh'),
+                            '#',
+                            [
+                                'class' => 'char-reset-stats inherit-color btn btn-danger',
+                                'data-url' => Url::to(['/character/reset-stats', 'id' => $model->c_id]),
+                                'data-toggle' => "tooltip",
+                                'title' => 'Reset Stats',
                                 'data-pjax' => 0
                             ]
                         );
