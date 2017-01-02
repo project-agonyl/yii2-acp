@@ -34,6 +34,10 @@ $this->title = $model->c_id.' Details';
                 'wallet_coins' => [
                     'attribute' => 'coin',
                     'label' => 'Flamez Coins'
+                ],
+                'pumpkins' => [
+                    'attribute' => 'pumpkinSubmissionCount',
+                    'label' => 'Pumpkins Submitted'
                 ]
             ],
         ]); ?>

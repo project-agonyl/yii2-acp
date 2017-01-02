@@ -268,4 +268,23 @@ class Account extends BaseAccount implements IdentityInterface
             ])
             ->all();
     }
+
+    public function getPumpkinSubmissionCount()
+    {
+        return $this->getSubmissionCount(EventPoints::TYPE_PUMPKIN);
+    }
+
+    protected function getSubmissionCount($type)
+    {
+        $eventPoints = EventPoints::find()
+            ->where([
+                'type' => $type,
+                'account' => $this->c_id
+            ])
+            ->one();
+        if ($eventPoints == null) {
+            return 0;
+        }
+        return $eventPoints->points;
+    }
 }
