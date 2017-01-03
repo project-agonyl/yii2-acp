@@ -12,12 +12,14 @@ use common\helpers\Utils;
 use common\models\Account;
 use common\models\AccountInfo;
 use common\models\ConnectOldAccount;
+use common\models\EventPoints;
 use common\models\OldAccount;
 use frontend\models\EshopDeliverySearch;
 use frontend\models\OldAccountTransfer;
 use frontend\models\UpdatePassword;
 use Yii;
 use common\components\Controller;
+use yii\data\ActiveDataProvider;
 
 class ServicesController extends Controller
 {
@@ -94,6 +96,26 @@ class ServicesController extends Controller
         $searchModel = new EshopDeliverySearch(['account' => Yii::$app->user->id]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('eshopDeliveryView', ['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
+    }
+
+    public function actionTopPumpkinSubmitters()
+    {
+        $query = EventPoints::find()
+            ->where([
+                'type' => EventPoints::TYPE_PUMPKIN
+            ])
+            ->andWhere(['not', [
+                'account' => ['Merlano', 'karthikp', 'a3gm1', 'a3gm2', 'a3gm3', 'a3gm4', 'a3gm5', 'a3gm6', 'a3gm7']
+            ]])
+            ->orderBy(['points' => SORT_DESC])
+            ->limit(10);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'key' => 'id',
+            'pagination' => false,
+            'sort' => false
+        ]);
+        return $this->render('topSubmission', ['dataProvider' => $dataProvider]);
     }
 
     private function getAccountModel()

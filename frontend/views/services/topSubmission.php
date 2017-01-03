@@ -20,9 +20,6 @@ $this->title = 'Top 10 Pumpkin Submitters';
                         'c_status' => Charac0::STATUS_ACTIVE,
                         'c_sheadera' => $model->account
                     ])
-                    ->andWhere(['not', [
-                        'c_sheadera' => ['Merlano', 'karthikp', 'a3gm1', 'a3gm2', 'a3gm3', 'a3gm4', 'a3gm5', 'a3gm6', 'a3gm7']
-                    ]])
                     ->orderBy([
                         'rb' => SORT_DESC,
                         'CAST(c_sheaderc AS int)' => SORT_DESC,
