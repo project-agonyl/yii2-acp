@@ -635,7 +635,7 @@ class Charac0 extends BaseCharac0
             $availableCoins = $this->coin;
             $requiredCoins  = ArrayHelper::getValue(Yii::$app->params, 'reset.coins', 10);
             if ($availableCoins < $requiredCoins) {
-                $this->addError('c_id', 'Do not have enough coins to reset stats');
+                $this->addError('c_id', 'Do not have '.$requiredCoins.' coins to reset stats');
                 return false;
             }
             $wallet->coin -= $requiredCoins;
@@ -643,7 +643,7 @@ class Charac0 extends BaseCharac0
             $availableCash = $this->cash;
             $requiredCash  = ArrayHelper::getValue(Yii::$app->params, 'reset.cash', 5);
             if ($availableCash < $requiredCash) {
-                $this->addError('c_id', 'Do not have enough cash to reset stats');
+                $this->addError('c_id', 'Do not have '.$requiredCash.' cash to reset stats');
                 return false;
             }
             $wallet->cash -= $requiredCash;
@@ -651,6 +651,8 @@ class Charac0 extends BaseCharac0
         $transaction = Yii::$app->db->beginTransaction();
         try {
             $oldStats = $this->c_sheaderb;
+            $oldLevel = $this->c_sheaderc;
+            $this->c_sheaderc = (string)1;
             $points = Yii::$app->params['rebirth']['character'][$this->rb]['gifts']['points'];
             switch ($this->c_sheaderb) {
                 case '0':
@@ -682,7 +684,8 @@ class Charac0 extends BaseCharac0
                 [
                     'character' => $this->c_id,
                     'old_stats' => $oldStats,
-                    'new_stats' => $this->c_headera
+                    'new_stats' => $this->c_headera,
+                    'old_level' => $oldLevel
                 ]
             );
             return true;

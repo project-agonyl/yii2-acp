@@ -249,7 +249,7 @@ class CharacterController extends Controller
             if (!$characterModel->resetStats(Yii::$app->request->post('type', 'coin'))) {
                 return Json::encode(['status' => 'nok', 'msg' => Html::errorSummary($characterModel)]);
             }
-            return Json::encode(['status' => 'ok', 'msg' => 'Stats were reset successfully.']);
+            return Json::encode(['status' => 'ok', 'msg' => 'Stats were reset successfully. Kill a monster to get back your original level']);
         }
         throw new MethodNotAllowedHttpException();
     }
