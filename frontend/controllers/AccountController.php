@@ -141,9 +141,9 @@ class AccountController extends Controller
      *
      * @return mixed
      */
-    public function actionSignup()
+    public function actionSignup($referrer = null)
     {
-        $model = new SignupForm();
+        $model = new SignupForm(['referrer' => $referrer]);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'Thank you for signing up. Please check your email and activate your account.');
             return $this->redirect(['login']);

@@ -2,12 +2,15 @@
 
 namespace common\models;
 
+use common\helpers\Utils;
 use Yii;
 use \common\models\base\Account as BaseAccount;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
+use yii\bootstrap\Html;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\IdentityInterface;
 
 /**
@@ -286,5 +289,24 @@ class Account extends BaseAccount implements IdentityInterface
             return 0;
         }
         return $eventPoints->points;
+    }
+
+    public function getReferralUrl()
+    {
+        $char = Charac0::find()
+            ->where([
+                'c_sheadera' => $this->c_id,
+                'c_status' => Charac0::STATUS_ACTIVE
+            ])
+            ->one();
+        if ($char == null) {
+            return 'N/A';
+        }
+        return Url::to(['/account/signup', 'referrer' => Utils::safeBase64Encode($char->c_id)], true);
+    }
+
+    public function getReferralLink()
+    {
+        return Html::a($this->referralUrl, $this->referralUrl, ['target' => '_blank']);
     }
 }
