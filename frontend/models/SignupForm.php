@@ -104,6 +104,17 @@ class SignupForm extends Model
                 $accInfo->cevent_points = 0;
                 $accInfo->refresh_count = 0;
                 $accInfo->ref_add_allow = 1;
+                if ($this->referrer != null) {
+                    $char = Charac0::find()
+                        ->where([
+                            'c_id' => Utils::safeBase64Decode($this->referrer),
+                            'c_status' => Charac0::STATUS_ACTIVE
+                        ])
+                        ->one();
+                    if ($char != null) {
+                        $accInfo->referred_by = $char->c_sheadera;
+                    }
+                }
                 if (!$accInfo->save()) {
                     $transaction->rollBack();
                     $this->addErrors($accInfo->errors);
@@ -156,5 +167,10 @@ class SignupForm extends Model
                 'c_id' => Utils::safeBase64Decode($this->referrer),
                 'c_status' => Charac0::STATUS_ACTIVE
             ])
+            ->one();
+        if ($char == null) {
+            return 'N/A';
+        }
+        return $char->c_id;
     }
 }
