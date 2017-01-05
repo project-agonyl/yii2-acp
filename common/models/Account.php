@@ -307,6 +307,6 @@ class Account extends BaseAccount implements IdentityInterface
 
     public function getReferralLink()
     {
-        return Html::a($this->referralUrl, $this->referralUrl, ['target' => '_blank']);
+        return ($this->referralUrl != 'N/A')?Html::a($this->referralUrl, $this->referralUrl, ['target' => '_blank']):'N/A';
     }
 }
