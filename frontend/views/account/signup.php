@@ -41,6 +41,11 @@ $this->title = 'ACP Login';
     </div>
     <div class="row">
         <div class="col-sm-6">
+            <?= $form->field($model, 'referredBy')->textInput(['disabled' => 'disabled']) ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
             <div class="form-group">
                 <?= Html::submitButton('Sign Up', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
             </div>

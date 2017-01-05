@@ -1,10 +1,12 @@
 <?php
 namespace frontend\models;
 
+use common\helpers\Utils;
 use common\models\Account;
 use common\models\AccountInfo;
 use common\models\Activation;
 use common\models\ActivityLog;
+use common\models\Charac0;
 use common\models\NotificationLog;
 use Ramsey\Uuid\Uuid;
 use Yii;
@@ -24,6 +26,7 @@ class SignupForm extends Model
     public $name = '';
     public $phone = '';
     public $notify = true;
+    public $referrer;
 
     /**
      * @inheritdoc
@@ -101,6 +104,17 @@ class SignupForm extends Model
                 $accInfo->cevent_points = 0;
                 $accInfo->refresh_count = 0;
                 $accInfo->ref_add_allow = 1;
+                if ($this->referrer != null) {
+                    $char = Charac0::find()
+                        ->where([
+                            'c_id' => Utils::safeBase64Decode($this->referrer),
+                            'c_status' => Charac0::STATUS_ACTIVE
+                        ])
+                        ->one();
+                    if ($char != null) {
+                        $accInfo->referred_by = $char->c_sheadera;
+                    }
+                }
                 if (!$accInfo->save()) {
                     $transaction->rollBack();
                     $this->addErrors($accInfo->errors);
@@ -141,5 +155,22 @@ class SignupForm extends Model
             $this->addError('c_id', $e->getMessage());
             return false;
         }
+    }
+
+    public function getReferredBy()
+    {
+        if ($this->referrer == null) {
+            return 'N/A';
+        }
+        $char = Charac0::find()
+            ->where([
+                'c_id' => Utils::safeBase64Decode($this->referrer),
+                'c_status' => Charac0::STATUS_ACTIVE
+            ])
+            ->one();
+        if ($char == null) {
+            return 'N/A';
+        }
+        return $char->c_id;
     }
 }

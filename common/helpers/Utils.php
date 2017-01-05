@@ -45,4 +45,12 @@ class Utils
         date_default_timezone_set("Asia/Calcutta");
         return date('Y-m-d H:i:s');
     }
+
+    public static function safeBase64Encode($data) {
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
+
+    public static function safeBase64Decode($data) {
+        return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
+    }
 }

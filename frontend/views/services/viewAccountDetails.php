@@ -38,7 +38,11 @@ $this->title = $model->c_id.' Details';
                 'pumpkins' => [
                     'attribute' => 'pumpkinSubmissionCount',
                     'label' => 'Pumpkins Submitted'
-                ]
+                ],
+                [
+                    'format' => 'raw',
+                    'attribute' => 'referralLink',
+                ],
             ],
         ]); ?>
     </div>
